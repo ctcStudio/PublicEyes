@@ -1,0 +1,10 @@
+include ':publicEyes'
+
+include ':core', ':indicator', ':numberpicker', ':okhttp', ':utilities', ':mediapicker'
+
+project(':core').projectDir = new File('third_party/core')
+project(':indicator').projectDir = new File('third_party/indicator')
+project(':numberpicker').projectDir = new File('third_party/numberpicker')
+project(':okhttp').projectDir = new File('third_party/okhttp')
+project(':utilities').projectDir = new File('third_party/utilities')
+project(':mediapicker').projectDir = new File('third_party/mediapicker')
