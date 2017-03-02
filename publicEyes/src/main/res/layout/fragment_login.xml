@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/space_normal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/img_public_eye"
+            android:scaleType="center" />
+
+        <TextView
+            style="@style/TextViewYellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_smaller"
+            android:layout_marginTop="20dp"
+            android:text="Full name"
+            android:textSize="@dimen/large_text" />
+
+        <EditText
+            style="@style/UnderLineEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Full name"
+            android:textSize="@dimen/large_text" />
+
+        <TextView
+            style="@style/TextViewYellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_smaller"
+            android:text="Password"
+            android:textSize="@dimen/large_text" />
+
+        <include
+            layout="@layout/layout_input_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            style="@style/TextViewYellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_smaller"
+            android:gravity="center"
+            android:text="Or"
+            android:textSize="@dimen/largest_text" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                style="@style/ButtonDefault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_blue_fb"
+                android:text="Login with facebook"
+                android:textSize="@dimen/larger_text" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_facebook" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:background="@color/yellowColor"
+        android:text="Continue"
+        android:textSize="@dimen/larger_text" />
+</FrameLayout>

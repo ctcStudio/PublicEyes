@@ -4,10 +4,78 @@
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.hiepkhach9x.publiceyes.RegisterActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/register_background" />
+
+    <ImageView
+        android:id="@+id/img_public_eys"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:layout_marginTop="@dimen/space_large"
+        android:background="@drawable/img_public_eye"
+        android:scaleType="center" />
+
+    <ImageView
+        android:id="@+id/img_register_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_public_eys"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:layout_marginTop="@dimen/space_largest"
+        android:scaleType="center"
+        android:src="@drawable/img_register_text" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_register_text"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:layout_marginTop="@dimen/space_largest"
+        android:scaleType="center"
+        android:src="@drawable/img_register_step" />
+
+    <TextView
+        android:id="@+id/sign_up_fb"
+        style="@style/ButtonDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sign_up_email"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_blue_fb"
+        android:text="Sign up width facebook"
+        android:textSize="@dimen/larger_text" />
+
+    <TextView
+        android:id="@+id/sign_up_email"
+        style="@style/ButtonDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/login"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="15dp"
+        android:background="@drawable/button_blue"
+        android:text="Sign up width E-mail"
+        android:textSize="@dimen/larger_text" />
+
+    <TextView
+        android:id="@+id/login"
+        style="@style/TextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:text="@string/already_a_user_log_in" />
 </RelativeLayout>

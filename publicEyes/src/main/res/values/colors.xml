@@ -6,7 +6,10 @@
 
     <color name="whiteColor">#ffffff</color>
     <color name="blackColor">#000000</color>
-    <color name= "darkColor">#131313</color>
+    <color name="darkColor">#131313</color>
     <color name="yellowColor">#fbcc23</color>
     <color name="blueFbColor">#3a5795</color>
+    <color name="grayColor">#464444</color>
+    <color name="blueColor">#24e4ff</color>
+    <color name="grayLightColor">#aaaaaa</color>
 </resources>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkColor"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/space_normal"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/img_public_eye"
+            android:scaleType="center" />
+
+        <TextView
+            style="@style/TextViewBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_smaller"
+            android:layout_marginTop="20dp"
+            android:text="Create your account with E-mail ID"
+            android:textSize="@dimen/larger_text" />
+
+        <TextView
+            style="@style/TextViewYellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_smaller"
+            android:text="Email"
+            android:textSize="@dimen/large_text" />
+
+        <EditText
+            style="@style/UnderLineEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Email"
+            android:textSize="@dimen/large_text" />
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:background="@color/yellowColor"
+        android:text="Continue"
+        android:textSize="@dimen/larger_text" />
+</FrameLayout>

@@ -6,4 +6,23 @@
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="space_smallest">2dp</dimen>
+    <dimen name="space_smaller">4dp</dimen>
+    <dimen name="space_small">6dp</dimen>
+    <dimen name="space_normal">8dp</dimen>
+    <dimen name="space_large">10dp</dimen>
+    <dimen name="space_larger">12dp</dimen>
+    <dimen name="space_largest">15dp</dimen>
+
+    <dimen name="corner_small">4dp</dimen>
+    <dimen name="corner_normal">8dp</dimen>
+    <dimen name="corner_large">16dp</dimen>
+
+    <dimen name="small_text">12sp</dimen>
+    <dimen name="normal_text">14sp</dimen>
+    <dimen name="large_text">16sp</dimen>
+    <dimen name="larger_text">18sp</dimen>
+    <dimen name="largest_text">20sp</dimen>
+
 </resources>

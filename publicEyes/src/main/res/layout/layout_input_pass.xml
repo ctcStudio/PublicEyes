@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:minHeight="40dp"
+    android:orientation="horizontal">
+
+    <com.hiepkhach9x.publiceyes.UnderLineEditText
+        style="@style/UnderLineEditText"
+        android:id="@id/input_pass"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="Enter Password"
+        android:textSize="@dimen/large_text"
+        app:showUnderLine="true" />
+
+    <ImageView
+        android:id="@id/show_pass"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginRight="@dimen/space_normal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/img_eye" />
+</FrameLayout>

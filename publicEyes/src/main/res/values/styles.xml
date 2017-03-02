@@ -1,7 +1,9 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"></style>
+
+    <style name="AppTheme.Splash" parent="AppTheme.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="android:colorBackground">@color/darkColor</item>
     </style>
@@ -15,4 +17,32 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="UnderLineEditText">
+        <item name="showUnderLine">true</item>
+        <item name="underLineColor">@color/yellowColor</item>
+        <item name="android:textColor">@color/whiteColor</item>
+        <item name="android:textColorHint">@color/grayColor</item>
+        <item name="android:paddingTop">@dimen/space_normal</item>
+        <item name="android:paddingBottom">@dimen/space_normal</item>
+    </style>
+
+    <style name="ButtonDefault">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:padding">@dimen/space_small</item>
+        <item name="android:textColor">@color/whiteColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TextViewBold">
+        <item name="android:textColor">@color/whiteColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/space_normal</item>
+        <item name="android:paddingBottom">@dimen/space_normal</item>
+    </style>
+
+    <style name="TextViewYellow" parent="TextViewBold">
+        <item name="android:textColor">@color/yellowColor</item>
+    </style>
 </resources>
