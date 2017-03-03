@@ -1,9 +1,12 @@
-package com.hiepkhach9x.publiceyes;
+package com.hiepkhach9x.publiceyes.ui;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,9 +21,13 @@ public class SplashActivity extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                startMainActivity();
+                if (UserPref.get().hasActive()) {
+                    startMainActivity();
+                } else {
+                    startRegisterActivity();
+                }
             }
-        }, 1000);
+        }, 2000);
     }
 
     private void startMainActivity() {

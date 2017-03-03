@@ -2,4 +2,10 @@
 <resources>
     <item name="show_pass" type="id" />
     <item name="input_pass" type="id" />
+    <item name="actionbar_back" type="id" />
+    <item name="actionbar_title" type="id" />
+    <item name="actionbar" type="id" />
+    <item name="content_layout" type="id" />
+    <item name="btn_ok" type="id" />
+    <item name="btn_cancel" type="id" />
 </resources>

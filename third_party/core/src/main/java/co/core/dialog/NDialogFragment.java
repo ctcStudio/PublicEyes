@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
 import co.core.toolbox.NotifyUtil;
 
 /**
- * Created by freesky1102 on 8/28/16.
+ * Created by HungHN on 8/28/16.
  */
 public abstract class NDialogFragment extends DialogFragment {
 

@@ -8,7 +8,7 @@ import android.content.IntentFilter;
 import co.ntq.dispatch.center.AppLog;
 
 /**
- * Created by freesky1102 on 11/11/15.
+ * Created by HungHN on 11/11/15.
  */
 public class GPSStatusReceiver extends BroadcastReceiver {
 

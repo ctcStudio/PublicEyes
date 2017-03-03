@@ -1,9 +1,10 @@
 package co.core.fragments;
 
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 
 /**
- * Created by freesky1102 on 5/27/16.
+ * Created by HungHN on 5/27/16.
  */
 public interface NavigationManager {
     /**
@@ -19,6 +20,8 @@ public interface NavigationManager {
     void finishActivity();
 
     void showPage(Fragment fragment);
+
+    void swapPage(Fragment fragment);
 
     void showPage(Fragment fragment, boolean hasAnimation, boolean isAddBackStack);
 }

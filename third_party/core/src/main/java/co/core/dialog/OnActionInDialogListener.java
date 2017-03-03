@@ -3,7 +3,7 @@ package co.core.dialog;
 import android.content.Intent;
 
 /**
- * Created by freesky1102 on 6/29/16.
+ * Created by HungHN on 6/29/16.
  */
 public interface OnActionInDialogListener {
     /**

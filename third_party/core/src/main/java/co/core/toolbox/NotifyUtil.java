@@ -9,7 +9,7 @@ import co.core.dialog.OnActionInDialogListener;
 import co.core.fragments.OnFragmentResultListener;
 
 /**
- * Created by freesky1102 on 8/28/16.
+ * Created by HungHN on 8/28/16.
  * <pre>
  * This class is used to notify events from
  *

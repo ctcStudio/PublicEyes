@@ -1,4 +1,4 @@
-package com.hiepkhach9x.publiceyes;
+package com.hiepkhach9x.publiceyes.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,6 +6,8 @@ import android.graphics.PorterDuff;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.EditText;
+
+import com.hiepkhach9x.publiceyes.R;
 
 /**
  * Created by hungh on 3/2/2017.

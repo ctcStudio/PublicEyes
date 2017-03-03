@@ -3,7 +3,7 @@ package co.core.fragments;
 import android.content.Intent;
 
 /**
- * Created by freesky1102 on 10/26/16.
+ * Created by HungHN on 10/26/16.
  */
 public interface OnFragmentResultListener {
 
