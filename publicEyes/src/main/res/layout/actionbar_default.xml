@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <ImageButton
-        android:id="@id/actionbar_back"
+        android:id="@id/actionbar_left"
         android:layout_width="?actionBarSize"
         android:layout_height="?actionBarSize"
         android:background="@android:color/transparent"

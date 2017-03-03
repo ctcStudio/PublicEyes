@@ -28,4 +28,6 @@
     <dimen name="largest_text">20sp</dimen>
     <dimen name="min_width_button_sign_up">300dp</dimen>
 
+    <dimen name="shadow_width">15dp</dimen>
+    <dimen name="sliding_menu_offset">90dp</dimen>
 </resources>

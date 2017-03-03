@@ -50,6 +50,14 @@
         <item name="android:paddingBottom">@dimen/space_normal</item>
     </style>
 
+    <style name="TextViewGray" parent="TextViewBold">
+        <item name="android:textColor">@color/grayColor</item>
+    </style>
+
+    <style name="TextVieLeftMenu" parent="TextViewGray">
+        <item name="android:textSize">@dimen/large_text</item>
+    </style>
+
     <style name="TextViewYellow" parent="TextViewBold">
         <item name="android:textColor">@color/yellowColor</item>
     </style>

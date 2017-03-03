@@ -1,9 +1,10 @@
 include ':publicEyes'
 
-include ':core', ':indicator', ':okhttp', ':utilities', ':mediapicker'
+include ':core', ':indicator', ':okhttp', ':utilities', ':mediapicker', ':slidingmenu'
 
 project(':core').projectDir = new File('third_party/core')
 project(':indicator').projectDir = new File('third_party/indicator')
 project(':okhttp').projectDir = new File('third_party/okhttp')
 project(':utilities').projectDir = new File('third_party/utilities')
 project(':mediapicker').projectDir = new File('third_party/mediapicker')
+project(':slidingmenu').projectDir = new File('third_party/slidingmenu')

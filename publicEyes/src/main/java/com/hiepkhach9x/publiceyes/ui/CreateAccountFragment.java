@@ -1,5 +1,6 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -14,7 +15,7 @@ import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
-public class CreateAccountFragment extends BaseAppFragment implements ActionbarInfo,View.OnClickListener {
+public class CreateAccountFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
 
     public CreateAccountFragment() {
     }
@@ -49,6 +50,12 @@ public class CreateAccountFragment extends BaseAppFragment implements ActionbarI
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_continue:
+                startActivity(new Intent(getContext(), MainActivity.class));
+                if (mNavigationManager != null) {
+                    mNavigationManager.finishActivity();
+                } else {
+                    getActivity().finish();
+                }
                 break;
             case R.id.show_pass:
                 etPassword.setTransformationMethod(new HideReturnsTransformationMethod());

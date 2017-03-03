@@ -63,7 +63,7 @@ public class SliderFragment extends BaseAppFragment implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                if(position == images.length - 1) {
+                if (position == images.length - 1) {
                     mSuccess.setVisibility(View.VISIBLE);
                     mSkip.setVisibility(View.INVISIBLE);
                 } else {
@@ -82,7 +82,14 @@ public class SliderFragment extends BaseAppFragment implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.skip:
+            case R.id.success:
+                if (mNavigationManager != null) {
+                    mNavigationManager.swapPage(new HomeFragment());
+                }
+                break;
+        }
     }
 
     private class SliderAdapter extends PagerAdapter {
@@ -90,7 +97,7 @@ public class SliderFragment extends BaseAppFragment implements View.OnClickListe
         LayoutInflater inflater;
 
         public SliderAdapter() {
-            inflater =  (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
 
         @Override
@@ -100,7 +107,7 @@ public class SliderFragment extends BaseAppFragment implements View.OnClickListe
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View itemView = inflater.inflate(R.layout.item_image, container,false);
+            View itemView = inflater.inflate(R.layout.item_image, container, false);
             ImageView imageView = (ImageView) itemView.findViewById(R.id.image);
             imageView.setImageResource(images[position]);
             container.addView(itemView);

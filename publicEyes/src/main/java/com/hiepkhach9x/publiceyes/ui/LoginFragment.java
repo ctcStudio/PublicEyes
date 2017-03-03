@@ -1,5 +1,6 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -34,6 +35,12 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_continue:
+                startActivity(new Intent(getContext(), MainActivity.class));
+                if (mNavigationManager != null) {
+                    mNavigationManager.finishActivity();
+                } else {
+                    getActivity().finish();
+                }
                 break;
         }
     }

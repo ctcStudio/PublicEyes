@@ -32,4 +32,5 @@ dependencies {
     compile project (':mediapicker')
     compile project (':mediapicker')
     compile project (':utilities')
+    compile project (':slidingmenu')
 }
