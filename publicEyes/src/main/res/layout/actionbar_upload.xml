@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkColor"
+    android:orientation="horizontal">
+
+    <ImageButton
+        android:id="@id/actionbar_left"
+        android:layout_width="?actionBarSize"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_back" />
+
+    <TextView
+        android:id="@id/actionbar_title"
+        style="@style/ActionBarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_weight="1"
+        android:gravity="center" />
+
+    <TextView
+        style="@style/TextViewYellow"
+        android:layout_width="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:paddingLeft="@dimen/space_normal"
+        android:paddingRight="@dimen/space_normal"
+        android:text="Upload"
+        android:textSize="@dimen/larger_text" />
+</LinearLayout>

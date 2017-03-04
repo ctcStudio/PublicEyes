@@ -15,7 +15,7 @@ import com.hiepkhach9x.publiceyes.R;
  * Created by hungh on 3/3/2017.
  */
 
-public class HomeFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler {
+public class HomeFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler, View.OnClickListener {
     private CustomSlidingMenu slidingMenu;
 
     @Override
@@ -47,6 +47,8 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.choose_photo).setOnClickListener(this);
+        view.findViewById(R.id.choose_video).setOnClickListener(this);
     }
 
     @Override
@@ -66,5 +68,16 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public String getActionbarTitle() {
         return getString(R.string.app_name);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.choose_photo:
+            case R.id.choose_video:
+                if(mNavigationManager !=null) {
+                    mNavigationManager.showPage(new ReportFragment());
+                }
+        }
     }
 }

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkColor">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.hiepkhach9x.publiceyes.view.RectangleImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/grayColor"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_public_eye" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/add_photo_size"
+            android:layout_margin="@dimen/space_normal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/add_photo"
+                    android:layout_width="@dimen/add_photo_size"
+                    android:layout_height="@dimen/add_photo_size"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/ic_add_photo" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <TextView
+            style="@style/TextViewYellow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:layout_marginRight="@dimen/space_normal"
+            android:text="Add Description/Vehicle number"
+            android:textSize="@dimen/larger_text" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_large"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:layout_marginRight="@dimen/space_normal"
+            android:background="@drawable/button_white"
+            android:gravity="top|left"
+            android:minHeight="100dp"
+            android:padding="@dimen/space_small" />
+    </LinearLayout>
+</ScrollView>

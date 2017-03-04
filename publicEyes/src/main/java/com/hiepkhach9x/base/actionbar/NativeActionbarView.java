@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.ui.HomeFragment;
+import com.hiepkhach9x.publiceyes.ui.ReportFragment;
 
 import co.core.actionbar.CustomActionbar;
 import co.core.fragments.NavigationManager;
@@ -68,7 +69,11 @@ public class NativeActionbarView extends FrameLayout implements CustomActionbar 
     }
 
     protected int findResourceIdForActionbar(Fragment activePage) {
-        return R.layout.actionbar_default;
+        int layout = R.layout.actionbar_default;
+        if (activePage instanceof ReportFragment) {
+            layout = R.layout.actionbar_upload;
+        }
+        return layout;
     }
 
     protected void syncChildView(Fragment activePage) {
@@ -106,7 +111,7 @@ public class NativeActionbarView extends FrameLayout implements CustomActionbar 
         final Fragment fragment = mNavigationManager.getActivePage();
 
         int imageRes = R.drawable.ic_back;
-        if(fragment instanceof HomeFragment) {
+        if (fragment instanceof HomeFragment) {
             imageRes = R.drawable.ic_menu_white;
         }
         mLeftView.setImageResource(imageRes);

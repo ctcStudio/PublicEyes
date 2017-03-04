@@ -30,4 +30,7 @@
 
     <dimen name="shadow_width">15dp</dimen>
     <dimen name="sliding_menu_offset">90dp</dimen>
+
+    <dimen name="add_photo_size">90dp</dimen>
+    <dimen name="remove_photo_size">15dp</dimen>
 </resources>
