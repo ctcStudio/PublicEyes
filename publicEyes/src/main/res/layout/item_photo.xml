@@ -7,7 +7,8 @@
     <ImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <ImageView
         android:id="@+id/remove"
@@ -16,5 +17,8 @@
         android:layout_gravity="right|top"
         android:layout_marginRight="@dimen/space_smaller"
         android:layout_marginTop="@dimen/space_smaller"
-        android:background="@drawable/ic_close" />
+        android:background="@drawable/button_circle_gray"
+        android:padding="@dimen/space_smaller"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_close_white" />
 </merge>

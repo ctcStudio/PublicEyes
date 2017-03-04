@@ -4,6 +4,7 @@ package co.core.fragments;
  * @author TUNGDX
  */
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
@@ -35,15 +36,19 @@ public abstract class NFragment extends Fragment implements OnActionInDialogList
     }
 
     @Override
-    @CallSuper
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
+    public void onAttach(Context context) {
+        super.onAttach(context);
         if (getActivity() != mPageFragmentHost) {
             mPageFragmentHost = (NFragmentHost) getActivity();
             mImageLoader = mPageFragmentHost.getImageLoader();
             mNavigationManager = mPageFragmentHost.getNavigationManager();
         }
+    }
+
+    @Override
+    @CallSuper
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         mSaveInstanceStateCalled = false;
     }

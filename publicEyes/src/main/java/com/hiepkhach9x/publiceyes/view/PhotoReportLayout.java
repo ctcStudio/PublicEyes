@@ -1,7 +1,7 @@
 package com.hiepkhach9x.publiceyes.view;
 
 import android.content.Context;
-import android.graphics.Bitmap;
+import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 
 import com.hiepkhach9x.publiceyes.R;
 
+import co.core.imageloader.NImageLoader;
+
 /**
  * Created by hungh on 3/4/2017.
  */
@@ -17,11 +19,13 @@ import com.hiepkhach9x.publiceyes.R;
 public class PhotoReportLayout extends FrameLayout implements View.OnClickListener {
 
     private ImageView photo;
-    private Bitmap bitmap;
+    private Uri filePath;
     private PhotoLayoutListener listener;
+    private NImageLoader mImageLoader;
 
-    public PhotoReportLayout(Context context) {
+    public PhotoReportLayout(Context context, NImageLoader imageLoader) {
         super(context);
+        mImageLoader = imageLoader;
         initView();
     }
 
@@ -42,6 +46,7 @@ public class PhotoReportLayout extends FrameLayout implements View.OnClickListen
 
         photo = (ImageView) findViewById(R.id.photo);
         findViewById(R.id.remove).setOnClickListener(this);
+        photo.setOnClickListener(this);
     }
 
     @Override
@@ -54,20 +59,24 @@ public class PhotoReportLayout extends FrameLayout implements View.OnClickListen
                 break;
             case R.id.photo:
                 if (listener != null) {
-                    listener.onSelectPhoto(bitmap);
+                    listener.onSelectPhoto(filePath);
                 }
                 break;
         }
+    }
+
+    public void setImageLoader(NImageLoader imageLoader) {
+        this.mImageLoader = imageLoader;
     }
 
     public void sePhotoLayoutListener(PhotoLayoutListener listener) {
         this.listener = listener;
     }
 
-    public void setPhoto(Bitmap bitmap) {
-        this.bitmap = bitmap;
-        if (photo != null) {
-            photo.setImageBitmap(bitmap);
+    public void setPhoto(Uri filePath) {
+        this.filePath = filePath;
+        if (photo != null && mImageLoader != null) {
+            mImageLoader.display(this.filePath, photo);
         }
     }
 
@@ -75,6 +84,6 @@ public class PhotoReportLayout extends FrameLayout implements View.OnClickListen
 
         void onRemovePhoto(PhotoReportLayout layout);
 
-        void onSelectPhoto(Bitmap bitmap);
+        void onSelectPhoto(Uri filePath);
     }
 }
