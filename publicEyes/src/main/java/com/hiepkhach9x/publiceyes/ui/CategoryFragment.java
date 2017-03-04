@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -45,6 +46,15 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
         ListView categoryList = (ListView) view.findViewById(R.id.list_category);
         CategoryAdapter categoryAdapter = new CategoryAdapter(getContext());
         categoryList.setAdapter(categoryAdapter);
+
+        categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (mNavigationManager != null) {
+                    mNavigationManager.showPage(new LocationFragment());
+                }
+            }
+        });
     }
 
     @Override

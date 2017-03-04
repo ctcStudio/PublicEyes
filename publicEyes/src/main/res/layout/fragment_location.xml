@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkColor"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/img_public_eye"
+        android:scaleType="center" />
+
+    <TextView
+        android:id="@+id/text_location"
+        style="@style/TextViewYellow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_logo"
+        android:layout_margin="@dimen/space_normal"
+        android:text="Type your location"
+        android:textSize="@dimen/larger_text" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_location"
+        android:layout_marginLeft="@dimen/space_normal"
+        android:layout_marginRight="@dimen/space_normal"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.hiepkhach9x.publiceyes.view.UnderLineEditText
+            android:id="@+id/input_location"
+            style="@style/UnderLineEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="your location"
+            android:minHeight="40dp"
+            android:textSize="@dimen/large_text"
+            app:showUnderLine="true" />
+
+        <ImageView
+            android:id="@+id/get_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="@dimen/space_small"
+            android:scaleType="center"
+            android:src="@drawable/ic_action_location_found" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_continue"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/yellowColor"
+        android:gravity="center"
+        android:text="Continue"
+        android:textSize="@dimen/larger_text" />
+</RelativeLayout>

@@ -29,8 +29,21 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         if (slidingMenu != null) {
             slidingMenu.setEnableSliding(true);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (slidingMenu != null) {
+            slidingMenu.setEnableSliding(false);
         }
     }
 
@@ -75,7 +88,7 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         switch (view.getId()) {
             case R.id.choose_photo:
             case R.id.choose_video:
-                if(mNavigationManager !=null) {
+                if (mNavigationManager != null) {
                     mNavigationManager.showPage(new ReportFragment());
                 }
         }

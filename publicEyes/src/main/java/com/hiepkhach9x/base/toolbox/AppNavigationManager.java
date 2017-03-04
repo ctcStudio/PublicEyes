@@ -85,6 +85,37 @@ public class AppNavigationManager implements NavigationManager {
         showPage(fragment, true, false);
     }
 
+    @Override
+    public void replaceAll(Fragment fragment) {
+        replaceAll(fragment, true);
+    }
+
+    @Override
+    public void replaceAll(Fragment fragment, boolean hasAnimation) {
+        if (!canNavigate())
+            return;
+
+        // Clear all back stack.
+        int backStackCount = mFragmentManager.getBackStackEntryCount();
+        for (int i = 0; i < backStackCount; i++) {
+
+            // Get the back stack fragment id.
+            int backStackId = mFragmentManager.getBackStackEntryAt(i).getId();
+
+            mFragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
+        } /* end of for */
+        mBackStack.clear();
+
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (hasAnimation)
+            transaction.setCustomAnimations(R.anim.fragment_enter,
+                    R.anim.fragment_exit, R.anim.fragment_pop_enter,
+                    R.anim.fragment_pop_exit);
+        transaction.replace(mPlaceholder, fragment);
+        transaction.commit();
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void showPage(Fragment fragment, boolean hasAnimation, boolean isAddBackStack) {
