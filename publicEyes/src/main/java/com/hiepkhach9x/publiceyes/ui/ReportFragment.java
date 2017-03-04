@@ -13,7 +13,7 @@ import com.hiepkhach9x.publiceyes.R;
  * Created by hungh on 3/4/2017.
  */
 
-public class ReportFragment extends BaseAppFragment implements ActionbarInfo,ActionbarHandler {
+public class ReportFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler {
 
     @Override
     protected int getLayoutRes() {
@@ -27,11 +27,19 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo,Act
 
     @Override
     public boolean onLeftHandled() {
+        if (mNavigationManager != null) {
+            mNavigationManager.goBack();
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean onRightHandled() {
+        if (mNavigationManager != null) {
+            mNavigationManager.showPage(new CategoryFragment());
+            return true;
+        }
         return false;
     }
 

@@ -120,10 +120,14 @@ public class NativeActionbarView extends FrameLayout implements CustomActionbar 
             @Override
             public void onClick(View v) {
                 // Allow the current fragment controls action back
-                if (fragment != null && fragment instanceof ActionbarHandler)
-                    ((ActionbarHandler) fragment).onLeftHandled();
-                    // Normal back
-                else if (!mNavigationManager.goBack()) {
+                if (fragment != null && fragment instanceof ActionbarHandler) {
+                    boolean isHandler = ((ActionbarHandler) fragment).onLeftHandled();
+                    if (!isHandler) {
+                        if (!mNavigationManager.goBack()) {
+                            mNavigationManager.finishActivity();
+                        }
+                    }
+                } else if (!mNavigationManager.goBack()) {
                     mNavigationManager.finishActivity();
                 }
             }

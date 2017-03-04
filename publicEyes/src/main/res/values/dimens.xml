@@ -33,4 +33,5 @@
 
     <dimen name="add_photo_size">90dp</dimen>
     <dimen name="remove_photo_size">15dp</dimen>
+    <dimen name="item_size_category">80dp</dimen>
 </resources>
