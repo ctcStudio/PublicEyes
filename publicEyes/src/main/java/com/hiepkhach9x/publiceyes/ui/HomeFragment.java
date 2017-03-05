@@ -67,8 +67,8 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
                     case WHAT_CHANGE_VIDEO:
                         Uri videoPath = (Uri) message.obj;
                         if (mNavigationManager != null) {
-                            ReportFragment reportFragment = ReportFragment.newInstance(videoPath);
-                            mNavigationManager.showPage(reportFragment);
+                            ReportVideoFragment reportVideoFragment = ReportVideoFragment.newInstance(videoPath);
+                            mNavigationManager.showPage(reportVideoFragment);
                         }
                         return true;
                 }
@@ -186,10 +186,10 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
                         long duration = VideoUtils.getDuration(getContext(), videoUri);
 
                         if (duration <= 0 || duration >= (Config.TIME_LIMIT_VIDEO + 1) * 1000) {
-                            Log.d(TAG,"Duration is: " + duration);
+                            Log.d(TAG, "Duration is: " + duration);
                         } else {
                             Message message = new Message();
-                            message.what = WHAT_CHANGE_PHOTO;
+                            message.what = WHAT_CHANGE_VIDEO;
                             message.obj = videoUri;
                             mHandler.sendMessage(message);
                         }

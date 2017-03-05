@@ -102,7 +102,7 @@ public class FusedLocationService implements
         if (!PermissionGrant.checkSelfPermission(mContext, new String[]{Manifest.permission.ACCESS_FINE_LOCATION})) {
             return;
         }
-        if (!isHasGoogleApiClientConnected) {
+        if (!isHasGoogleApiClientConnected && googleApiClient != null) {
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     googleApiClient, locationRequest, this);
             isHasGoogleApiClientConnected = true;
