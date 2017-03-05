@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_large"
+    android:background="@drawable/bg_dialog_post_success"
+    android:minHeight="300dp"
+    android:orientation="vertical"
+    android:padding="@dimen/space_normal">
+
+    <ImageView
+        android:id="@+id/img_thank"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/thanks" />
+
+
+    <TextView
+        android:id="@+id/text_content"
+        style="@style/TextViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img_thank"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:gravity="center"
+        android:text="thank you! \n\n your complaint  has been successfully posted"
+        android:textAllCaps="true"
+        android:textColor="@color/grayColor"
+        android:textSize="@dimen/largest_text" />
+
+    <Button
+        android:id="@+id/btn_view_on_ichangemycity"
+        style="@style/TextViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_content"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:layout_marginTop="@dimen/space_largest"
+        android:background="@drawable/view_on_icmyc"
+        android:gravity="center"
+        android:minHeight="52dp"
+        android:text="VIEW IT ON ICHANGEMYCITY"
+        android:textColor="@color/grayColor"
+        android:textSize="@dimen/larger_text" />
+
+    <Button
+        android:id="@+id/btn_post"
+        style="@style/TextViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_view_on_ichangemycity"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:layout_marginTop="@dimen/space_normal"
+        android:background="@drawable/post"
+        android:gravity="center"
+        android:minHeight="52dp"
+        android:text="POST ANOTHER COMPLAINT"
+        android:textSize="@dimen/larger_text" />
+</RelativeLayout>

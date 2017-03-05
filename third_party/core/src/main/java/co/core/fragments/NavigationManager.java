@@ -18,6 +18,8 @@ public interface NavigationManager {
 
     void finishActivity();
 
+    boolean isBackStackEmpty();
+
     void showPage(Fragment fragment);
 
     void swapPage(Fragment fragment);

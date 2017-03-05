@@ -154,8 +154,9 @@ public class AppNavigationManager implements NavigationManager {
                 : 0;
     }
 
+    @Override
     public boolean isBackStackEmpty() {
-        return mFragmentManager.getBackStackEntryCount() <= 0;
+        return mBackStack.isEmpty() || mFragmentManager.getBackStackEntryCount() == 0;
     }
 
     public boolean isPlaceHolderEmpty(int placeHolder) {

@@ -2,6 +2,7 @@ package com.hiepkhach9x.publiceyes.store;
 
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.entities.Category;
+import com.hiepkhach9x.publiceyes.entities.Complaint;
 
 import java.util.ArrayList;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * Created by hungh on 3/4/2017.
  */
 
-public class CategoryData {
+public class DummyData {
     public static ArrayList<Category> createCategories() {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(1, R.drawable.no_parking, "No Parking"));
@@ -22,10 +23,29 @@ public class CategoryData {
         categories.add(new Category(8, R.drawable.zebra_cross_issue, "Stopped on Zebra cross/Near TRF light"));
         categories.add(new Category(9, R.drawable.uturn, "Taking a U-turn where U-turn is prohibited"));
         categories.add(new Category(10, R.drawable.triple_riding, "Triple riding"));
-        categories.add(new Category(11, R.drawable.mobile_phone, "Using mobilephone"));
+        categories.add(new Category(11, R.drawable.mobile_phone, "Using mobile phone"));
         categories.add(new Category(12, R.drawable.lane_discipline, "Violation lane discipline"));
         categories.add(new Category(13, R.drawable.wrong_parking, "Wrong parking"));
         categories.add(new Category(14, R.drawable.black_film, "Using black film/other materials"));
         return categories;
+    }
+
+    public static ArrayList<Complaint> createComplaints() {
+        ArrayList<Complaint> complaints = new ArrayList<>();
+        for (Category category : createCategories()) {
+            complaints.add(dummyComplaints(category));
+        }
+        return complaints;
+    }
+
+
+    public static Complaint dummyComplaints(Category category) {
+        Complaint complaint = new Complaint();
+        complaint.setName(category.getCategoryName());
+        complaint.setTime("2 days");
+        complaint.setAddress("Kim No, Dong Anh, Ha Noi");
+        complaint.setContent(category.getCategoryName() + " at Kim No, Dong Anh, Ha Noi");
+        complaint.setImageThumb("http://news.thuvienphapluat.vn/tintuc/Uploads/UserFiles/635014675329755859/Images/xe-khong-chinh-chu-da997.jpg");
+        return complaint;
     }
 }

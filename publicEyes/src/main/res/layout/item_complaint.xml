@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_normal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_large">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/TextViewBlack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Riding Without A Helmet"
+                android:textSize="@dimen/larger_text" />
+
+            <TextView
+                android:id="@+id/time"
+                style="@style/TextViewDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_affected"
+                android:drawablePadding="@dimen/space_smaller"
+                android:text="2 days"
+                android:textColor="@color/grayColor"
+                android:textSize="@dimen/normal_text" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/address"
+            style="@style/TextViewBlueSky"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_pin"
+            android:drawablePadding="@dimen/space_smaller"
+            android:text="Riding Without A Helmet"
+            android:textSize="@dimen/larger_text" />
+
+        <TextView
+            android:id="@+id/text_content"
+            style="@style/TextViewBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Riding Without A Helmet at Kim No, Dong Anh, Ha Noi "
+            android:textSize="@dimen/larger_text" />
+
+        <com.hiepkhach9x.publiceyes.view.RectangleImageView
+            android:id="@+id/image_thumb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerInside" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

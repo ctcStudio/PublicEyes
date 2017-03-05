@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar" />
 
     <style name="AppTheme.Splash" parent="AppTheme.NoActionBar">
         <!-- Customize your theme here. -->
@@ -43,15 +43,28 @@
         <item name="android:paddingBottom">@dimen/space_normal</item>
     </style>
 
-    <style name="TextViewBold">
+    <style name="TextViewDefault">
         <item name="android:textColor">@color/whiteColor</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:paddingTop">@dimen/space_normal</item>
         <item name="android:paddingBottom">@dimen/space_normal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="TextViewBold" parent="TextViewDefault">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="TextViewGray" parent="TextViewBold">
         <item name="android:textColor">@color/grayColor</item>
+    </style>
+
+    <style name="TextViewBlack" parent="TextViewBold">
+        <item name="android:textColor">@color/blackColor</item>
+    </style>
+
+    <style name="TextViewBlueSky" parent="TextViewBold">
+        <item name="android:textColor">@color/blueFbColor</item>
     </style>
 
     <style name="TextVieLeftMenu" parent="TextViewGray">

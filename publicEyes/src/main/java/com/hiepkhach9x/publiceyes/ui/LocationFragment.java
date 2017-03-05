@@ -1,6 +1,7 @@
 package com.hiepkhach9x.publiceyes.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,6 +20,7 @@ import com.hiepkhach9x.base.toolbox.PermissionGrant;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.task.FetchAddressIntentService;
+import com.hiepkhach9x.publiceyes.ui.dialog.PostSuccessDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
 import co.utilities.KeyboardUtils;
@@ -29,6 +31,7 @@ import co.utilities.KeyboardUtils;
 
 public class LocationFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
     private static final String TAG = "LocationFragment";
+    private static final int REQUEST_POST_DIALOG = 100;
 
     @Override
     public String getActionbarTitle() {
@@ -115,6 +118,24 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
         view.findViewById(R.id.layout).setOnClickListener(this);
     }
 
+    @Override
+    public void onDialogResult(int requestCode, int action, Intent extraData) {
+        super.onDialogResult(requestCode, action, extraData);
+        if (requestCode == REQUEST_POST_DIALOG) {
+            switch (action) {
+                case PostSuccessDialog.ACTION_CLICK_POST_OTHER:
+                    if (mNavigationManager != null) {
+                        mNavigationManager.replaceAll(new HomeFragment());
+                    }
+                    break;
+                case PostSuccessDialog.ACTION_CLICK_VIEW_IN:
+                    if (mNavigationManager != null) {
+                        mNavigationManager.replaceAll(MyComplaintsFragment.newInstance());
+                    }
+                    break;
+            }
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -129,9 +150,8 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
                 }
                 break;
             case R.id.btn_continue:
-                if (mNavigationManager != null) {
-                    mNavigationManager.replaceAll(new HomeFragment());
-                }
+                PostSuccessDialog postSuccessDialog = PostSuccessDialog.newInstance(REQUEST_POST_DIALOG);
+                postSuccessDialog.show(getChildFragmentManager(), "SuccessDialog");
                 break;
             case R.id.layout:
                 if (isAdded()) {

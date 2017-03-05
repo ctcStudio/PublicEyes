@@ -1,9 +1,11 @@
 package com.hiepkhach9x.publiceyes.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.hiepkhach9x.base.BaseSlidingActivity;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
@@ -13,7 +15,9 @@ import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu {
+import co.utilities.VideoUtils;
+
+public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener {
 
     SlidingMenu mSlidingMenu;
 
@@ -47,6 +51,13 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         mSlidingMenu.setFadeDegree(0.35f);
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
         mSlidingMenu.setSlidingEnabled(false);
+
+        findViewById(R.id.layout_complaints).setOnClickListener(this);
+        findViewById(R.id.layout_faq).setOnClickListener(this);
+        findViewById(R.id.layout_rate).setOnClickListener(this);
+        findViewById(R.id.layout_how_to).setOnClickListener(this);
+        findViewById(R.id.layout_report_bug).setOnClickListener(this);
+        findViewById(R.id.layout_logout).setOnClickListener(this);
     }
 
     @Override
@@ -110,4 +121,30 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     }
 
 
+    @Override
+    public void onClick(View view) {
+        hide();
+        switch (view.getId()) {
+            case R.id.layout_complaints:
+                if (mNavigationManager != null) {
+                    mNavigationManager.showPage(MyComplaintsFragment.newInstance());
+                }
+                break;
+            case R.id.layout_faq:
+                break;
+            case R.id.layout_rate:
+                break;
+            case R.id.layout_how_to:
+                break;
+            case R.id.layout_report_bug:
+                if (mNavigationManager != null) {
+                    mNavigationManager.showPage(ReportFragment.newInstance(null));
+                }
+                break;
+            case R.id.layout_logout:
+                startActivity(new Intent(this, RegisterActivity.class));
+                finish();
+                break;
+        }
+    }
 }

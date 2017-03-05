@@ -17,7 +17,7 @@ import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.entities.Category;
-import com.hiepkhach9x.publiceyes.store.CategoryData;
+import com.hiepkhach9x.publiceyes.store.DummyData;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categories = CategoryData.createCategories();
+        categories = DummyData.createCategories();
     }
 
     @Override

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.hiepkhach9x.publiceyes.R;
 
+import co.core.imageloader.NDisplayOptions;
 import co.core.imageloader.NImageLoader;
 
 /**
@@ -76,7 +77,10 @@ public class PhotoReportLayout extends FrameLayout implements View.OnClickListen
     public void setPhoto(Uri filePath) {
         this.filePath = filePath;
         if (photo != null && mImageLoader != null) {
-            mImageLoader.display(this.filePath, photo);
+            NDisplayOptions.Builder builder = new NDisplayOptions.Builder();
+            builder.cacheOnDisk(true);
+            builder.setImageOnLoading(R.drawable.ic_photo);
+            mImageLoader.display(this.filePath, photo, builder.build());
         }
     }
 

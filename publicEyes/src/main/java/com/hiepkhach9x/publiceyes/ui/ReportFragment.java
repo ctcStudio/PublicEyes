@@ -19,6 +19,7 @@ import com.hiepkhach9x.publiceyes.view.RectangleImageView;
 
 import java.util.ArrayList;
 
+import co.core.imageloader.NDisplayOptions;
 import co.mediapicker.NMediaItem;
 import co.mediapicker.NMediaOptions;
 import co.mediapicker.NMediaPickerActivity;
@@ -81,11 +82,17 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mImageLoader != null)
-            mImageLoader.display(mFileUri, mPhotoView);
+        if (mFileUri != null) {
+            if (mImageLoader != null) {
+                NDisplayOptions.Builder builder = new NDisplayOptions.Builder();
+                builder.cacheOnDisk(true);
+                builder.setImageOnLoading(R.drawable.ic_photo);
+                mImageLoader.display(mFileUri, mPhotoView, builder.build());
+            }
 
-        PhotoReportLayout photoReportLayout = createPhotoLayout(mFileUri);
-        mLayoutPhoto.addView(photoReportLayout);
+            PhotoReportLayout photoReportLayout = createPhotoLayout(mFileUri);
+            mLayoutPhoto.addView(photoReportLayout);
+        }
     }
 
 
@@ -164,14 +171,16 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
                 if (mPhotoSelectedList != null) {
                     for (final NMediaItem mediaItem : mPhotoSelectedList) {
                         Uri originalPath = mediaItem.getUriOrigin();
+                        if (originalPath != null) {
+                            if (mImageLoader != null) {
+                                mImageLoader.display(originalPath, mPhotoView);
+                            }
 
-                        if (mImageLoader != null)
-                            mImageLoader.display(originalPath, mPhotoView);
-
-                        PhotoReportLayout photoReportLayout = createPhotoLayout(originalPath);
-                        if (mLayoutPhoto != null)
-                            mLayoutPhoto.addView(photoReportLayout);
-                        break;
+                            PhotoReportLayout photoReportLayout = createPhotoLayout(originalPath);
+                            if (mLayoutPhoto != null)
+                                mLayoutPhoto.addView(photoReportLayout);
+                            break;
+                        }
                     }
                 } else {
                     Log.e(TAG, "Error to get media, NULL");
