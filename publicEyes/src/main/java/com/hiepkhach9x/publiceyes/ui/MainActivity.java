@@ -1,11 +1,14 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.hiepkhach9x.base.BaseSlidingActivity;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
+import com.hiepkhach9x.base.toolbox.PermissionGrant;
+import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -30,6 +33,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 mNavigationManager.swapPage(new HomeFragment());
             }
         }
+
+        PermissionGrant.verify(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_PERMISSION_LOCATION);
     }
 
     private void initSlidingMenu() {

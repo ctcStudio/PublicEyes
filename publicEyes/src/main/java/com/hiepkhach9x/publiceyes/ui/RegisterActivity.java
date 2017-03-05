@@ -1,8 +1,11 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.Manifest;
 import android.os.Bundle;
 
 import com.hiepkhach9x.base.BaseAppActivity;
+import com.hiepkhach9x.base.toolbox.PermissionGrant;
+import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 
 public class RegisterActivity extends BaseAppActivity {
@@ -15,6 +18,8 @@ public class RegisterActivity extends BaseAppActivity {
                 && mNavigationManager.getActivePage() == null) {
             mNavigationManager.swapPage(new RegisterFragment());
         }
+
+        PermissionGrant.verify(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_PERMISSION_LOCATION);
     }
 
     @Override
