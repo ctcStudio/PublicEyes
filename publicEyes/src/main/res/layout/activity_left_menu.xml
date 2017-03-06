@@ -43,7 +43,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/my_complaints"
@@ -71,7 +71,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/faq_s"
@@ -99,7 +99,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/rate_us_on_appstore"
@@ -128,7 +128,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/how_to_s"
@@ -156,7 +156,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/report_a_bug"
@@ -184,7 +184,7 @@
         <TextView
             style="@style/TextVieLeftMenu"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/logout"

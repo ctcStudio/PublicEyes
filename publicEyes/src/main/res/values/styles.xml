@@ -69,6 +69,7 @@
 
     <style name="TextVieLeftMenu" parent="TextViewGray">
         <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="TextViewYellow" parent="TextViewBold">
