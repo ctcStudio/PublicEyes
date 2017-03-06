@@ -26,7 +26,7 @@
         android:layout_marginLeft="@dimen/space_normal"
         android:layout_marginRight="@dimen/space_normal"
         android:layout_marginTop="@dimen/space_largest"
-        android:text="Add Description/Vehicle number"
+        android:text="@string/add_description_vehicle_number"
         android:textSize="@dimen/larger_text" />
 
     <EditText
@@ -39,7 +39,7 @@
         android:layout_marginRight="@dimen/space_normal"
         android:background="@drawable/button_white"
         android:gravity="top|left"
-        android:hint="Please enter description/Vehicle number"
+        android:hint="@string/please_enter_description_vehicle_number"
         android:maxHeight="300dp"
         android:minHeight="200dp"
         android:padding="@dimen/space_small" />
@@ -52,6 +52,6 @@
         android:layout_gravity="bottom"
         android:background="@color/yellowColor"
         android:gravity="center"
-        android:text="Continue"
+        android:text="@string/text_continue"
         android:textSize="@dimen/larger_text" />
 </RelativeLayout>

@@ -31,7 +31,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
 
     @Override
     public String getActionbarTitle() {
-        return "Sign Up";
+        return getString(R.string.sign_up);
     }
 
     @Override

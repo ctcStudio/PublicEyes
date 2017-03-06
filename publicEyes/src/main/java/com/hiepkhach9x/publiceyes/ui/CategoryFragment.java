@@ -59,7 +59,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
 
     @Override
     public String getActionbarTitle() {
-        return "Category";
+        return getString(R.string.category);
     }
 
     private class CategoryAdapter extends ArrayAdapter<Category> {

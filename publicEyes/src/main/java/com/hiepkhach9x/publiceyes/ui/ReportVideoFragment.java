@@ -33,7 +33,7 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
 
     @Override
     public String getActionbarTitle() {
-        return "Video";
+        return getString(R.string.video_report);
     }
 
     @Override

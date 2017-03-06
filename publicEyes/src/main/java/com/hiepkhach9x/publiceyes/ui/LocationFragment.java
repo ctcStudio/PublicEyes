@@ -35,7 +35,7 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
 
     @Override
     public String getActionbarTitle() {
-        return "Set Location";
+        return getString(R.string.set_location);
     }
 
     @Override

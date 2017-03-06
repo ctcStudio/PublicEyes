@@ -22,21 +22,37 @@
         android:background="@drawable/img_public_eye"
         android:scaleType="center" />
 
-    <ImageView
-        android:id="@+id/img_register_text"
+    <TextView
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img_public_eys"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/space_normal"
-        android:layout_marginTop="@dimen/space_largest"
+        android:layout_marginTop="@dimen/space_normal"
         android:scaleType="center"
-        android:src="@drawable/img_register_text" />
+        android:text="Report traffic violation?"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/largest_text"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/space_normal"
+        android:scaleType="center"
+        android:text="It is as easy as 1-2-3"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/normal_text"
+        android:textStyle="bold" />
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img_register_text"
+        android:layout_below="@+id/text_step"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/space_normal"
         android:layout_marginTop="@dimen/space_largest"
@@ -53,7 +69,7 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_blue_fb"
         android:minWidth="@dimen/min_width_button_sign_up"
-        android:text="Sign up width facebook"
+        android:text="@string/sign_up_width_facebook"
         android:textSize="@dimen/larger_text" />
 
     <TextView
@@ -66,7 +82,7 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_blue"
         android:minWidth="@dimen/min_width_button_sign_up"
-        android:text="Sign up width E-mail"
+        android:text="@string/sign_up_width_e_mail"
         android:textSize="@dimen/larger_text" />
 
     <TextView

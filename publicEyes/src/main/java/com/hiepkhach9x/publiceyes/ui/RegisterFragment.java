@@ -44,7 +44,7 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
                 }
                 break;
             case R.id.sign_up_fb:
-                Toast.makeText(getContext(), "Developing...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.developing, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.login:
                 if (mNavigationManager != null) {

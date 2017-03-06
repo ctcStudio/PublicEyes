@@ -129,7 +129,7 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
 
     @Override
     public String getActionbarTitle() {
-        return "Report Violation";
+        return getString(R.string.report_violation);
     }
 
     @Override

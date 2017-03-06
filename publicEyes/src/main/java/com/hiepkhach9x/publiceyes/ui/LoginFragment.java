@@ -47,6 +47,6 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
 
     @Override
     public String getActionbarTitle() {
-        return "Login";
+        return getString(R.string.login);
     }
 }

@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Riding Without A Helmet"
+                android:text="@string/riding_without_a_helmet"
                 android:textSize="@dimen/larger_text" />
 
             <TextView
@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:drawableLeft="@drawable/ic_pin"
             android:drawablePadding="@dimen/space_smaller"
-            android:text="Riding Without A Helmet"
+            android:text="@string/riding_without_a_helmet"
             android:textSize="@dimen/larger_text" />
 
         <TextView

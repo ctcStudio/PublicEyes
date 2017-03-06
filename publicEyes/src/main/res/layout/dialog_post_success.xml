@@ -28,7 +28,7 @@
         android:layout_below="@+id/img_thank"
         android:layout_marginBottom="@dimen/space_largest"
         android:gravity="center"
-        android:text="thank you! \n\n your complaint  has been successfully posted"
+        android:text="@string/thank_you_post"
         android:textAllCaps="true"
         android:textColor="@color/grayColor"
         android:textSize="@dimen/largest_text" />
@@ -44,7 +44,7 @@
         android:background="@drawable/view_on_icmyc"
         android:gravity="center"
         android:minHeight="52dp"
-        android:text="VIEW IT ON ICHANGEMYCITY"
+        android:text="@string/view_it_on_mcty"
         android:textColor="@color/grayColor"
         android:textSize="@dimen/larger_text" />
 
@@ -59,6 +59,6 @@
         android:background="@drawable/post"
         android:gravity="center"
         android:minHeight="52dp"
-        android:text="POST ANOTHER COMPLAINT"
+        android:text="@string/post_another"
         android:textSize="@dimen/larger_text" />
 </RelativeLayout>

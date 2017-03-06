@@ -34,7 +34,7 @@ public class CreateAccountFragment extends BaseAppFragment implements ActionbarI
 
     @Override
     public String getActionbarTitle() {
-        return "Create Account";
+        return getString(R.string.create_account);
     }
 
     @Override

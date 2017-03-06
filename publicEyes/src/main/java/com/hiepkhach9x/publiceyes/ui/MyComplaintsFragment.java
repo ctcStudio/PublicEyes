@@ -72,6 +72,6 @@ public class MyComplaintsFragment extends BaseAppFragment implements ActionbarIn
 
     @Override
     public String getActionbarTitle() {
-        return "My Complaints";
+        return getString(R.string.my_complaints);
     }
 }

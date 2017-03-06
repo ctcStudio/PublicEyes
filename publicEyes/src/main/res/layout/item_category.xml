@@ -25,7 +25,7 @@
             android:layout_marginRight="@dimen/space_normal"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="Using black film/other materials"
+            android:text="@string/using_black_film_other_materials"
             android:textSize="@dimen/largest_text" />
 
         <View
