@@ -8,6 +8,8 @@ import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.publiceyes.R;
 
+import co.utilities.KeyboardUtils;
+
 public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
 
     public SignUpFragment() {
@@ -22,6 +24,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
+        view.findViewById(R.id.layout).setOnClickListener(this);
     }
 
     @Override
@@ -41,6 +44,9 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
                 if (mNavigationManager != null) {
                     mNavigationManager.showPage(new CreateAccountFragment());
                 }
+                break;
+            case R.id.layout:
+                KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
         }
     }

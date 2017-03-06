@@ -37,7 +37,7 @@ public class MyComplaintsFragment extends BaseAppFragment implements ActionbarIn
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mComplaints = DummyData.createComplaints();
+        mComplaints = DummyData.createComplaints(getContext());
     }
 
     @Override

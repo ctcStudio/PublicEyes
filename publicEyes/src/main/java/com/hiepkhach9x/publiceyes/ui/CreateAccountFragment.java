@@ -15,6 +15,8 @@ import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
+import co.utilities.KeyboardUtils;
+
 public class CreateAccountFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
 
     public CreateAccountFragment() {
@@ -42,6 +44,7 @@ public class CreateAccountFragment extends BaseAppFragment implements ActionbarI
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
         view.findViewById(R.id.show_pass).setOnClickListener(this);
+        view.findViewById(R.id.layout).setOnClickListener(this);
 
         etPassword = (UnderLineEditText) view.findViewById(R.id.input_pass);
     }
@@ -59,6 +62,9 @@ public class CreateAccountFragment extends BaseAppFragment implements ActionbarI
                 break;
             case R.id.show_pass:
                 etPassword.setTransformationMethod(new HideReturnsTransformationMethod());
+                break;
+            case R.id.layout:
+                KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
         }
     }

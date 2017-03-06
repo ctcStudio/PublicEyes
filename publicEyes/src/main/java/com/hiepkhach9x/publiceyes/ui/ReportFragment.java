@@ -23,6 +23,7 @@ import co.core.imageloader.NDisplayOptions;
 import co.mediapicker.NMediaItem;
 import co.mediapicker.NMediaOptions;
 import co.mediapicker.NMediaPickerActivity;
+import co.utilities.KeyboardUtils;
 
 /**
  * Created by hungh on 3/4/2017.
@@ -77,6 +78,7 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
         mLayoutPhoto = (LinearLayout) view.findViewById(R.id.layout_photo);
 
         view.findViewById(R.id.add_photo).setOnClickListener(this);
+        view.findViewById(R.id.layout).setOnClickListener(this);
     }
 
     @Override
@@ -149,6 +151,9 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
         switch (view.getId()) {
             case R.id.add_photo:
                 photoPickerFile();
+                break;
+            case R.id.layout:
+                KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
         }
     }

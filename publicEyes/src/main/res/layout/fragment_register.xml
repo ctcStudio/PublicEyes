@@ -29,8 +29,12 @@
         android:layout_below="@+id/img_public_eys"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/space_normal"
-        android:scaleType="center"
-        android:text="Report traffic violation?"
+        android:layout_marginLeft="@dimen/space_large"
+        android:layout_marginRight="@dimen/space_large"
+        android:gravity="center"
+        android:paddingLeft="@dimen/space_large"
+        android:paddingRight="@dimen/space_large"
+        android:text="@string/report_traffic_violation"
         android:textColor="@color/whiteColor"
         android:textSize="@dimen/largest_text"
         android:textStyle="bold" />
@@ -42,8 +46,10 @@
         android:layout_below="@+id/text_title"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/space_normal"
-        android:scaleType="center"
-        android:text="It is as easy as 1-2-3"
+        android:gravity="center"
+        android:paddingLeft="@dimen/space_large"
+        android:paddingRight="@dimen/space_large"
+        android:text="@string/it_is_as_easy_as_1_2_3"
         android:textColor="@color/whiteColor"
         android:textSize="@dimen/normal_text"
         android:textStyle="bold" />
@@ -70,7 +76,7 @@
         android:background="@drawable/button_blue_fb"
         android:minWidth="@dimen/min_width_button_sign_up"
         android:text="@string/sign_up_width_facebook"
-        android:textSize="@dimen/larger_text" />
+        android:textSize="@dimen/large_text" />
 
     <TextView
         android:id="@+id/sign_up_email"
@@ -83,7 +89,7 @@
         android:background="@drawable/button_blue"
         android:minWidth="@dimen/min_width_button_sign_up"
         android:text="@string/sign_up_width_e_mail"
-        android:textSize="@dimen/larger_text" />
+        android:textSize="@dimen/large_text" />
 
     <TextView
         android:id="@+id/login"
@@ -92,6 +98,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/space_normal"
+        android:padding="@dimen/space_normal"
         android:text="@string/already_a_user_log_in" />
 </RelativeLayout>

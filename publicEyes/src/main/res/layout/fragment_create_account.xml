@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/darkColor"
@@ -45,14 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_smaller"
-            android:text="Full name"
+            android:text="@string/full_name"
             android:textSize="@dimen/large_text" />
 
         <com.hiepkhach9x.publiceyes.view.UnderLineEditText
             style="@style/UnderLineEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Full name"
+            android:hint="@string/enter_full_name"
             android:textSize="@dimen/large_text" />
 
         <TextView
@@ -60,7 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_smaller"
-            android:text="Password"
+            android:text="@string/password"
             android:textSize="@dimen/large_text" />
 
         <include
@@ -73,14 +74,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/space_smaller"
-            android:text="Phone Number"
+            android:text="@string/phone_number"
             android:textSize="@dimen/large_text" />
 
         <com.hiepkhach9x.publiceyes.view.UnderLineEditText
             style="@style/UnderLineEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Mobile Number"
+            android:hint="@string/enter_mobile_number"
             android:inputType="numberDecimal"
             android:textSize="@dimen/large_text" />
     </LinearLayout>

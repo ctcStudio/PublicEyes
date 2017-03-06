@@ -37,7 +37,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categories = DummyData.createCategories();
+        categories = DummyData.createCategories(getContext());
     }
 
     @Override
