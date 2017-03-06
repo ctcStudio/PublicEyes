@@ -35,7 +35,6 @@
     <string name="video">Video</string>
     <string name="photo">Photo</string>
     <string name="please_enter_description_vehicle_number">Please enter description/Vehicle number</string>
-    <string name="using_black_film_other_materials">Using black film/other materials</string>
     <string name="riding_without_a_helmet">Riding Without A Helmet</string>
     <string name="enter_password">Enter Password</string>
     <string name="category">Category</string>
@@ -55,7 +54,7 @@
     <string name="parking_on_footpath">Parking On Footpath</string>
     <string name="riding_on_footpath">Riding On Footpath</string>
     <string name="riding_without_helmet">Riding Without A Helmet</string>
-    <string name="defective_number_plate">Defective numbe plate</string>
+    <string name="defective_number_plate">Defective number plate</string>
     <string name="not_wearing_seat_belt">Not wearing seat belt</string>
     <string name="zebra_cross">Stopped on Zebra cross/Near TRF light</string>
     <string name="uturn">Taking a U-turn where U-turn is prohibited</string>
@@ -63,5 +62,4 @@
     <string name="mobile_phone">Using mobile phone</string>
     <string name="lane_discipline">Violation lane discipline</string>
     <string name="wrong_parking">Wrong parking</string>
-    <string name="black_film">Using black film/other materials</string>
 </resources>

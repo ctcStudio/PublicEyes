@@ -28,7 +28,6 @@ public class DummyData {
         categories.add(new Category(11, R.drawable.mobile_phone, context.getString(R.string.mobile_phone)));
         categories.add(new Category(12, R.drawable.lane_discipline, context.getString(R.string.lane_discipline)));
         categories.add(new Category(13, R.drawable.wrong_parking, context.getString(R.string.wrong_parking)));
-        categories.add(new Category(14, R.drawable.black_film, context.getString(R.string.black_film)));
         return categories;
     }
 
