@@ -35,7 +35,7 @@ public class SliderFragment extends BaseAppFragment implements View.OnClickListe
     private CirclePageIndicator pageIndicator;
     private View mSkip, mSuccess;
     private int[] images = new int[]{R.drawable.joyride02, R.drawable.joyride03, R.drawable.joyride04
-            , R.drawable.joyride05, R.drawable.joyride06};
+            , R.drawable.joyride05};
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
