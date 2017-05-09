@@ -5,31 +5,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
 
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarHandler;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
-import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.R;
 
-import java.util.ArrayList;
-
-import co.mediapicker.NMediaItem;
-import co.mediapicker.NMediaOptions;
-import co.mediapicker.NMediaPickerActivity;
-import co.utilities.VideoUtils;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by hungh on 3/3/2017.
  */
 
 public class HomeFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler, View.OnClickListener {
+    private static final String KEY_PHOTO_PATH = "key.photo.path";
     private final String TAG = "HomeFragment";
     private final int REQUEST_PHOTO = 1234;
     private final int REQUEST_VIDEO = 4321;
@@ -52,15 +51,17 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCurrentPhotoPath = savedInstanceState.getString(KEY_PHOTO_PATH);
+        }
 
         mHandler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message message) {
                 switch (message.what) {
                     case WHAT_CHANGE_PHOTO:
-                        Uri imgPath = (Uri) message.obj;
                         if (mNavigationManager != null) {
-                            ReportFragment reportFragment = ReportFragment.newInstance(imgPath);
+                            ReportFragment reportFragment = ReportFragment.newInstance(mCurrentPhotoPath);
                             mNavigationManager.showPage(reportFragment);
                         }
                         return true;
@@ -91,6 +92,12 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         if (slidingMenu != null) {
             slidingMenu.setEnableSliding(false);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_PHOTO_PATH, mCurrentPhotoPath);
     }
 
     @Override
@@ -142,15 +149,30 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     }
 
     private void videoPickerFile() {
-        NMediaOptions.Builder builder = new NMediaOptions.Builder();
-        NMediaOptions options = builder.setMaxVideoDuration(Config.TIME_LIMIT_VIDEO * 1000).setShowWarningBeforeRecordVideo(true).selectVideo().build();
-        NMediaPickerActivity.open(this, REQUEST_VIDEO, options);
+        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+        takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3 * 60);
+        startActivityForResult(takeVideoIntent, REQUEST_VIDEO);
     }
 
     private void photoPickerFile() {
-        NMediaOptions.Builder builder = new NMediaOptions.Builder();
-        NMediaOptions options = builder.setIsCropped(false).setFixAspectRatio(false).selectPhoto().build();
-        NMediaPickerActivity.open(this, REQUEST_PHOTO, options);
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getContext().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                ex.printStackTrace();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = Uri.fromFile(photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(takePictureIntent, REQUEST_PHOTO);
+            }
+        }
     }
 
     @Override
@@ -161,44 +183,37 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         }
         switch (requestCode) {
             case REQUEST_PHOTO:
-                ArrayList<NMediaItem> mPhotoSelectedList = NMediaPickerActivity.getNMediaItemSelected(data);
-                if (mPhotoSelectedList != null) {
-                    for (final NMediaItem mediaItem : mPhotoSelectedList) {
-                        Uri originalPath = mediaItem.getUriOrigin();
-
-                        Message message = new Message();
-                        message.what = WHAT_CHANGE_PHOTO;
-                        message.obj = originalPath;
-                        mHandler.sendMessage(message);
-                        break;
-                    }
-                } else {
-                    Log.e(TAG, "Error to get media, NULL");
-                }
-
+                Message messagePhoto = new Message();
+                messagePhoto.what = WHAT_CHANGE_PHOTO;
+                mHandler.sendMessage(messagePhoto);
                 break;
+
             case REQUEST_VIDEO:
-                ArrayList<NMediaItem> mVideoSelectedList = NMediaPickerActivity
-                        .getNMediaItemSelected(data);
-                if (mVideoSelectedList != null) {
-                    for (NMediaItem mediaItem : mVideoSelectedList) {
-                        Uri videoUri = mediaItem.getUriOrigin();
-                        long duration = VideoUtils.getDuration(getContext(), videoUri);
-
-                        if (duration <= 0 || duration >= (Config.TIME_LIMIT_VIDEO + 1) * 1000) {
-                            Log.d(TAG, "Duration is: " + duration);
-                        } else {
-                            Message message = new Message();
-                            message.what = WHAT_CHANGE_VIDEO;
-                            message.obj = videoUri;
-                            mHandler.sendMessage(message);
-                        }
-                        break;
-                    }
-                } else {
-                    Log.e(TAG, "Error to get media, NULL");
+                Uri mVideoUri = data.getData();
+                if (mVideoUri != null) {
+                    Message messageVideo = new Message();
+                    messageVideo.what = WHAT_CHANGE_VIDEO;
+                    messageVideo.obj = mVideoUri;
+                    mHandler.sendMessage(messageVideo);
                 }
-                break;
         }
+    }
+
+    String mCurrentPhotoPath;
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }
