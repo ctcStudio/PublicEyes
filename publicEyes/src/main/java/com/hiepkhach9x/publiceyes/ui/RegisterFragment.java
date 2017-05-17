@@ -6,13 +6,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.hiepkhach9x.base.BaseAppFragment;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
+
+import okhttp3.Call;
+import okhttp3.Response;
 
 /**
  * Created by hungh on 3/3/2017.
  */
 
-public class RegisterFragment extends BaseAppFragment implements View.OnClickListener {
+public class RegisterFragment extends BaseAppFragment implements View.OnClickListener, ResponseListener {
 
     public RegisterFragment() {
     }
@@ -52,5 +57,20 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
                 }
                 break;
         }
+    }
+
+    @Override
+    public BaseResponse parse(int requestId, Call call, Response response) throws Exception {
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+
     }
 }

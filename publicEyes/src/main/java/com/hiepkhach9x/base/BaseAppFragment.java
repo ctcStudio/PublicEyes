@@ -4,6 +4,7 @@ package com.hiepkhach9x.base;
  * @author TUNGDX
  */
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -16,7 +17,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.hiepkhach9x.base.api.Api;
 import com.hiepkhach9x.base.dialog.LoadingDialogFragment;
+import com.hiepkhach9x.publiceyes.App;
 import com.hiepkhach9x.publiceyes.R;
 
 import co.core.actionbar.CustomActionbar;
@@ -35,9 +38,17 @@ public abstract class BaseAppFragment extends NFragment {
     public static final String LOADING_TAG = "loading_tag";
 
     private Handler mHandler;
+    protected Api mApi;
+    private ProgressDialog apiDialog;
 
     public BaseAppFragment() {
         setArguments(new Bundle());
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mApi = App.get().getApi();
     }
 
     @Override
@@ -88,6 +99,24 @@ public abstract class BaseAppFragment extends NFragment {
             return frame;
         }
     }
+
+    protected void showApiLoading() {
+        if (apiDialog == null) {
+            apiDialog = new ProgressDialog(getActivity());
+            apiDialog.setMessage("Loading..");
+        }
+
+        if (!apiDialog.isShowing()) {
+            apiDialog.show();
+        }
+    }
+
+    protected void dismissApiLoading() {
+        if (apiDialog != null && apiDialog.isShowing()) {
+            apiDialog.dismiss();
+        }
+    }
+
 
     protected void showLoading() {
         Fragment loading = getChildFragmentManager().findFragmentByTag(LOADING_TAG);

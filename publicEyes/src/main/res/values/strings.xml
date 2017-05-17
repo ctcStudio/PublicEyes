@@ -62,4 +62,10 @@
     <string name="mobile_phone">Using mobile phone</string>
     <string name="lane_discipline">Violation lane discipline</string>
     <string name="wrong_parking">Wrong parking</string>
+    <string name="cmt_or_the_can_cuoc">Chứng minh thư/ Thẻ căn cước</string>
+    <string name="address">Địa chỉ</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="input_data_signup_error">Bạn phải nhập đủ thông tin các trường họ và tên, email, password!</string>
 </resources>

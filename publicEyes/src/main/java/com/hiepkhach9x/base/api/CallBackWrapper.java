@@ -13,6 +13,7 @@ import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.base.api.errors.ServerError;
 
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
 
 import okhttp3.Call;
@@ -20,12 +21,12 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class CallBackWrapper implements Callback {
-    private ResponseListener listener;
+    private SoftReference<ResponseListener> softReference;
     private int requestId;
 
     public CallBackWrapper(int requestId, ResponseListener listener) {
         this.requestId = requestId;
-        this.listener = listener;
+        this.softReference = new SoftReference<>(listener);
     }
 
     @Override
@@ -37,8 +38,8 @@ public class CallBackWrapper implements Callback {
 
     @Override
     public void onResponse(final Call call, final Response response) throws IOException {
-
-        if (this.listener != null) {
+        ResponseListener listener = softReference.get();
+        if (listener != null) {
 
             int statusCode = response.code();
 
@@ -52,7 +53,7 @@ public class CallBackWrapper implements Callback {
                  */
             if (!isError) {
                 try {
-                    BaseResponse temp = this.listener.parse(requestId, call, response);
+                    BaseResponse temp = listener.parse(requestId, call, response);
                     response.close();
                     deliverUIResponse(temp);
                 } catch (Exception e) {
@@ -79,9 +80,9 @@ public class CallBackWrapper implements Callback {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
+                ResponseListener listener = softReference.get();
                 if (listener != null) {
                     listener.onError(requestId, error);
-                    listener = null;
                 }
             }
         });
@@ -91,9 +92,9 @@ public class CallBackWrapper implements Callback {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
+                ResponseListener listener = softReference.get();
                 if (listener != null) {
                     listener.onResponse(requestId, response);
-                    listener = null;
                 }
             }
         });
