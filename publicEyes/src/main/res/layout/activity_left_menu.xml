@@ -34,13 +34,23 @@
 
             <TextView
                 style="@style/TextViewBold"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
-                android:drawablePadding="@dimen/space_smallest"
                 android:drawableLeft="@drawable/point_white"
+                android:drawablePadding="@dimen/space_smallest"
+                android:text="100"
                 android:textColor="@color/whiteColor" />
         </LinearLayout>
+
+        <TextView
+            style="@style/TextViewBlack"
+            android:layout_marginRight="@dimen/space_largest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_vertical"
+            android:padding="@dimen/space_larger"
+            android:background="@drawable/button_white"
+            android:text="@string/change_money"/>
     </FrameLayout>
 
     <LinearLayout
@@ -63,6 +73,34 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/my_complaints"
+            android:textSize="@dimen/larger_text" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_compaign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="@dimen/space_larger">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="@dimen/space_larger"
+            android:src="@drawable/ic_bug_report" />
+
+        <TextView
+            style="@style/TextVieLeftMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:text="@string/compaign"
             android:textSize="@dimen/larger_text" />
 
         <ImageView
@@ -148,34 +186,6 @@
             android:layout_weight="1"
             android:gravity="left|center_vertical"
             android:text="@string/how_to_s"
-            android:textSize="@dimen/larger_text" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_compaign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="@dimen/space_larger">
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="@dimen/space_larger"
-            android:src="@drawable/ic_bug_report" />
-
-        <TextView
-            style="@style/TextVieLeftMenu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="left|center_vertical"
-            android:text="@string/compaign"
             android:textSize="@dimen/larger_text" />
 
         <ImageView
