@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.content.FileProvider;
 import android.view.View;
 
 import com.hiepkhach9x.base.BaseAppFragment;
@@ -168,7 +169,7 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                Uri photoURI = Uri.fromFile(photoFile);
+                Uri photoURI = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_PHOTO);
             }

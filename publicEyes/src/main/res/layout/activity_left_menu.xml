@@ -13,18 +13,34 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_left_menu_user" />
 
-        <TextView
-            style="@style/TextViewBold"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/space_small"
             android:layout_marginLeft="@dimen/space_larger"
-            android:text="Name"
-            android:textSize="@dimen/larger_text" />
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextViewBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:textSize="@dimen/larger_text" />
+
+            <TextView
+                style="@style/TextViewBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:drawablePadding="@dimen/space_smallest"
+                android:drawableLeft="@drawable/point_white"
+                android:textColor="@color/whiteColor" />
+        </LinearLayout>
     </FrameLayout>
 
     <LinearLayout

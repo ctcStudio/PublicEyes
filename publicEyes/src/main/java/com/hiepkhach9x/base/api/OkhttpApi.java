@@ -45,11 +45,11 @@ public class OkHttpApi implements Api {
     private void cancelCallWithTag(int requestId) {
         // A call may transition from queue -> running. Remove queued Calls first.
         for (Call call : mOkHttpClient.dispatcher().queuedCalls()) {
-            if (call.request().tag() == requestId)
+            if ((int)call.request().tag() == requestId)
                 call.cancel();
         }
         for (Call call : mOkHttpClient.dispatcher().runningCalls()) {
-            if (call.request().tag() == requestId)
+            if ((int)call.request().tag() == requestId)
                 call.cancel();
         }
     }
