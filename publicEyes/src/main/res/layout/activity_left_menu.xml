@@ -157,7 +157,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/layout_report_bug"
+        android:id="@+id/layout_compaign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
@@ -175,7 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left|center_vertical"
-            android:text="@string/report_a_bug"
+            android:text="@string/compaign"
             android:textSize="@dimen/larger_text" />
 
         <ImageView

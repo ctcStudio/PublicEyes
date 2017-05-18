@@ -3,7 +3,7 @@ package com.hiepkhach9x.publiceyes;
 import android.app.Application;
 
 import com.hiepkhach9x.base.api.Api;
-import com.hiepkhach9x.base.api.OkHttpApi;
+import com.hiepkhach9x.base.api.OkHttpImpl;
 import com.hiepkhach9x.base.imageloader.UILImageLoader;
 
 import co.core.imageloader.NImageLoader;
@@ -32,7 +32,7 @@ public class App extends Application {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-        mApi = new OkHttpApi(okHttpClient);
+        mApi = new OkHttpImpl(okHttpClient);
 
     }
 

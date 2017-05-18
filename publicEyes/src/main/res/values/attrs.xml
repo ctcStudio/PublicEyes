@@ -4,4 +4,10 @@
         <attr name="showUnderLine" format="boolean" />
         <attr name="underLineColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="AutoFitTextView">
+        <attr name="minTextSize" format="dimension" />
+        <attr name="precision" format="float" />
+        <attr name="sizeToFit" format="boolean" />
+    </declare-styleable>
 </resources>

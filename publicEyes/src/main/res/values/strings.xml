@@ -12,7 +12,7 @@
     <string name="faq_s">FAQ\'S</string>
     <string name="rate_us_on_appstore">Rate us on AppStore</string>
     <string name="how_to_s">How To\'s</string>
-    <string name="report_a_bug">Report a Bug</string>
+    <string name="compaign">Compaign</string>
     <string name="logout">Logout</string>
     <string name="thank_you_post">thank you! \n\n your complaint has been successfully posted</string>
     <string name="view_it_on_mcty">VIEW IT ON ICHANGEMYCITY</string>
@@ -68,4 +68,9 @@
     <string name="common_cancel">Cancel</string>
     <string name="error">Error</string>
     <string name="input_data_signup_error">Bạn phải nhập đủ thông tin các trường họ và tên, email, password!</string>
+
+    <!-- popup news -->
+    <string name="news_popup_title">Chiến dịch</string>
+    <string name="new_detail">hiện</string>
+    <string name="new_close_up">đóng</string>
 </resources>

@@ -90,6 +90,7 @@ public class DateUtils {
                                                String toFormat) {
         SimpleDateFormat from = new SimpleDateFormat(fromFormat,
                 Locale.getDefault());
+        from.setTimeZone(TimeZone.getTimeZone("GMT"));
         SimpleDateFormat to = new SimpleDateFormat(toFormat,
                 Locale.getDefault());
         try {
@@ -153,6 +154,23 @@ public class DateUtils {
             date = dateFormat.parse(time);
             dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
             return dateFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return time;
+        }
+    }
+
+    public static String convertLocaleToGMTByFormat(String time, String toFormat) {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",
+                Locale.getDefault());
+        SimpleDateFormat toDateFormat = new SimpleDateFormat(toFormat,
+                Locale.getDefault());
+        Date date;
+        try {
+            date = dateFormat.parse(time);
+            toDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+            return toDateFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
             return time;

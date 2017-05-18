@@ -9,12 +9,12 @@ import okhttp3.Request;
  * Created by hungh on 5/17/2017.
  */
 
-public class OkHttpApi implements Api {
+public class OkHttpImpl implements Api {
 
 
     private final OkHttpClient mOkHttpClient;
 
-    public OkHttpApi(OkHttpClient okHttpClient) {
+    public OkHttpImpl(OkHttpClient okHttpClient) {
         mOkHttpClient = okHttpClient;
     }
 

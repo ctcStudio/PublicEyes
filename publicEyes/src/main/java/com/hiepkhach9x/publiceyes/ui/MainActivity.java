@@ -56,7 +56,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         findViewById(R.id.layout_faq).setOnClickListener(this);
         findViewById(R.id.layout_rate).setOnClickListener(this);
         findViewById(R.id.layout_how_to).setOnClickListener(this);
-        findViewById(R.id.layout_report_bug).setOnClickListener(this);
+        findViewById(R.id.layout_compaign).setOnClickListener(this);
         findViewById(R.id.layout_logout).setOnClickListener(this);
     }
 
@@ -136,9 +136,9 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 break;
             case R.id.layout_how_to:
                 break;
-            case R.id.layout_report_bug:
+            case R.id.layout_compaign:
                 if (mNavigationManager != null) {
-                    mNavigationManager.showPage(ReportFragment.newInstance(null));
+                    mNavigationManager.showPage(CompaignFragment.newInstance());
                 }
                 break;
             case R.id.layout_logout:
