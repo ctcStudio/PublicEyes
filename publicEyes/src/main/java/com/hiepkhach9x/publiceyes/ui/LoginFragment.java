@@ -21,6 +21,7 @@ import co.utilities.KeyboardUtils;
 public class LoginFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
 
     private UnderLineEditText etPassword;
+    private UnderLineEditText etEmail;
 
     @Override
     protected int getLayoutRes() {
@@ -36,15 +37,18 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         etPassword = (UnderLineEditText) view.findViewById(R.id.input_pass);
+        etEmail = (UnderLineEditText) view.findViewById(R.id.ed_email);
 
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
         view.findViewById(R.id.show_pass).setOnClickListener(this);
         view.findViewById(R.id.layout).setOnClickListener(this);
+        view.findViewById(R.id.login_facebook).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.login_facebook:
             case R.id.btn_continue:
                 AppPref.get().saveFirstLogin(true);
                 startActivity(new Intent(getContext(), MainActivity.class));

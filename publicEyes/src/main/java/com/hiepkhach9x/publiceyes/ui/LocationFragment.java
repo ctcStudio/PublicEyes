@@ -161,7 +161,7 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
         }
     }
 
-    class AddressResultReceiver extends ResultReceiver {
+    private class AddressResultReceiver extends ResultReceiver {
 
         public AddressResultReceiver() {
             super(new Handler());
