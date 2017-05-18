@@ -58,4 +58,16 @@
     <string name="mobile_phone">Sử dụng điện thoại khi lái xe</string>
     <string name="lane_discipline">Lái xe không theo làn đường quy định</string>
     <string name="wrong_parking">Đỗ xe không đúng nơi quy định</string>
+
+    <string name="cmt_or_the_can_cuoc">Chứng minh thư/ Thẻ căn cước</string>
+    <string name="address">Địa chỉ</string>
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="error">Error</string>
+    <string name="input_data_signup_error">Bạn phải nhập đủ thông tin các trường họ và tên, email, password!</string>
+
+    <!-- popup news -->
+    <string name="news_popup_title">Chiến dịch</string>
+    <string name="new_detail">hiện</string>
+    <string name="new_close_up">đóng</string>
 </resources>

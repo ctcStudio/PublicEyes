@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/news_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/space_normal"
+    android:layout_marginLeft="@dimen/space_small"
+    android:layout_marginRight="@dimen/space_small"
+    android:layout_marginBottom="@dimen/space_largest"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/ll_fragment_new_notifications"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/space_larger"
+        android:background="@drawable/bg_dialog_new">
+
+        <TextView
+            android:id="@+id/news_title"
+            style="@style/TextViewBold"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height_smaller"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="@string/news_popup_title"
+            android:textColor="@color/blackColor"
+            android:textStyle="bold"
+            android:textSize="@dimen/large_text" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/blueColor"
+            android:layout_below="@+id/news_title"/>
+
+        <ListView
+            android:id="@+id/list_news"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/news_done"
+            android:layout_below="@+id/news_title"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="@dimen/space_small"
+            android:layout_margin="@dimen/space_normal" />
+
+        <Button
+            android:id="@+id/news_done"
+            style="@style/TextViewBlack"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/space_normal"
+            android:layout_marginLeft="@dimen/space_normal"
+            android:layout_marginTop="@dimen/space_normal"
+            android:background="@drawable/button_yellow"
+            android:padding="@dimen/space_small"
+            android:gravity="center"
+            android:text="@string/common_ok"
+            android:textSize="@dimen/large_text" />
+    </RelativeLayout>
+
+</FrameLayout>

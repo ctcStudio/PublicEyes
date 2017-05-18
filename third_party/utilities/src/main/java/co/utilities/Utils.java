@@ -1,13 +1,17 @@
 package co.utilities;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Resources;
+import android.graphics.Point;
 import android.hardware.Camera;
 import android.os.Looper;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
+import android.view.Display;
+import android.view.WindowManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,6 +44,29 @@ public class Utils {
         }
         // shoud be never happen.
         return 0;
+    }
+
+    /**
+     *
+     * @param context
+     * @return screen size
+     */
+    @SuppressLint("NewApi")
+    public static int[] getScreenSize(Context context) {
+        int[] size = new int[2];
+        WindowManager wm = (WindowManager) context
+                .getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        if (android.os.Build.VERSION.SDK_INT < 13) {
+            size[0] = display.getWidth();
+            size[1] = display.getHeight();
+        } else {
+            Point outSize = new Point();
+            display.getSize(outSize);
+            size[0] = outSize.x;
+            size[1] = outSize.y;
+        }
+        return size;
     }
 
     /**

@@ -37,4 +37,9 @@
 
     <dimen name="height_item_news">118dp</dimen>
     <dimen name="width_item_news">280dp</dimen>
+
+    <dimen name="button_height">58dp</dimen>
+    <dimen name="button_height_small">52dp</dimen>
+    <dimen name="button_height_smaller">46dp</dimen>
+    <dimen name="button_height_smallest">40dp</dimen>
 </resources>

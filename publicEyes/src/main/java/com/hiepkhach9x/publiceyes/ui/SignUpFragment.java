@@ -14,6 +14,7 @@ import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.SignUpRequest;
+import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
@@ -71,6 +72,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
                 KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
             case R.id.btn_continue:
+                AppPref.get().saveFirstLogin(true);
                 startActivity(new Intent(getContext(), MainActivity.class));
                 if (mNavigationManager != null) {
                     mNavigationManager.finishActivity();

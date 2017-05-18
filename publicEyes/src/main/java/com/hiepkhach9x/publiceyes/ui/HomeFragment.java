@@ -2,6 +2,7 @@ package com.hiepkhach9x.publiceyes.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 
@@ -17,12 +19,19 @@ import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarHandler;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
+import com.hiepkhach9x.publiceyes.App;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.entities.News;
+import com.hiepkhach9x.publiceyes.store.AppPref;
+import com.hiepkhach9x.publiceyes.store.DummyData;
+import com.hiepkhach9x.publiceyes.ui.dialog.NewsDialog;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by hungh on 3/3/2017.
@@ -38,6 +47,7 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     private final int WHAT_CHANGE_VIDEO = 2;
 
     private CustomSlidingMenu slidingMenu;
+    private NewsDialog mNewsDialog;
 
     @Override
     public void onAttach(Context context) {
@@ -77,6 +87,21 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        showPopupNews(DummyData.dummyNews());
+    }
+
+    private void showPopupNews(ArrayList<News> newsList) {
+        // Check whether or not show New Notifications
+        if(AppPref.get().isShowNews()) {
+            mNewsDialog = new NewsDialog(getContext(), newsList);
+            mNewsDialog.show();
+            AppPref.get().saveIsShowNews(false);
+        }
     }
 
     @Override

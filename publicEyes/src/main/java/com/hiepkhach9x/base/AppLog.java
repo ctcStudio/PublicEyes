@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class AppLog {
 
-    private static final boolean isEnabled = true;
+    public static final boolean isEnabled = true;
 
     private static final String TAG = "My App";
 

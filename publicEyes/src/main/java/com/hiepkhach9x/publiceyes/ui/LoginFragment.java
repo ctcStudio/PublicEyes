@@ -9,6 +9,7 @@ import android.view.View;
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
 import co.utilities.KeyboardUtils;
@@ -45,6 +46,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_continue:
+                AppPref.get().saveFirstLogin(true);
                 startActivity(new Intent(getContext(), MainActivity.class));
                 if (mNavigationManager != null) {
                     mNavigationManager.finishActivity();

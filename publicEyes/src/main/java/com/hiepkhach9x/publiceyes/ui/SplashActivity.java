@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 
 public class SplashActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
                 }
             }
         }, 2000);
+        AppPref.get().saveIsShowNews(true);
     }
 
     private void startMainActivity() {

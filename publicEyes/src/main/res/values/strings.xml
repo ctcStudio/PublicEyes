@@ -62,15 +62,15 @@
     <string name="mobile_phone">Using mobile phone</string>
     <string name="lane_discipline">Violation lane discipline</string>
     <string name="wrong_parking">Wrong parking</string>
-    <string name="cmt_or_the_can_cuoc">Chứng minh thư/ Thẻ căn cước</string>
-    <string name="address">Địa chỉ</string>
+    <string name="cmt_or_the_can_cuoc">Identity card</string>
+    <string name="address">Address</string>
     <string name="common_ok">OK</string>
     <string name="common_cancel">Cancel</string>
     <string name="error">Error</string>
-    <string name="input_data_signup_error">Bạn phải nhập đủ thông tin các trường họ và tên, email, password!</string>
+    <string name="input_data_signup_error">You have not entered enough information!</string>
 
     <!-- popup news -->
-    <string name="news_popup_title">Chiến dịch</string>
-    <string name="new_detail">hiện</string>
-    <string name="new_close_up">đóng</string>
+    <string name="news_popup_title">Compaign</string>
+    <string name="new_detail">show</string>
+    <string name="new_close_up">close</string>
 </resources>
