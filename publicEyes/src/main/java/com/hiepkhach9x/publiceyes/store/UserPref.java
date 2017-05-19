@@ -3,7 +3,9 @@ package com.hiepkhach9x.publiceyes.store;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.publiceyes.App;
+import com.hiepkhach9x.publiceyes.entities.User;
 
 import co.utilities.BasePrefers;
 
@@ -19,6 +21,11 @@ public class UserPref extends BasePrefers {
     private final String KEY_PASSWORD = "key.password";
     private final String KEY_FULL_NAME = "key.full.name";
     private final String KEY_MOBILE_NUMBER = "key.mobile.number";
+    private final String KEY_ID_CARD = "key.id.card";
+    private final String KEY_POINT = "key.point";
+    private final String KEY_AGE = "key.age";
+    private final String KEY_ADDRESS = "key.address";
+
 
     public static UserPref get() {
         return new UserPref(App.get());
@@ -26,6 +33,16 @@ public class UserPref extends BasePrefers {
 
     public UserPref(Context context) {
         super(context);
+    }
+
+    public void saveUserInfo(User user) {
+        saveEmail(user.getEmail());
+        saveFullName(user.getFullName());
+        saveMobileNumber(user.getMobileNumber());
+        saveIdCard(user.getIdCard());
+        savePoint(user.getPoint());
+        saveAge(user.getAge());
+        saveAddress(user.getAddress());
     }
 
     @Override
@@ -63,6 +80,38 @@ public class UserPref extends BasePrefers {
 
     public String getMobileNumber() {
         return getSharedPreference().getString(KEY_MOBILE_NUMBER, "");
+    }
+
+    public boolean saveIdCard(String idCard) {
+        return mEditor.putString(KEY_ID_CARD, idCard).commit();
+    }
+
+    public String getIdCard() {
+        return getSharedPreference().getString(KEY_ID_CARD, "");
+    }
+
+    public boolean savePoint(int point) {
+        return mEditor.putInt(KEY_POINT, point).commit();
+    }
+
+    public int getPoint() {
+        return getSharedPreference().getInt(KEY_POINT, 0);
+    }
+
+    public boolean saveAge(int age) {
+        return mEditor.putInt(KEY_AGE, age).commit();
+    }
+
+    public int getAge() {
+        return getSharedPreference().getInt(KEY_AGE, 0);
+    }
+
+    public boolean saveAddress(String address) {
+        return mEditor.putString(KEY_ADDRESS, address).commit();
+    }
+
+    public String getAddress() {
+        return getSharedPreference().getString(KEY_ADDRESS, "");
     }
 
     public boolean hasActive() {

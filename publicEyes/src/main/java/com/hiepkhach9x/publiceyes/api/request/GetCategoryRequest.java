@@ -11,12 +11,10 @@ import okhttp3.Headers;
 import okhttp3.RequestBody;
 
 /**
- * Created by HungHN on 5/18/17.
+ * Created by HungHN on 5/19/17.
  */
 
-public class LoginRequest implements BaseRequest {
-    private String email;
-    private String password;
+public class GetCategoryRequest implements BaseRequest {
 
     @Override
     public String getUrl() {
@@ -46,21 +44,5 @@ public class LoginRequest implements BaseRequest {
     public RequestBody getBody() {
         RequestBody body = RequestBody.create(JSON, toJson());
         return body;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }

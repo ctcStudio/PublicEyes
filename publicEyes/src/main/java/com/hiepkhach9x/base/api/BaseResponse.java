@@ -1,5 +1,7 @@
 package com.hiepkhach9x.base.api;
 
+import com.google.gson.JsonSyntaxException;
+
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -11,9 +13,9 @@ import okhttp3.Response;
  */
 
 public abstract class BaseResponse {
-    public BaseResponse(Response response) throws IOException, JSONException {
+    public BaseResponse(String response) throws IOException, JSONException, JsonSyntaxException {
         parseData(response);
     }
 
-    protected abstract void parseData(Response data) throws IOException, JSONException;
+    protected abstract void parseData(String data) throws IOException, JSONException;
 }

@@ -14,13 +14,13 @@ import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.SignUpRequest;
+import com.hiepkhach9x.publiceyes.api.response.SignUpResponse;
 import com.hiepkhach9x.publiceyes.store.AppPref;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
 import co.utilities.KeyboardUtils;
-import okhttp3.Call;
-import okhttp3.Response;
 
 public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener,
         ResponseListener {
@@ -72,13 +72,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
                 KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
             case R.id.btn_continue:
-                AppPref.get().saveFirstLogin(true);
-                startActivity(new Intent(getContext(), MainActivity.class));
-                if (mNavigationManager != null) {
-                    mNavigationManager.finishActivity();
-                } else {
-                    getActivity().finish();
-                }
+                signUpAccount();
                 break;
             case R.id.show_pass:
                 etPassword.setTransformationMethod(new HideReturnsTransformationMethod());
@@ -95,8 +89,9 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         address = edEmail.getText().toString().trim();
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
-                || TextUtils.isEmpty(fullName)) {
-            AlertDialog alertDialog = AppAlertDialog.AlertDialogOk(getContext(),"",getString(R.string.input_data_signup_error)
+                || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)
+                || TextUtils.isEmpty(cmt) || TextUtils.isEmpty(address)) {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error)
                     , true,null);
             alertDialog.show();
             return;
@@ -115,16 +110,36 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
 
     @Override
     public BaseResponse parse(int requestId, String response) throws Exception {
+        if (requestId == REQUEST_SIGN_UP) {
+            return new SignUpResponse(response);
+        }
         return null;
     }
 
     @Override
     public void onResponse(int requestId, BaseResponse response) {
+        if (requestId == REQUEST_SIGN_UP) {
+            AppPref.get().saveFirstLogin(true);
+            SignUpResponse signUpResponse = (SignUpResponse) response;
+            UserPref.get().saveUserInfo(signUpResponse.getUser());
+            UserPref.get().saveEmail(email);
+            UserPref.get().savePassword(password);
+            startMainActivity();
+        }
+    }
 
+    private void startMainActivity() {
+        startActivity(new Intent(getContext(), MainActivity.class));
+        if (mNavigationManager != null) {
+            mNavigationManager.finishActivity();
+        } else {
+            getActivity().finish();
+        }
     }
 
     @Override
     public void onError(int requestId, Exception e) {
-
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
     }
 }

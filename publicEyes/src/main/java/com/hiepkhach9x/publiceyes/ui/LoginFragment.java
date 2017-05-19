@@ -2,20 +2,26 @@ package com.hiepkhach9x.publiceyes.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
-import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 
 import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
+import com.hiepkhach9x.publiceyes.api.response.LoginResponse;
 import com.hiepkhach9x.publiceyes.entities.User;
 import com.hiepkhach9x.publiceyes.store.AppPref;
+import com.hiepkhach9x.publiceyes.store.UserPref;
+import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
@@ -27,23 +33,23 @@ import com.sromku.simple.fb.utils.Attributes;
 import com.sromku.simple.fb.utils.PictureAttributes;
 
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import co.utilities.KeyboardUtils;
+import co.utilities.Utils;
 
 /**
  * Created by hungh on 3/3/2017.
  */
 
-public class LoginFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
+public class LoginFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener, ResponseListener {
     private static final String TAG = "LoginFragment";
+    private static final int REQUEST_LOGIN = 100;
+
     private UnderLineEditText etPassword;
     private UnderLineEditText etEmail;
+    private String email;
+    private String password;
 
     private ProgressDialog progressDialog;
 
@@ -73,14 +79,10 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_facebook:
+                gotoMain();
+                break;
             case R.id.btn_continue:
-                AppPref.get().saveFirstLogin(true);
-                startActivity(new Intent(getContext(), MainActivity.class));
-                if (mNavigationManager != null) {
-                    mNavigationManager.finishActivity();
-                } else {
-                    getActivity().finish();
-                }
+                loginByEmail();
                 break;
             case R.id.layout:
                 KeyboardUtils.hideSoftKeyboard(getActivity());
@@ -91,7 +93,37 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
         }
     }
 
-    protected void facebookLogin() {
+    private void gotoMain() {
+        startActivity(new Intent(getContext(), MainActivity.class));
+        if (mNavigationManager != null) {
+            mNavigationManager.finishActivity();
+        } else {
+            getActivity().finish();
+        }
+    }
+
+    private void loginByEmail() {
+        email = etEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error),true,null);
+            alertDialog.show();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
+            alertDialog.show();
+            return;
+        }
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(email);
+        loginRequest.setPassword(password);
+        mApi.restartRequest(REQUEST_LOGIN,loginRequest,this);
+        showApiLoading();
+    }
+
+    private void facebookLogin() {
         Permission[] permissions = new Permission[] {
                 Permission.USER_ABOUT_ME,
                 Permission.PUBLIC_PROFILE,
@@ -198,5 +230,32 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     @Override
     public String getActionbarTitle() {
         return getString(R.string.login);
+    }
+
+    @Override
+    public BaseResponse parse(int requestId, String response) throws Exception {
+        if(requestId == REQUEST_LOGIN) {
+            return new LoginResponse(response);
+        }
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+        dismissApiLoading();
+        if(requestId == REQUEST_LOGIN) {
+            AppPref.get().saveFirstLogin(true);
+            LoginResponse loginResponse = (LoginResponse) response;
+            UserPref.get().saveUserInfo(loginResponse.getUser());
+            UserPref.get().saveEmail(email);
+            UserPref.get().savePassword(password);
+            gotoMain();
+        }
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
     }
 }

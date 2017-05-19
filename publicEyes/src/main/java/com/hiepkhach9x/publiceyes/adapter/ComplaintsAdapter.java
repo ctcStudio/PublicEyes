@@ -66,10 +66,10 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Ho
         }
 
         public void updateView(Complaint complaint) {
-            name.setText(complaint.getName());
+            name.setText(complaint.getCategoryName());
             time.setText(complaint.getTime());
             address.setText(complaint.getAddress());
-            content.setText(complaint.getContent());
+            content.setText(complaint.getDescription());
             if (mImageloader != null) {
                 NDisplayOptions.Builder builder = new NDisplayOptions.Builder();
                 builder.cacheOnDisk(true);

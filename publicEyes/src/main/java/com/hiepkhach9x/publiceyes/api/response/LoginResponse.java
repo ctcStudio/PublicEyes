@@ -1,6 +1,9 @@
 package com.hiepkhach9x.publiceyes.api.response;
 
+import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.entities.User;
 
 import org.json.JSONException;
 
@@ -13,12 +16,27 @@ import okhttp3.Response;
  */
 
 public class LoginResponse extends BaseResponse {
-    public LoginResponse(Response response) throws IOException, JSONException {
+    @SerializedName("Code")
+    private int code;
+    @SerializedName("Data")
+    private User user;
+    public LoginResponse(String response) throws IOException, JSONException {
         super(response);
     }
 
     @Override
-    protected void parseData(Response data) throws IOException, JSONException {
+    protected void parseData(String data) throws IOException, JSONException {
+        Gson gson = new Gson();
+        LoginResponse response = gson.fromJson(data,LoginResponse.class);
+        code = response.getCode();
+        user = response.getUser();
+    }
 
+    public int getCode() {
+        return code;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

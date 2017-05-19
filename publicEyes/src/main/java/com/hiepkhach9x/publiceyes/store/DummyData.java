@@ -15,9 +15,13 @@ import java.util.ArrayList;
 
 public class DummyData {
     public static final String SIGN_UP_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"\"}}";
-    public static final String GET_USER_RESPONSE = "{\"Code\": 0,\"Data\": {\"username\": \"minhpt\",\"password\": \"6f3329e55e7c655d29d72e512bd28bac\"," +
-            "\"decentralization_id\": 2,\"name\": \"Minh\",\"age\": 18,\"address\": \"102 trường chinhw\",\"id_card\": \"123456789\",\"mobile_phone\": " +
-            "\"01667823462\",\"bonus_point\": 0,\"payment_type\": \"as\",\"bank_account\": \"as\",\"bank_name\": \"a\",\"bank_branch\": \"a\"," +
+    public static final String LOGIN_RESPONSE = "{\"Code\": 0,\"Data\": {\"email\": \"hunghn2612@gmail.com\"," +
+            "\"decentralization_id\": 2,\"name\": \"Hung Hoang\",\"age\": 24,\"address\": \"Kim No, Dong Anh, Ha Noi\",\"id_card\": \"013230848\",\"mobile_phone\": " +
+            "\"0984921226\",\"bonus_point\": 30,\"payment_type\": \"as\",\"bank_account\": \"as\",\"bank_name\": \"a\",\"bank_branch\": \"a\"," +
+            "\"create_by\": null,\"create_date\": null,\"update_by\": \"admin\",\"update_date\": \"2017-05-04T14:37:58.037\",\"delete_by\": null,\"delete_date\": null}}";
+    public static final String GET_USER_RESPONSE = "{\"Code\": 0,\"Data\": {\"email\": \"hunghn2612@gmail.com\",\"password\": \"6f3329e55e7c655d29d72e512bd28bac\"," +
+            "\"decentralization_id\": 2,\"name\": \"Hung Hoang\",\"age\": 24,\"address\": \"102 trường chinhw\",\"id_card\": \"013230848\",\"mobile_phone\": " +
+            "\"0984921226\",\"bonus_point\": 30,\"payment_type\": \"as\",\"bank_account\": \"as\",\"bank_name\": \"a\",\"bank_branch\": \"a\"," +
             "\"create_by\": null,\"create_date\": null,\"update_by\": \"minhpt\",\"update_date\": \"2017-05-04T14:37:58.037\",\"delete_by\": null,\"delete_date\": null}}";
     public static final String UPLOAD_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"https://drive.google.com/open?id=0B9930oH9q2HrNHhqelVLTnc0djA\"}}";
     public static final String MESSAGE_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"\"}}";

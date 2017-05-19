@@ -130,7 +130,7 @@
                 style="@style/UnderLineEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_mobile_number"
+                android:hint="@string/address"
                 android:textSize="@dimen/large_text" />
         </LinearLayout>
     </ScrollView>

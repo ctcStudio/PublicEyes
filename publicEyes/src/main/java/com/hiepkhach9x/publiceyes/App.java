@@ -5,6 +5,7 @@ import android.app.Application;
 import com.hiepkhach9x.base.api.Api;
 import com.hiepkhach9x.base.api.OkHttpImpl;
 import com.hiepkhach9x.base.imageloader.UILImageLoader;
+import com.hiepkhach9x.publiceyes.api.FakeImpl;
 
 import co.core.imageloader.NImageLoader;
 import okhttp3.OkHttpClient;
@@ -32,8 +33,8 @@ public class App extends Application {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
-        mApi = new OkHttpImpl(okHttpClient);
-
+        //mApi = new OkHttpImpl(okHttpClient);
+        mApi = new FakeImpl();
     }
 
     public static App get() {
