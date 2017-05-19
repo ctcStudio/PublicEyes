@@ -60,7 +60,7 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
     }
 
     @Override
-    public BaseResponse parse(int requestId, Call call, Response response) throws Exception {
+    public BaseResponse parse(int requestId, String response) throws Exception {
         return null;
     }
 

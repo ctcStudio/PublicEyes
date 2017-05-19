@@ -114,7 +114,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
     }
 
     @Override
-    public BaseResponse parse(int requestId, Call call, Response response) throws Exception {
+    public BaseResponse parse(int requestId, String response) throws Exception {
         return null;
     }
 
