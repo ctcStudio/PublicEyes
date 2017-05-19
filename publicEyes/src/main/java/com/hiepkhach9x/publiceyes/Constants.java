@@ -20,4 +20,5 @@ public class Constants {
     public static final int REQUEST_PERMISSION_LOCATION = 100;
     public static final int REQUEST_PERMISSION_STORE = 101;
     public static final int REQUEST_PERMISSION_CAMERA = 102;
+    public static final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
 }

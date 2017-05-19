@@ -28,12 +28,12 @@ public class UIResponseRS implements ResponseListener {
     }
 
     @Override
-    public BaseResponse parse(int requestId, Call call, Response response) throws Exception {
+    public BaseResponse parse(int requestId, String response) throws Exception {
 
         ResponseListener listener = rsReference.get();
 
         if (listener != null)
-            return listener.parse(requestId, call, response);
+            return listener.parse(requestId, response);
         return null;
     }
 

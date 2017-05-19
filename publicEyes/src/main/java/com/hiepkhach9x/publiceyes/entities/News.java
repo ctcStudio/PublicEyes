@@ -4,6 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.TextUtils;
 
+import com.google.gson.annotations.SerializedName;
+import com.hiepkhach9x.publiceyes.Constants;
+
 import co.utilities.DateUtils;
 
 public class News implements Parcelable {
@@ -36,12 +39,20 @@ public class News implements Parcelable {
     private static final String[] TAG_LIST = {"a", "b", "blockquote", "code", "del", "dd", "dl",
             "dt", "em", "h1", "h2", "h3", "i", "img", "kbd", "li", "ol", "p", "pre",
             "s", "sup", "sub", "strong", "strike", "ul", "br", "hr", "u"};
+    @SerializedName("operation_id")
     private String id;
+    @SerializedName("image")
     private String banner;
+    @SerializedName("name")
     private String title;
-    private String fromDate;
-    private String toDate;
+    @SerializedName("date_from")
+    private String fromDate;   // 2017-04-15T00:00:00
+    @SerializedName("date_to")
+    private String toDate;   // 2017-04-15T00:00:00
+    @SerializedName("descripton")
     private String htmlContent;
+    @SerializedName("bonusPoint")
+    private int bonusPoint;
 
     public News() {
     }
@@ -53,6 +64,7 @@ public class News implements Parcelable {
         fromDate = in.readString();
         toDate = in.readString();
         htmlContent = in.readString();
+        bonusPoint = in.readInt();
     }
 
     @Override
@@ -63,6 +75,7 @@ public class News implements Parcelable {
         dest.writeString(fromDate);
         dest.writeString(toDate);
         dest.writeString(htmlContent);
+        dest.writeInt(bonusPoint);
     }
 
     @Override
@@ -117,8 +130,8 @@ public class News implements Parcelable {
     }
 
     public String getDeadline() {
-        return DateUtils.convertLocaleToGMTByFormat(fromDate,"yyyy/MM/dd HH:mm:ss")
-                + " ~ " + DateUtils.convertLocaleToGMTByFormat(toDate,"yyyy/MM/dd HH:mm:ss");
+        return DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE,"yyyy/MM/dd HH:mm:ss")
+                + " ~ " + DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE,"yyyy/MM/dd HH:mm:ss");
     }
 
     public String getTitle() {
@@ -147,5 +160,13 @@ public class News implements Parcelable {
 
     public void setToDate(String toDate) {
         this.toDate = toDate;
+    }
+
+    public int getBonusPoint() {
+        return bonusPoint;
+    }
+
+    public void setBonusPoint(int bonusPoint) {
+        this.bonusPoint = bonusPoint;
     }
 }

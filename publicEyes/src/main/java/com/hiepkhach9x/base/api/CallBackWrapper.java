@@ -53,7 +53,7 @@ public class CallBackWrapper implements Callback {
                  */
             if (!isError) {
                 try {
-                    BaseResponse temp = listener.parse(requestId, call, response);
+                    BaseResponse temp = listener.parse(requestId, response.body().string());
                     response.close();
                     deliverUIResponse(temp);
                 } catch (Exception e) {

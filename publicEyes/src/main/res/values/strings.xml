@@ -26,8 +26,8 @@
     <string name="password">Password</string>
     <string name="or">Or</string>
     <string name="login_with_facebook">Login with facebook</string>
-    <string name="sign_up_width_facebook">Sign up width facebook</string>
-    <string name="sign_up_width_e_mail">Sign up width E-mail</string>
+    <string name="sign_up_with_facebook">Sign up with facebook</string>
+    <string name="sign_up_with_e_mail">Sign up with E-mail</string>
     <string name="add_description_vehicle_number">Add Description/Vehicle number</string>
     <string name="email">Email</string>
     <string name="enter_email">Enter Email</string>
@@ -73,6 +73,7 @@
     <string name="news_popup_title">Compaign</string>
     <string name="new_detail">show</string>
     <string name="new_close_up">close</string>
-    <string name="app_facebook_id">abc</string>
     <string name="change_money">Đổi tiền</string>
+
+    <string name="app_facebook_id">abc</string>
 </resources>

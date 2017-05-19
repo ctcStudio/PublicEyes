@@ -75,7 +75,7 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_blue_fb"
         android:minWidth="@dimen/min_width_button_sign_up"
-        android:text="@string/sign_up_width_facebook"
+        android:text="@string/sign_up_with_facebook"
         android:textSize="@dimen/large_text" />
 
     <TextView
@@ -88,7 +88,7 @@
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_blue"
         android:minWidth="@dimen/min_width_button_sign_up"
-        android:text="@string/sign_up_width_e_mail"
+        android:text="@string/sign_up_with_e_mail"
         android:textSize="@dimen/large_text" />
 
     <TextView

@@ -14,6 +14,31 @@ import java.util.ArrayList;
  */
 
 public class DummyData {
+    public static final String SIGN_UP_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"\"}}";
+    public static final String GET_USER_RESPONSE = "{\"Code\": 0,\"Data\": {\"username\": \"minhpt\",\"password\": \"6f3329e55e7c655d29d72e512bd28bac\"," +
+            "\"decentralization_id\": 2,\"name\": \"Minh\",\"age\": 18,\"address\": \"102 trường chinhw\",\"id_card\": \"123456789\",\"mobile_phone\": " +
+            "\"01667823462\",\"bonus_point\": 0,\"payment_type\": \"as\",\"bank_account\": \"as\",\"bank_name\": \"a\",\"bank_branch\": \"a\"," +
+            "\"create_by\": null,\"create_date\": null,\"update_by\": \"minhpt\",\"update_date\": \"2017-05-04T14:37:58.037\",\"delete_by\": null,\"delete_date\": null}}";
+    public static final String UPLOAD_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"https://drive.google.com/open?id=0B9930oH9q2HrNHhqelVLTnc0djA\"}}";
+    public static final String MESSAGE_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"\"}}";
+    public static final String GET_LIST_VIOLATION = "{\"Code\": 0,\"Data\": [{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
+            "\"path\": \"/Uploads/Files/636295083555836511_tumblr_mm82d6DNhY1rwuy3uo1_400.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
+            "\"status_admin\": false}]}";
+    public static final String GET_OPERATON_LIST = "{\"Code\": 0,\"Data\": [{\"operation_id\": 1,\"name\": \"Tháng giao thông\",\"descripton\": " +
+            "\"Mỗi báo cáo vi phạm được x2 point\",\"image\": \"https://drive.google.com/open?id=0B9930oH9q2HrZVJBcjBNM2g3bms\",\"detail\": " +
+            "\"Mỗi báo cáo vi phạm được x2 point\",\"bonus_point\": 10,\"date_from\": \"2017-04-15T00:00:00\",\"date_to\": \"2017-05-20T00:00:00\"," +
+            "\"create_by\": null,\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status\": true}," +
+            "{\"operation_id\": 2,\"name\": \"Tháng giao thông\",\"descripton\": \"Mỗi báo cáo vi phạm được x2 point\",\"image\": " +
+            "\"https://drive.google.com/open?id=0B9930oH9q2HrZVJBcjBNM2g3bms\",\"detail\": \"Mỗi báo cáo vi phạm được x2 point\",\"bonus_point\": 10," +
+            "\"date_from\": \"2017-04-15T00:00:00\",\"date_to\": \"2017-05-20T00:00:00\",\"create_by\": null,\"create_date\": null,\"update_by\": null," +
+            "\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status\": true}]}";
+    public static final String GET_CATEGORY_LIST = "{\"Code\": 0,\"Data\": [{\"category_id\": 1,\"name\": \"Ngược chiều\",\"path\": \"https://drive.google.com/open?id=0B9930oH9q2HrZHBFZU8zVDZidEk\"," +
+            "\"create_by\": null,\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null}," +
+            "{\"category_id\": 2,\"name\": \"Vượt đèn đỏ\",\"path\": \"https://drive.google.com/open?id=0B9930oH9q2HrZHBFZU8zVDZidEk\",\"create_by\": null," +
+            "\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null}]}";
+
     public static ArrayList<Category> createCategories(Context context) {
         ArrayList<Category> categories = new ArrayList<>();
         categories.add(new Category(1, R.drawable.no_parking, context.getString(R.string.no_parking)));
@@ -43,10 +68,12 @@ public class DummyData {
 
     public static Complaint dummyComplaints(Category category) {
         Complaint complaint = new Complaint();
-        complaint.setName(category.getCategoryName());
+        complaint.setCategoryId(category.getId());
+        complaint.setCategoryName(category.getCategoryName());
         complaint.setTime("2 days");
         complaint.setAddress("Kim No, Dong Anh, Ha Noi");
-        complaint.setContent(category.getCategoryName() + " at Kim No, Dong Anh, Ha Noi");
+        complaint.setDescription(category.getCategoryName() + " at Kim No, Dong Anh, Ha Noi");
+        complaint.setUserName("HungHN");
         complaint.setImageThumb("http://news.thuvienphapluat.vn/tintuc/Uploads/UserFiles/635014675329755859/Images/xe-khong-chinh-chu-da997.jpg");
         return complaint;
     }
@@ -57,9 +84,6 @@ public class DummyData {
             "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n" +
             "\n" +
             "<h2>Heading in h2, som more sample text</h2>\n" +
-            "\n" +
-            "<p>Phasellus sem odio, varius quis, cursus at, ullamcorper eget, turpis. Maecenas a mi.</p>\n" +
-            "\n" +
             "<ul>\n" +
             "\t<li>Nulla facilisi.</li>\n" +
             "\t<li>Pellentesque habitant morbi</li>\n" +
@@ -78,8 +102,8 @@ public class DummyData {
                 news.setBanner("http://wass.edu.vn/wp-content/uploads/2015/09/Banner-WAPS-huong-ung-thang-an-toan-giao-thong-T.Viet-Copy.jpg");
                 news.setTitle("Title " + i);
             }
-            news.setFromDate("20160405143640");
-            news.setToDate("20160406143640");
+            news.setFromDate("2017-04-15T00:00:00");
+            news.setToDate("2017-04-15T00:00:00");
             news.setHtmlContent(htmlContent);
             newses.add(news);
         }

@@ -8,7 +8,7 @@ import okhttp3.Response;
  */
 public interface ResponseListener {
 
-    BaseResponse parse(int requestId, Call call, Response response) throws Exception;
+    BaseResponse parse(int requestId, String response) throws Exception;
 
     void onResponse(int requestId, BaseResponse response);
 

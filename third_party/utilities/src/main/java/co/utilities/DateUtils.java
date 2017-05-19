@@ -160,23 +160,6 @@ public class DateUtils {
         }
     }
 
-    public static String convertLocaleToGMTByFormat(String time, String toFormat) {
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss",
-                Locale.getDefault());
-        SimpleDateFormat toDateFormat = new SimpleDateFormat(toFormat,
-                Locale.getDefault());
-        Date date;
-        try {
-            date = dateFormat.parse(time);
-            toDateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
-            return toDateFormat.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return time;
-        }
-    }
-
     /**
      * Get {@link Date} in GMT.
      *
