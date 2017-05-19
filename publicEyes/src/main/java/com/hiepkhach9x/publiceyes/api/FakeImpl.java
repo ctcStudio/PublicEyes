@@ -6,7 +6,7 @@ import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.publiceyes.api.request.GetCampaignsRequest;
-import com.hiepkhach9x.publiceyes.api.request.GetCategoryRequest;
+import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetListReportRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
 import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
@@ -47,7 +47,7 @@ public class FakeImpl implements Api {
                 response = responseListener.parse(requestId, DummyData.GET_LIST_VIOLATION);
             } else if (request instanceof GetCampaignsRequest) {
                 response = responseListener.parse(requestId, DummyData.GET_OPERATON_LIST);
-            } else if (request instanceof GetCategoryRequest) {
+            } else if (request instanceof GetListCategoryRequest) {
                 response = responseListener.parse(requestId, DummyData.GET_CATEGORY_LIST);
             } else {
                 response = responseListener.parse(requestId, DummyData.MESSAGE_RESPONSE);

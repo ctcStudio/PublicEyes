@@ -13,7 +13,9 @@ import okhttp3.Response;
  */
 
 public abstract class BaseResponse {
-    public BaseResponse(String response) throws IOException, JSONException, JsonSyntaxException {
+    public final static int SUCCESS = 0;
+
+    public BaseResponse(String response) throws IOException, JSONException, RuntimeException {
         parseData(response);
     }
 

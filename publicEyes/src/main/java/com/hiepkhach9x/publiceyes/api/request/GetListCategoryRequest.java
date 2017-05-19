@@ -7,18 +7,15 @@ import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
 
-import java.io.File;
-
 import okhttp3.Headers;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
 /**
- * Created by HungHN on 5/18/17.
+ * Created by HungHN on 5/19/17.
  */
 
-public class UploadFileRequest implements BaseRequest {
-    private File file;
+public class GetListCategoryRequest implements BaseRequest {
+
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
@@ -45,15 +42,7 @@ public class UploadFileRequest implements BaseRequest {
 
     @Override
     public RequestBody getBody() {
-        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if(file !=null) {
-            requestBody.addFormDataPart("file", file.getPath(), RequestBody.create(IMAGE, file));
-        }
-
-        return requestBody.build();
-    }
-
-    public void setFile(File file) {
-        this.file = file;
+        RequestBody body = RequestBody.create(JSON, toJson());
+        return body;
     }
 }

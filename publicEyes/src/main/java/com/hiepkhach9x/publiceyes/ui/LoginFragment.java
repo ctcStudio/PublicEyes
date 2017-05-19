@@ -18,7 +18,6 @@ import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
 import com.hiepkhach9x.publiceyes.api.response.LoginResponse;
-import com.hiepkhach9x.publiceyes.entities.User;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
@@ -36,7 +35,6 @@ import com.sromku.simple.fb.utils.PictureAttributes;
 import java.util.List;
 
 import co.utilities.KeyboardUtils;
-import co.utilities.Utils;
 
 /**
  * Created by hungh on 3/3/2017.
@@ -107,7 +105,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
         password = etPassword.getText().toString().trim();
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error),true,null);
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error),true,null);
             alertDialog.show();
             return;
         }
@@ -119,8 +117,8 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(email);
         loginRequest.setPassword(password);
-        mApi.restartRequest(REQUEST_LOGIN,loginRequest,this);
         showApiLoading();
+        mApi.restartRequest(REQUEST_LOGIN,loginRequest,this);
     }
 
     private void facebookLogin() {

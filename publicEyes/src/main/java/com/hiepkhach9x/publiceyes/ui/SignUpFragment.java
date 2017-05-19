@@ -92,7 +92,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
                 || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)
                 || TextUtils.isEmpty(cmt) || TextUtils.isEmpty(address)) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error)
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error)
                     , true,null);
             alertDialog.show();
             return;
@@ -111,8 +111,8 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         request.setPhone(phone);
         request.setCmt(cmt);
         request.setAddress(address);
-        mApi.restartRequest(REQUEST_SIGN_UP,request,this);
         showApiLoading();
+        mApi.restartRequest(REQUEST_SIGN_UP,request,this);
     }
 
     @Override

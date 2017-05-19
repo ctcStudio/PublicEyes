@@ -201,7 +201,6 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
 
     @Override
     public void onError(int requestId, Exception e) {
-        dismissApiLoading();
         AppAlertDialog.errorApiAlertDialogOk(this, e, null);
     }
 }

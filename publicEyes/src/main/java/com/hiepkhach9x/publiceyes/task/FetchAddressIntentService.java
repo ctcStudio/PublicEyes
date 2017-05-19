@@ -74,7 +74,7 @@ public class FetchAddressIntentService extends IntentService {
                 errorMessage = "no address found";
                 Log.e(TAG, errorMessage);
             }
-            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage);
+            deliverResultToReceiver(Constants.FAILURE_RESULT, errorMessage, null);
         } else {
             Address address = addresses.get(0);
             ArrayList<String> addressFragments = new ArrayList<String>();
@@ -86,15 +86,18 @@ public class FetchAddressIntentService extends IntentService {
             }
             Log.i(TAG, "address found");
             deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                    TextUtils.join(Constants.COMMA + " ",addressFragments));
+                    TextUtils.join(Constants.COMMA + " ",addressFragments),address);
         }
     }
 
     protected ResultReceiver mReceiver;
 
-    private void deliverResultToReceiver(int resultCode, String message) {
+    private void deliverResultToReceiver(int resultCode, String message, Address address) {
         Bundle bundle = new Bundle();
         bundle.putString(Constants.RESULT_DATA_KEY, message);
+        if(address !=null) {
+            bundle.putParcelable(Constants.RESULT_DATA_ADDRESS,address);
+        }
         mReceiver.send(resultCode, bundle);
     }
 }

@@ -15,46 +15,112 @@ import android.widget.TextView;
 
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
+import com.hiepkhach9x.publiceyes.api.response.GetListCategoryResponse;
 import com.hiepkhach9x.publiceyes.entities.Category;
-import com.hiepkhach9x.publiceyes.store.DummyData;
+import com.hiepkhach9x.publiceyes.entities.Complaint;
+import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 
 import java.util.ArrayList;
+
+import co.core.imageloader.NDisplayOptions;
 
 /**
  * Created by hungh on 3/4/2017.
  */
 
-public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
+public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, ResponseListener {
 
+    private static final String ARGS_IMAGE_URL = "args.image.url";
+    private static final String ARGS_DESCRIPTION = "args.description";
+    private static final String ARGS_CATEGORIES = "args.categories";
+
+    private static final int REQUEST_GET_CATEGORIES = 104;
     private ArrayList<Category> categories;
+    private CategoryAdapter categoryAdapter;
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_category;
     }
 
+    public static CategoryFragment newInstance(String filePath, String description) {
+
+        Bundle args = new Bundle();
+        args.putString(ARGS_IMAGE_URL, filePath);
+        args.putString(ARGS_DESCRIPTION, description);
+        CategoryFragment fragment = new CategoryFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    private String imageUrl;
+    private String description;
+
+    private void parseBundle(Bundle bundle) {
+        imageUrl = bundle.getString(ARGS_IMAGE_URL);
+        description = bundle.getString(ARGS_DESCRIPTION);
+        categories = bundle.getParcelableArrayList(ARGS_CATEGORIES);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        categories = DummyData.createCategories(getContext());
+        if (savedInstanceState != null) {
+            parseBundle(savedInstanceState);
+        } else if (getArguments() != null) {
+            parseBundle(getArguments());
+        }
+        if(categories == null) {
+            categories = new ArrayList<>();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(ARGS_IMAGE_URL, imageUrl);
+        outState.putString(ARGS_DESCRIPTION, description);
+        outState.putParcelableArrayList(ARGS_CATEGORIES, categories);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView categoryList = (ListView) view.findViewById(R.id.list_category);
-        CategoryAdapter categoryAdapter = new CategoryAdapter(getContext());
+        categoryAdapter = new CategoryAdapter(getContext());
         categoryList.setAdapter(categoryAdapter);
 
         categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Category category = categories.get(i);
                 if (mNavigationManager != null) {
-                    mNavigationManager.showPage(new LocationFragment());
+                    Complaint complaint = new Complaint();
+                    complaint.setCategoryId(category.getId());
+                    complaint.setImageThumb(imageUrl);
+                    complaint.setDescription(description);
+                    mNavigationManager.showPage(LocationFragment.newInstance(complaint));
                 }
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if(categories.isEmpty()) {
+            getListCategory();
+        }
+    }
+
+    private void getListCategory() {
+        GetListCategoryRequest getListCategoryRequest = new GetListCategoryRequest();
+        showApiLoading();
+        mApi.restartRequest(REQUEST_GET_CATEGORIES, getListCategoryRequest,this);
     }
 
     @Override
@@ -62,11 +128,39 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
         return getString(R.string.category);
     }
 
+    @Override
+    public BaseResponse parse(int requestId, String response) throws Exception {
+        if (requestId == REQUEST_GET_CATEGORIES) {
+            return new GetListCategoryResponse(response);
+        }
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+        dismissApiLoading();
+        if (requestId == REQUEST_GET_CATEGORIES) {
+            GetListCategoryResponse getListCategoryResponse = (GetListCategoryResponse) response;
+            ArrayList<Category> List = getListCategoryResponse.getCategories();
+            if(List !=null) {
+                categories.clear();
+                categories.addAll(List);
+                categoryAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+    }
+
     private class CategoryAdapter extends ArrayAdapter<Category> {
 
         LayoutInflater inflater;
 
-        public CategoryAdapter(Context context) {
+        CategoryAdapter(Context context) {
             super(context, 0);
             inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -91,14 +185,20 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo {
             }
 
             Category category = categories.get(position);
-            holder.icon.setImageResource(category.getCategoryIcon());
+            if(category.getCategoryIcon() !=0) {
+                holder.icon.setImageResource(category.getCategoryIcon());
+            } else {
+                NDisplayOptions.Builder displayOptions = new NDisplayOptions.Builder();
+                displayOptions.setImageOnFail(R.drawable.ic_photo);
+                mImageLoader.display(category.getAvatar(),holder.icon,displayOptions.build());
+            }
             holder.name.setText(category.getCategoryName());
 
             return convertView;
         }
     }
 
-    static class ViewHolder {
+    private class ViewHolder {
         ImageView icon;
         TextView name;
     }

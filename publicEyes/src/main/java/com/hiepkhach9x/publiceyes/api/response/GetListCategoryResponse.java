@@ -15,20 +15,20 @@ import java.util.ArrayList;
  * Created by HungHN on 5/19/17.
  */
 
-public class GetCategoryResponse extends BaseResponse {
+public class GetListCategoryResponse extends BaseResponse {
     @SerializedName("Code")
     private int code;
     @SerializedName("Data")
     private ArrayList<Category> categories;
 
-    public GetCategoryResponse(String response) throws IOException, JSONException, JsonSyntaxException {
+    public GetListCategoryResponse(String response) throws IOException, JSONException, JsonSyntaxException {
         super(response);
     }
 
     @Override
     protected void parseData(String data) throws IOException, JSONException {
         Gson gson = new Gson();
-        GetCategoryResponse response = gson.fromJson(data, GetCategoryResponse.class);
+        GetListCategoryResponse response = gson.fromJson(data, GetListCategoryResponse.class);
         code = response.getCode();
         categories = response.getCategories();
     }

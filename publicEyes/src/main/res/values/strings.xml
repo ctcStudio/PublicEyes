@@ -68,7 +68,7 @@
     <string name="common_ok">OK</string>
     <string name="common_cancel">Cancel</string>
     <string name="error">Error</string>
-    <string name="input_data_signup_error">Bạn phải nhập đủ thông tin các trường họ và tên, email, password!</string>
+    <string name="input_data_error">Bạn phải nhập đủ thông tin!</string>
 
     <!-- popup news -->
     <string name="news_popup_title">Chiến dịch</string>

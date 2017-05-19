@@ -11,6 +11,7 @@ import okhttp3.RequestBody;
 public interface BaseRequest {
     MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     MediaType FORM = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
+    MediaType IMAGE = MediaType.parse("image/*");
 
     String getUrl();
 

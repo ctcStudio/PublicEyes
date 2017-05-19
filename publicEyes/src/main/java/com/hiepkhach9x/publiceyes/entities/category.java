@@ -13,9 +13,11 @@ public class Category implements Parcelable{
     @SerializedName("category_id")
     private int id;
     @SerializedName("path")
-    private int categoryIcon;
+    private String avatar;
     @SerializedName("name")
     private String categoryName;
+
+    private int categoryIcon;
 
     public Category() {
     }
@@ -26,17 +28,20 @@ public class Category implements Parcelable{
         this.categoryName = categoryName;
     }
 
+
     protected Category(Parcel in) {
         id = in.readInt();
-        categoryIcon = in.readInt();
+        avatar = in.readString();
         categoryName = in.readString();
+        categoryIcon = in.readInt();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
-        dest.writeInt(categoryIcon);
+        dest.writeString(avatar);
         dest.writeString(categoryName);
+        dest.writeInt(categoryIcon);
     }
 
     @Override
@@ -55,6 +60,14 @@ public class Category implements Parcelable{
             return new Category[size];
         }
     };
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public int getId() {
         return id;

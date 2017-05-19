@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
+import com.hiepkhach9x.publiceyes.entities.Complaint;
 
 import okhttp3.Headers;
 import okhttp3.RequestBody;
@@ -14,8 +15,8 @@ import okhttp3.RequestBody;
  * Created by HungHN on 5/19/17.
  */
 
-public class GetCategoryRequest implements BaseRequest {
-
+public class UpdateReportRequest implements BaseRequest {
+    private Complaint complaint;
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
@@ -44,5 +45,9 @@ public class GetCategoryRequest implements BaseRequest {
     public RequestBody getBody() {
         RequestBody body = RequestBody.create(JSON, toJson());
         return body;
+    }
+
+    public void setComplaint(Complaint complaint) {
+        this.complaint = complaint;
     }
 }
