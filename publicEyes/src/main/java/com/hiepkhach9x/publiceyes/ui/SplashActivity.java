@@ -28,12 +28,11 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
+        mHandler = new Handler();
         if (UserPref.get().hasActive()) {
             loginByEmail();
             AppPref.get().saveIsShowNews(false);
         } else {
-            mHandler = new Handler();
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -89,7 +88,7 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
     @Override
     public void onResponse(int requestId, BaseResponse response) {
         if (requestId == REQUEST_LOGIN) {
-            AppPref.get().saveFirstLogin(true);
+            AppPref.get().saveFirstLogin(false);
             LoginResponse loginResponse = (LoginResponse) response;
             UserPref.get().saveUserInfo(loginResponse.getUser());
             startMainActivity();

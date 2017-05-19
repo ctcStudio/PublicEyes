@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 
 import com.hiepkhach9x.base.BaseAppFragment;
@@ -93,6 +94,12 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
                 || TextUtils.isEmpty(cmt) || TextUtils.isEmpty(address)) {
             AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error)
                     , true,null);
+            alertDialog.show();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
             alertDialog.show();
             return;
         }

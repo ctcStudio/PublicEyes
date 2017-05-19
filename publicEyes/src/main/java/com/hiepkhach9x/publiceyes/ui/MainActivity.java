@@ -6,20 +6,31 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.hiepkhach9x.base.BaseSlidingActivity;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
 import com.hiepkhach9x.base.toolbox.PermissionGrant;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
+import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
+import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
+import com.hiepkhach9x.publiceyes.api.response.SignUpResponse;
 import com.hiepkhach9x.publiceyes.store.AppPref;
+import com.hiepkhach9x.publiceyes.store.UserPref;
+import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import co.utilities.VideoUtils;
 
-public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener {
+public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener, ResponseListener {
 
-    SlidingMenu mSlidingMenu;
+    private static final int REQUEST_GET_USER = 101;
+    private SlidingMenu mSlidingMenu;
+    TextView name, point;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,18 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         PermissionGrant.verify(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_PERMISSION_LOCATION);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getUserInfo();
+
+    }
+
+    private void getUserInfo() {
+        GetUserRequest getUserRequest = new GetUserRequest();
+        mApi.restartRequest(REQUEST_GET_USER,getUserRequest,this);
+    }
+
     private void initSlidingMenu() {
         // customize the SlidingMenu
         mSlidingMenu = getSlidingMenu();
@@ -58,6 +81,13 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         findViewById(R.id.layout_how_to).setOnClickListener(this);
         findViewById(R.id.layout_compaign).setOnClickListener(this);
         findViewById(R.id.layout_logout).setOnClickListener(this);
+        findViewById(R.id.change_money).setOnClickListener(this);
+
+        name = (TextView) findViewById(R.id.tv_name);
+        point = (TextView) findViewById(R.id.tv_point);
+
+        name.setText(UserPref.get().getFullName());
+        point.setText(String.valueOf(UserPref.get().getPoint()));
     }
 
     @Override
@@ -141,10 +171,37 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                     mNavigationManager.showPage(CompaignFragment.newInstance());
                 }
                 break;
+            case R.id.change_money:
+                break;
             case R.id.layout_logout:
                 startActivity(new Intent(this, RegisterActivity.class));
                 finish();
                 break;
         }
+    }
+
+    @Override
+    public BaseResponse parse(int requestId, String response) throws Exception {
+        if (requestId == REQUEST_GET_USER) {
+            return new GetUserResponse(response);
+        }
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+        if (requestId == REQUEST_GET_USER) {
+            GetUserResponse getUserResponse = (GetUserResponse) response;
+            UserPref.get().saveUserInfo(getUserResponse.getUser());
+
+            name.setText(UserPref.get().getFullName());
+            point.setText(String.valueOf(UserPref.get().getPoint()));
+        }
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(this, e, null);
     }
 }
