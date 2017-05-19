@@ -28,6 +28,7 @@ import java.util.List;
 
 import co.core.androidpermission.AppPermissionChecker;
 import co.core.fragments.NFragment;
+import co.core.imageloader.NImageLoader;
 import co.utilities.OSUtils;
 
 /**
@@ -54,6 +55,7 @@ public class NMediaPickerFragment extends NFragment implements
     private NMediaSelectedListener mMediaSelectedListener;
     private Bundle mSavedInstanceState;
     private List<NMediaItem> mMediaSelectedList;
+    private NImageLoader mImageLoader;
 
     private int mMediaType;
     private int mPhotoSize, mPhotoSpacing;
@@ -104,6 +106,7 @@ public class NMediaPickerFragment extends NFragment implements
                 mMediaType = mMediaSelectedList.get(0).getType();
             }
         }
+        mImageLoader = new UILImageLoader(getContext());
         // get the photo size and spacing
         mPhotoSize = getResources().getDimensionPixelSize(
                 R.dimen.picker_photo_size);

@@ -180,7 +180,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
 
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage(getString(R.string.waiting));
+            progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
         }
         simpleFacebook.getProfile(properties, new OnProfileListener() {

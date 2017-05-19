@@ -76,4 +76,5 @@
     <string name="new_close_up">đóng</string>
     <string name="change_money">Đổi tiền</string>
     <string name="validate_email">email không đúng định dạng</string>
+    <string name="loading">loading...</string>
 </resources>

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.publiceyes.App;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
@@ -24,12 +25,12 @@ import co.core.imageloader.NImageLoader;
 public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Holder> {
     private ArrayList<Complaint> mComplaints;
     private LayoutInflater mInflater;
-    NImageLoader mImageloader;
+    private Context context;
 
     public ComplaintsAdapter(Context context, ArrayList<Complaint> complaints) {
+        this.context = context;
         this.mComplaints = complaints;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        mImageloader = App.get().getImageLoader();
     }
 
     @Override
@@ -70,12 +71,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Ho
             time.setText(complaint.getTime());
             address.setText(complaint.getAddress());
             content.setText(complaint.getDescription());
-            if (mImageloader != null) {
-                NDisplayOptions.Builder builder = new NDisplayOptions.Builder();
-                builder.cacheOnDisk(true);
-                builder.setImageOnLoading(R.drawable.ic_photo);
-                mImageloader.display(complaint.getImageThumb(), thumbnail, builder.build());
-            }
+            ImageUtil.loadImage(context,complaint.getImageThumb(), thumbnail);
         }
     }
 }

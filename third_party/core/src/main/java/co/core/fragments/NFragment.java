@@ -28,7 +28,6 @@ public abstract class NFragment extends Fragment implements OnActionInDialogList
 
     protected NFragmentHost mPageFragmentHost;
     private boolean mSaveInstanceStateCalled;
-    protected NImageLoader mImageLoader;
     protected NavigationManager mNavigationManager;
 
     public NFragment() {
@@ -40,7 +39,6 @@ public abstract class NFragment extends Fragment implements OnActionInDialogList
         super.onAttach(context);
         if (getActivity() != mPageFragmentHost) {
             mPageFragmentHost = (NFragmentHost) getActivity();
-            mImageLoader = mPageFragmentHost.getImageLoader();
             mNavigationManager = mPageFragmentHost.getNavigationManager();
         }
     }

@@ -7,7 +7,5 @@ import co.core.imageloader.NImageLoader;
  * @author TUNGDX
  */
 public interface NFragmentHost {
-    NImageLoader getImageLoader();
-
     NavigationManager getNavigationManager();
 }

@@ -19,7 +19,6 @@ import co.core.imageloader.NImageLoader;
 public abstract class BaseAppActivity extends NActivity implements NFragmentHost {
 
     protected NavigationManager mNavigationManager;
-    protected NImageLoader mImageLoader;
     protected Api mApi;
     private ProgressDialog apiDialog;
 
@@ -27,16 +26,10 @@ public abstract class BaseAppActivity extends NActivity implements NFragmentHost
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNavigationManager = new AppNavigationManager(this, getContentFrame());
-        mImageLoader = App.get().getImageLoader();
         mApi = App.get().getApi();
     }
 
     public abstract int getContentFrame();
-
-    @Override
-    public NImageLoader getImageLoader() {
-        return mImageLoader;
-    }
 
     @Override
     public NavigationManager getNavigationManager() {

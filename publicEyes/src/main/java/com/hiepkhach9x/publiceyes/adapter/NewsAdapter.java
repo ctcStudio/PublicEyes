@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.hiepkhach9x.publiceyes.App;
+import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.entities.News;
 import com.hiepkhach9x.publiceyes.view.AutoFitTextView;
@@ -20,23 +20,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import co.core.imageloader.NDisplayOptions;
-import co.core.imageloader.NImageLoader;
-
 public class NewsAdapter extends BaseAdapter {
 
     private ArrayList<News> mNewsList;
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private Set<Integer> mDetailList;
-    private NImageLoader imageLoader;
 
     public NewsAdapter(Context context, ArrayList<News> newsList) {
         this.mContext = context;
         this.mNewsList = newsList;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mDetailList = new HashSet<>();
-        imageLoader = App.get().getImageLoader();
     }
 
     public void addAll(List<News> newsList) {
@@ -106,11 +101,7 @@ public class NewsAdapter extends BaseAdapter {
         } else {
             holder.setCollapseContent();
         }
-        NDisplayOptions.Builder builder = new NDisplayOptions.Builder();
-        builder.cacheOnDisk(true);
-        builder.setImageOnFail(R.drawable.bg_dummy_banner);
-        builder.setImageOnLoading(R.drawable.bg_dummy_banner);
-        imageLoader.display(news.getBanner(),holder.banner,builder.build());
+        ImageUtil.loadBannerImage(mContext,news.getBanner(),holder.banner);
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

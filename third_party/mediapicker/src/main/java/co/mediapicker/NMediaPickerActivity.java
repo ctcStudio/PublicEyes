@@ -626,7 +626,6 @@ public class NMediaPickerActivity extends NActivity implements
                 .getParcelableArrayListExtra(NMediaPickerActivity.EXTRA_MEDIA_SELECTED);
     }
 
-    @Override
     public NImageLoader getImageLoader() {
         return new UILImageLoader(this);
     }

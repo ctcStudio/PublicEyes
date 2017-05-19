@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.hiepkhach9x.base.BaseAppFragment;
+import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.base.actionbar.ActionbarHandler;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.api.BaseResponse;
@@ -78,7 +79,7 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
         mPhotoView = (RectangleImageView) view.findViewById(R.id.photo_view);
         mDescription = (EditText) view.findViewById(R.id.description);
         Uri photoURI = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".provider", new File(mPhotoPath));
-        mImageLoader.display(photoURI, mPhotoView);
+        ImageUtil.loadImage(getContext(),photoURI, mPhotoView);
 
         view.findViewById(R.id.layout).setOnClickListener(this);
     }

@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hiepkhach9x.base.BaseAppFragment;
+import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
@@ -74,7 +75,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
         } else if (getArguments() != null) {
             parseBundle(getArguments());
         }
-        if(categories == null) {
+        if (categories == null) {
             categories = new ArrayList<>();
         }
     }
@@ -112,7 +113,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if(categories.isEmpty()) {
+        if (categories.isEmpty()) {
             getListCategory();
         }
     }
@@ -120,7 +121,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
     private void getListCategory() {
         GetListCategoryRequest getListCategoryRequest = new GetListCategoryRequest();
         showApiLoading();
-        mApi.restartRequest(REQUEST_GET_CATEGORIES, getListCategoryRequest,this);
+        mApi.restartRequest(REQUEST_GET_CATEGORIES, getListCategoryRequest, this);
     }
 
     @Override
@@ -142,7 +143,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
         if (requestId == REQUEST_GET_CATEGORIES) {
             GetListCategoryResponse getListCategoryResponse = (GetListCategoryResponse) response;
             ArrayList<Category> List = getListCategoryResponse.getCategories();
-            if(List !=null) {
+            if (List != null) {
                 categories.clear();
                 categories.addAll(List);
                 categoryAdapter.notifyDataSetChanged();
@@ -185,12 +186,10 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
             }
 
             Category category = categories.get(position);
-            if(category.getCategoryIcon() !=0) {
+            if (category.getCategoryIcon() != 0) {
                 holder.icon.setImageResource(category.getCategoryIcon());
             } else {
-                NDisplayOptions.Builder displayOptions = new NDisplayOptions.Builder();
-                displayOptions.setImageOnFail(R.drawable.ic_photo);
-                mImageLoader.display(category.getAvatar(),holder.icon,displayOptions.build());
+                ImageUtil.loadImage(getContext(), category.getAvatar(), holder.icon);
             }
             holder.name.setText(category.getCategoryName());
 
