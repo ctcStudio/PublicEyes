@@ -1,7 +1,10 @@
 package com.hiepkhach9x.publiceyes.ui;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +18,7 @@ import com.hiepkhach9x.base.menu.CustomSlidingMenu;
 import com.hiepkhach9x.base.toolbox.PermissionGrant;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
 import com.hiepkhach9x.publiceyes.store.AppPref;
@@ -27,6 +31,19 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     private static final int REQUEST_GET_USER = 101;
     private SlidingMenu mSlidingMenu;
     TextView name, point;
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+                int code = intent.getIntExtra(Constants.EXTRA_CODE, ResponseCode.UNKNOWN_ERROR);
+                if (code == ResponseCode.UNAUTHORIZED) {
+                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+                    finish();
+                }
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,6 +63,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         }
 
         PermissionGrant.verify(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_PERMISSION_LOCATION);
+
+        registerReceiver(broadcastReceiver,new IntentFilter(Constants.EXTRA_FILTER_ERROR_REQUEST));
     }
 
     @Override
@@ -53,6 +72,12 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         super.onStart();
         getUserInfo();
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(broadcastReceiver);
     }
 
     private void getUserInfo() {

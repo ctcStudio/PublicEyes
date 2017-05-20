@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.Msg;
 
 import org.json.JSONException;
@@ -15,8 +16,6 @@ import java.io.IOException;
  */
 
 public class UpdateReportResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private Msg msg;
 
@@ -32,15 +31,12 @@ public class UpdateReportResponse extends BaseResponse {
         msg = response.getMsg();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public Msg getMsg() {
         return msg;
     }
 
+    @Override
     public boolean isSuccess() {
-        return code == SUCCESS;
+        return code == ResponseCode.SUCCESS;
     }
 }

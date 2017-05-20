@@ -18,20 +18,17 @@ import com.hiepkhach9x.publiceyes.R;
 
 public class AppAlertDialog {
     public static android.support.v7.app.AlertDialog errorApiAlertDialogOk(Context context, Exception error,Dialog.OnClickListener okClick) {
-        String msg;
+        String msg = "app unknown error";
         if (error instanceof ServerError) {
             ServerError serverError = (ServerError) error;
-            if (TextUtils.isEmpty(error.getMessage())) {
-                msg = serverError.getError().getErrorDescription();
-            } else {
-                msg = serverError.getError().getMessage();
+            Error err = serverError.getError();
+            if (err !=null && err.getMessage() !=null) {
+                msg = err.getMessage().getMessage();
             }
         } else if (error instanceof ParserError) {
             msg = "parser data error";
         } else if (error instanceof AuthFailureError) {
             msg = "AuthFailure error";
-        } else {
-            msg = "unKnow error request";
         }
 
         return alertDialogOkAndCancel(context, context.getString(R.string.error), msg, true, okClick, false, null);
@@ -39,14 +36,12 @@ public class AppAlertDialog {
 
     public static android.support.v7.app.AlertDialog errorApiAlertDialogOk(Context context, Error error,
                                                                            boolean hasOKButton, Dialog.OnClickListener okClick) {
-        if (TextUtils.isEmpty(error.getMessage())) {
-            return alertDialogOkAndCancel(context, context.getString(R.string.error), error.getErrorDescription(), hasOKButton, okClick, false, null);
-        } else {
-            Spanned spanned = Html.fromHtml(error.getMessage());
-            String massage = spanned.toString();
-            return alertDialogOkAndCancel(context, context.getString(R.string.error),
-                    massage, hasOKButton, okClick, false, null);
+        String message = "unknown error";
+        if (error.getMessage() !=null) {
+            message = error.getMessage().getMessage();
         }
+        return alertDialogOkAndCancel(context, context.getString(R.string.error),
+                message, hasOKButton, okClick, false, null);
     }
 
     public static android.support.v7.app.AlertDialog alertDialogCancel(Context context, String title, String message,

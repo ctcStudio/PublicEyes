@@ -3,6 +3,7 @@ package com.hiepkhach9x.publiceyes.api.response;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.Msg;
 import com.hiepkhach9x.publiceyes.entities.User;
 
@@ -17,8 +18,6 @@ import okhttp3.Response;
  */
 
 public class UploadFileResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private Msg msg;
 
@@ -34,15 +33,12 @@ public class UploadFileResponse extends BaseResponse {
         msg = response.getMsg();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public Msg getMsg() {
         return msg;
     }
 
+    @Override
     public boolean isSuccess() {
-        return code == SUCCESS;
+        return code == ResponseCode.SUCCESS;
     }
 }

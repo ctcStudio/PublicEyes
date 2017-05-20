@@ -3,6 +3,7 @@ package com.hiepkhach9x.publiceyes.api.response;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.User;
 
 import org.json.JSONException;
@@ -16,8 +17,6 @@ import okhttp3.Response;
  */
 
 public class LoginResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private User user;
     public LoginResponse(String response) throws IOException, JSONException {
@@ -32,11 +31,12 @@ public class LoginResponse extends BaseResponse {
         user = response.getUser();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public User getUser() {
         return user;
+    }
+
+    @Override
+    public boolean isSuccess() {
+        return code == ResponseCode.SUCCESS;
     }
 }

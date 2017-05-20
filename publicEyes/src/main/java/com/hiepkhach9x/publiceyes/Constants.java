@@ -24,4 +24,7 @@ public class Constants {
     public static final int REQUEST_PERMISSION_CAMERA = 102;
     public static final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
     public static String APP_FORMAT_DATE = "yyyy/MM/dd HH:mm:ss";
+
+    public static final String EXTRA_FILTER_ERROR_REQUEST = "extra.filter.error";
+    public static final String EXTRA_CODE = "extra.code";
 }

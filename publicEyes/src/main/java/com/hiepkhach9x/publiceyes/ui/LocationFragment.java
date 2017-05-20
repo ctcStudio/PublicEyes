@@ -228,10 +228,8 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
         dismissApiLoading();
         if (requestId == REQUEST_UPDATE_REPORT) {
             UpdateReportResponse updateReportResponse = (UpdateReportResponse) response;
-            if (updateReportResponse.isSuccess()) {
-                PostSuccessDialog postSuccessDialog = PostSuccessDialog.newInstance(REQUEST_POST_DIALOG);
-                postSuccessDialog.show(getChildFragmentManager(), "SuccessDialog");
-            }
+            PostSuccessDialog postSuccessDialog = PostSuccessDialog.newInstance(REQUEST_POST_DIALOG);
+            postSuccessDialog.show(getChildFragmentManager(), "SuccessDialog");
         }
     }
 

@@ -1,6 +1,7 @@
 package com.hiepkhach9x.base.api;
 
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONException;
 
@@ -13,11 +14,23 @@ import okhttp3.Response;
  */
 
 public abstract class BaseResponse {
-    public final static int SUCCESS = 0;
+
+    @SerializedName("Code")
+    protected int code;
 
     public BaseResponse(String response) throws IOException, JSONException, RuntimeException {
         parseData(response);
     }
 
     protected abstract void parseData(String data) throws IOException, JSONException;
+
+    public abstract boolean isSuccess();
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
 }

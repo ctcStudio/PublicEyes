@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.Category;
 
 import org.json.JSONException;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
  */
 
 public class GetListCategoryResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private ArrayList<Category> categories;
 
@@ -33,11 +32,12 @@ public class GetListCategoryResponse extends BaseResponse {
         categories = response.getCategories();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public ArrayList<Category> getCategories() {
         return categories;
+    }
+
+    @Override
+    public boolean isSuccess() {
+        return code == ResponseCode.SUCCESS;
     }
 }

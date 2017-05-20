@@ -3,6 +3,7 @@ package com.hiepkhach9x.publiceyes.api.response;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.Category;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
 
@@ -18,8 +19,6 @@ import okhttp3.Response;
  */
 
 public class ReportResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private ArrayList<Complaint> complaints;
 
@@ -35,11 +34,12 @@ public class ReportResponse extends BaseResponse {
         complaints = response.getComplaints();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public ArrayList<Complaint> getComplaints() {
         return complaints;
+    }
+
+    @Override
+    public boolean isSuccess() {
+        return code == ResponseCode.SUCCESS;
     }
 }

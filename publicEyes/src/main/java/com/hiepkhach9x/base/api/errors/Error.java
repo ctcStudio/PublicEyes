@@ -1,6 +1,7 @@
 package com.hiepkhach9x.base.api.errors;
 
 import com.google.gson.annotations.SerializedName;
+import com.hiepkhach9x.publiceyes.entities.Msg;
 
 /**
  * Created by hungh on 5/1/2017.
@@ -8,33 +9,23 @@ import com.google.gson.annotations.SerializedName;
 
 public class Error {
     @SerializedName("error")
-    String error;
-    @SerializedName("error_description")
-    String errorDescription;
-    @SerializedName("message")
-    String message;
+    private int code;
+    @SerializedName("data")
+    private Msg message;
 
-    public String getError() {
-        return error;
+    public int getCode() {
+        return code;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setCode(int code) {
+        this.code = code;
     }
 
-    public String getErrorDescription() {
-        return errorDescription;
-    }
-
-    public void setErrorDescription(String errorDescription) {
-        this.errorDescription = errorDescription;
-    }
-
-    public String getMessage() {
+    public Msg getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMessage(Msg message) {
         this.message = message;
     }
 }

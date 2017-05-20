@@ -4,13 +4,17 @@ package com.hiepkhach9x.base.api;
  * Created by hungh on 4/22/2017.
  */
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.v4.content.LocalBroadcastManager;
 
 import com.hiepkhach9x.base.api.errors.AuthFailureError;
-import com.hiepkhach9x.base.api.errors.BaseError;
 import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.base.api.errors.ServerError;
+import com.hiepkhach9x.publiceyes.App;
+import com.hiepkhach9x.publiceyes.Constants;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 
 import java.io.IOException;
 import java.lang.ref.SoftReference;
@@ -55,7 +59,15 @@ public class CallBackWrapper implements Callback {
                 try {
                     BaseResponse temp = listener.parse(requestId, response.body().string());
                     response.close();
-                    deliverUIResponse(temp);
+                    if (temp.isSuccess()) {
+                        deliverUIResponse(temp);
+                    } else {
+                        if (temp.getCode() == ResponseCode.UNAUTHORIZED) {
+                            pushBroadcastError(temp.getCode());
+                        } else {
+                            deliverUIError(new ServerError(call, response));
+                        }
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     deliverUIError(new ParserError(call, response));
@@ -74,6 +86,12 @@ public class CallBackWrapper implements Callback {
                 deliverUIError(new ServerError(call, response));
             }
         }
+    }
+
+    private void pushBroadcastError(int code) {
+        Intent intent = new Intent(Constants.EXTRA_FILTER_ERROR_REQUEST);
+        intent.putExtra(Constants.EXTRA_CODE, code);
+        LocalBroadcastManager.getInstance(App.get()).sendBroadcast(intent);
     }
 
     private void deliverUIError(final Exception error) {

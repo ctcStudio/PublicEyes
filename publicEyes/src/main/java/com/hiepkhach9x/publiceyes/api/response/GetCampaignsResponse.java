@@ -3,6 +3,7 @@ package com.hiepkhach9x.publiceyes.api.response;
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.entities.News;
 
 import org.json.JSONException;
@@ -15,8 +16,6 @@ import java.util.ArrayList;
  */
 
 public class GetCampaignsResponse extends BaseResponse {
-    @SerializedName("Code")
-    private int code;
     @SerializedName("Data")
     private ArrayList<News> newses;
 
@@ -32,11 +31,12 @@ public class GetCampaignsResponse extends BaseResponse {
         newses = response.getNewses();
     }
 
-    public int getCode() {
-        return code;
-    }
-
     public ArrayList<News> getNewses() {
         return newses;
+    }
+
+    @Override
+    public boolean isSuccess() {
+        return code == ResponseCode.SUCCESS;
     }
 }
