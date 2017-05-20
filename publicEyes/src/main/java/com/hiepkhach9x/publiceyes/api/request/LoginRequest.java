@@ -21,6 +21,8 @@ public class LoginRequest implements BaseRequest {
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
+        builder.appendPath(ApiConfig.API);
+        builder.appendPath(ApiConfig.API_LOGIN);
         return builder.toString();
     }
 

@@ -2,6 +2,7 @@ package com.hiepkhach9x.publiceyes.store;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Base64;
 
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.publiceyes.App;
@@ -116,6 +117,11 @@ public class UserPref extends BasePrefers {
 
     public boolean hasActive() {
         return (!TextUtils.isEmpty(getEmail()) && !TextUtils.isEmpty(getPassword()));
+    }
+
+    public String getAuthorization() {
+        String data = getEmail()+":"+getPassword();
+        return Base64.encodeToString(data.getBytes(),Base64.DEFAULT);
     }
 
     @Override

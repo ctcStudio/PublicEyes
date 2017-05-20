@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 
 import java.io.File;
 
@@ -22,6 +23,9 @@ public class UploadFileRequest implements BaseRequest {
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
+        builder.appendPath(ApiConfig.API);
+        builder.appendPath(ApiConfig.API_VIOLATION);
+        builder.appendPath(ApiConfig.API_FILE);
         return builder.toString();
     }
 
@@ -35,6 +39,7 @@ public class UploadFileRequest implements BaseRequest {
     public Headers getHeaders() {
         Headers.Builder builder = new Headers.Builder()
                 .add("Content-Type", "application/json");
+        builder.add("Authorization", UserPref.get().getAuthorization());
         return builder.build();
     }
 

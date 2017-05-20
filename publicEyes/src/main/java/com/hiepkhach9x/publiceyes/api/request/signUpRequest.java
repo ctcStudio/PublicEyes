@@ -32,6 +32,8 @@ public class SignUpRequest implements BaseRequest {
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
+        builder.appendPath(ApiConfig.API);
+        builder.appendPath(ApiConfig.API_USER);
         return builder.toString();
     }
 

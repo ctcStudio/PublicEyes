@@ -10,8 +10,8 @@ import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetListReportRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
 import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
-import com.hiepkhach9x.publiceyes.api.request.ReportRequest;
 import com.hiepkhach9x.publiceyes.api.request.SignUpRequest;
+import com.hiepkhach9x.publiceyes.api.request.UpdateReportRequest;
 import com.hiepkhach9x.publiceyes.api.request.UploadFileRequest;
 import com.hiepkhach9x.publiceyes.store.DummyData;
 
@@ -39,7 +39,7 @@ public class FakeImpl implements Api {
                 response = responseListener.parse(requestId, DummyData.LOGIN_RESPONSE);
             } else if (request instanceof UploadFileRequest) {
                 response = responseListener.parse(requestId, DummyData.UPLOAD_RESPONSE);
-            } else if (request instanceof ReportRequest) {
+            } else if (request instanceof UpdateReportRequest) {
                 response = responseListener.parse(requestId, DummyData.MESSAGE_RESPONSE);
             } else if (request instanceof GetUserRequest) {
                 response = responseListener.parse(requestId, DummyData.GET_USER_RESPONSE);

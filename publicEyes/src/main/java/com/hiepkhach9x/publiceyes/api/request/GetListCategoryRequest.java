@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 
 import okhttp3.Headers;
 import okhttp3.RequestBody;
@@ -19,6 +20,9 @@ public class GetListCategoryRequest implements BaseRequest {
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
+        builder.appendPath(ApiConfig.API);
+        builder.appendPath(ApiConfig.API_CATEGORY);
+        builder.appendPath(ApiConfig.API_GET_ALL_CATEGORY);
         return builder.toString();
     }
 
@@ -32,6 +36,7 @@ public class GetListCategoryRequest implements BaseRequest {
     public Headers getHeaders() {
         Headers.Builder builder = new Headers.Builder()
                 .add("Content-Type", "application/json");
+        builder.add("Authorization", UserPref.get().getAuthorization());
         return builder.build();
     }
 
