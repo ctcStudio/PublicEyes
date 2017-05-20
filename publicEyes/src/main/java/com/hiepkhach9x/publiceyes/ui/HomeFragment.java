@@ -2,7 +2,6 @@ package com.hiepkhach9x.publiceyes.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,19 +10,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.FileProvider;
 import android.view.View;
 
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarHandler;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
-import com.hiepkhach9x.publiceyes.App;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.request.GetCampaignsRequest;
+import com.hiepkhach9x.publiceyes.api.response.GetCampaignsResponse;
 import com.hiepkhach9x.publiceyes.entities.News;
 import com.hiepkhach9x.publiceyes.store.AppPref;
-import com.hiepkhach9x.publiceyes.store.DummyData;
+import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.ui.dialog.NewsDialog;
 
 import java.io.File;
@@ -31,15 +32,16 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 /**
  * Created by hungh on 3/3/2017.
  */
 
-public class HomeFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler, View.OnClickListener {
+public class HomeFragment extends BaseAppFragment implements ActionbarInfo, ActionbarHandler,
+        View.OnClickListener, ResponseListener {
     private static final String KEY_PHOTO_PATH = "key.photo.path";
+    private static final int REQUEST_GET_CAMPAIGN = 110;
     private final String TAG = "HomeFragment";
     private final int REQUEST_PHOTO = 1234;
     private final int REQUEST_VIDEO = 4321;
@@ -93,16 +95,17 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        showPopupNews(DummyData.dummyNews());
+
+        if (AppPref.get().isShowNews()) {
+            getListCampaign();
+        }
     }
 
     private void showPopupNews(ArrayList<News> newsList) {
         // Check whether or not show New Notifications
-        if(AppPref.get().isShowNews()) {
-            mNewsDialog = new NewsDialog(getContext(), newsList);
-            mNewsDialog.show();
-            AppPref.get().saveIsShowNews(false);
-        }
+        mNewsDialog = new NewsDialog(getContext(), newsList);
+        mNewsDialog.show();
+        AppPref.get().saveIsShowNews(false);
     }
 
     @Override
@@ -242,5 +245,37 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
+    }
+
+    private void getListCampaign() {
+        GetCampaignsRequest getCampaignsRequest = new GetCampaignsRequest();
+        showApiLoading();
+        mApi.startRequest(REQUEST_GET_CAMPAIGN, getCampaignsRequest, this);
+    }
+
+    @Override
+    public BaseResponse parse(int requestId, String response) throws Exception {
+        if (requestId == REQUEST_GET_CAMPAIGN) {
+            return new GetCampaignsResponse(response);
+        }
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+        dismissApiLoading();
+        if (requestId == REQUEST_GET_CAMPAIGN) {
+            GetCampaignsResponse getCampaignsResponse = (GetCampaignsResponse) response;
+            ArrayList<News> list = getCampaignsResponse.getNewses();
+            if (list != null && !list.isEmpty()) {
+                showPopupNews(getCampaignsResponse.getNewses());
+            }
+        }
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
     }
 }

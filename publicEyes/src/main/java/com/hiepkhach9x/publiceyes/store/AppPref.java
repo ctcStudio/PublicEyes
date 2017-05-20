@@ -36,7 +36,7 @@ public class AppPref extends BasePrefers {
     }
 
     public boolean isFirstLogin() {
-        return getSharedPreference().getBoolean(KEY_FIRST_LOGIN, false);
+        return getSharedPreference().getBoolean(KEY_FIRST_LOGIN, true);
     }
 
 
@@ -48,5 +48,9 @@ public class AppPref extends BasePrefers {
         return getSharedPreference().getBoolean(KEY_IS_SHOW_NEWS, true);
     }
 
+    @Override
+    public void clear() {
+        mEditor.clear().commit();
+    }
 }
 

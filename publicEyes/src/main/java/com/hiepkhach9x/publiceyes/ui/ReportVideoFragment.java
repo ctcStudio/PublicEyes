@@ -4,10 +4,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.EditText;
 
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
+import com.hiepkhach9x.base.api.BaseResponse;
+import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.request.UploadFileRequest;
+import com.hiepkhach9x.publiceyes.api.response.UploadFileResponse;
+import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
+
+import java.io.File;
 
 import co.utilities.KeyboardUtils;
 
@@ -15,10 +23,13 @@ import co.utilities.KeyboardUtils;
  * Created by hungh on 3/5/2017.
  */
 
-public class ReportVideoFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener {
+public class ReportVideoFragment extends BaseAppFragment implements ActionbarInfo, View.OnClickListener,
+        ResponseListener {
 
     private static final String TAG = "ReportFragment";
     private static final String ARG_FILE = "ARG.FILE";
+
+    private static final int REQUEST_UPLOAD_VIDEO = 106;
 
     public static ReportVideoFragment newInstance(Uri videoPath) {
 
@@ -30,6 +41,7 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
     }
 
     private Uri mVideoFile;
+    private EditText mDescription;
 
     @Override
     public String getActionbarTitle() {
@@ -60,6 +72,7 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mDescription = (EditText) view.findViewById(R.id.description);
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
         view.findViewById(R.id.layout).setOnClickListener(this);
     }
@@ -71,10 +84,43 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
                 KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
             case R.id.btn_continue:
-                if (mNavigationManager != null) {
-                    mNavigationManager.showPage(new CategoryFragment());
-                }
+                uploadFile();
                 break;
         }
+    }
+
+    private void uploadFile() {
+        File file = new File(mVideoFile.getPath());
+        UploadFileRequest uploadFileRequest = new UploadFileRequest();
+        uploadFileRequest.setFile(file);
+        mApi.restartRequest(REQUEST_UPLOAD_VIDEO, uploadFileRequest, this);
+    }
+
+    @Override
+    public BaseResponse parse(int requestId, String response) throws Exception {
+        if (requestId == REQUEST_UPLOAD_VIDEO) {
+            return new UploadFileResponse(response);
+        }
+        return null;
+    }
+
+    @Override
+    public void onResponse(int requestId, BaseResponse response) {
+        dismissApiLoading();
+        if (requestId == REQUEST_UPLOAD_VIDEO) {
+            UploadFileResponse uploadFileResponse = (UploadFileResponse) response;
+            if (uploadFileResponse.isSuccess()) {
+                if (mNavigationManager != null) {
+                    mNavigationManager.showPage(CategoryFragment.newInstance(uploadFileResponse.getMsg().getPath(),
+                            mDescription.getText().toString().trim()));
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onError(int requestId, Exception e) {
+        dismissApiLoading();
+        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
     }
 }

@@ -68,7 +68,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Ho
 
         public void updateView(Complaint complaint) {
             name.setText(complaint.getCategoryName());
-            time.setText(complaint.getTime());
+            time.setText(complaint.getFormatTime());
             address.setText(complaint.getAddress());
             content.setText(complaint.getDescription());
             ImageUtil.loadImage(context,complaint.getImageThumb(), thumbnail);

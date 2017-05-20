@@ -20,4 +20,6 @@ public abstract class BasePrefers {
     public SharedPreferences getSharedPreference() {
         return mPreferences;
     }
+
+    public abstract void clear();
 }

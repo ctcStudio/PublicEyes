@@ -16,15 +16,11 @@ import com.hiepkhach9x.base.toolbox.PermissionGrant;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
-import com.hiepkhach9x.publiceyes.api.request.LoginRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
-import com.hiepkhach9x.publiceyes.api.response.SignUpResponse;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
-import co.utilities.VideoUtils;
 
 public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener, ResponseListener {
 
@@ -168,7 +164,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 break;
             case R.id.layout_compaign:
                 if (mNavigationManager != null) {
-                    mNavigationManager.showPage(CompaignFragment.newInstance());
+                    mNavigationManager.showPage(CampaignFragment.newInstance());
                 }
                 break;
             case R.id.change_money:
@@ -176,6 +172,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             case R.id.layout_logout:
                 startActivity(new Intent(this, RegisterActivity.class));
                 finish();
+                AppPref.get().clear();
                 break;
         }
     }

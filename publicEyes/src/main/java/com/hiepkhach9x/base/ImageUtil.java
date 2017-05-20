@@ -17,41 +17,31 @@ import java.io.File;
 
 
 public class ImageUtil {
-
-    public static void loadImage(Context context, String url, ImageView imageView) {
-        Glide.with(context).load(url).placeholder(R.drawable.ic_photo).into(imageView);
-    }
-
-    public static void loadBlurImageNoPlaceHolder(final Context context, String url, final ImageView imageView) {
-        Glide.with(context).load(url).asBitmap().placeholder(R.drawable.ic_photo).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(imageView);
-    }
-
     public static void loadImage(Context context, File file, ImageView imageView) {
-        Glide.with(context).load(file).placeholder(R.drawable.ic_photo).into(imageView);
+        Glide.with(context).load(file).asBitmap().placeholder(R.drawable.ic_photo).into(imageView);
     }
 
     public static void loadImage(Context context, Uri uri, ImageView imageView, int size) {
-        Glide.with(context).load(uri).placeholder(R.drawable.ic_photo).override(size, size).into(imageView);
+        Glide.with(context).load(uri).asBitmap().placeholder(R.drawable.ic_photo).override(size, size).into(imageView);
     }
 
     public static void loadImage(Context context, Uri uri, ImageView imageView) {
-        Glide.with(context).load(uri).placeholder(R.drawable.ic_photo).into(imageView);
+        Glide.with(context).load(uri).asBitmap().placeholder(R.drawable.ic_photo).into(imageView);
     }
 
-    public static void loadAvataImage(Context context, String url, ImageView imageView) {
-        Glide.with(context).load(url).placeholder(R.drawable.ic_photo).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+    public static void loadImage(Context context, String url, ImageView imageView) {
+        Glide.with(context).load(url).asBitmap().placeholder(R.drawable.ic_photo).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 
-    public static void loadAvataImage(Context context, String url, ImageView imageView, int width, int height) {
-        Glide.with(context).load(url).override(width, height).centerCrop().placeholder(R.drawable.ic_photo).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+    public static void loadImage(Context context, String url, ImageView imageView, int width, int height) {
+        Glide.with(context).load(url).asBitmap().override(width, height).centerCrop().placeholder(R.drawable.ic_photo).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 
-    public static void loadAvataImage(Context context, String url, ImageView imageView, int size) {
-        loadAvataImage(context, url, imageView, size, size);
+    public static void loadImage(Context context, String url, ImageView imageView, int size) {
+        loadImage(context, url, imageView, size, size);
     }
 
-    public static void loadRadiusAvataImage(final Context context, String url, final int radius, ImageView imageView) {
+    public static void loadRadiusImage(final Context context, String url, final int radius, ImageView imageView) {
         Glide.with(context).load(url).asBitmap().centerCrop().placeholder(R.drawable.ic_photo).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new BitmapImageViewTarget(imageView) {
                     @Override
@@ -64,12 +54,12 @@ public class ImageUtil {
                 });
     }
 
-    public static void loadRoundedAvataImage(Context context, String url, ImageView imageView) {
-        loadRadiusAvataImage(context, url, 20, imageView);
+    public static void loadRoundedImage(Context context, String url, ImageView imageView) {
+        loadRadiusImage(context, url, 20, imageView);
     }
 
 
-    public static void loadCircleAvataImage(final Context context, String url, ImageView imageView) {
+    public static void loadCircleImage(final Context context, String url, ImageView imageView) {
         Glide.with(context).load(url).asBitmap().centerCrop()
                 .placeholder(R.drawable.ic_photo).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new BitmapImageViewTarget(imageView) {
@@ -84,7 +74,6 @@ public class ImageUtil {
     }
 
     public static void loadBannerImage(Context context, String url, ImageView imageView) {
-        Glide.with(context).load(url).placeholder(R.drawable.bg_dummy_banner).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+        Glide.with(context).load(url).asBitmap().placeholder(R.drawable.bg_dummy_banner).override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 }

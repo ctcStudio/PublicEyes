@@ -31,7 +31,7 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
         mHandler = new Handler();
         if (UserPref.get().hasActive()) {
             loginByEmail();
-            AppPref.get().saveIsShowNews(false);
+            AppPref.get().saveFirstLogin(false);
         } else {
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -43,7 +43,7 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
                     }
                 }
             }, 1000);
-            AppPref.get().saveIsShowNews(true);
+            AppPref.get().saveFirstLogin(true);
         }
     }
 

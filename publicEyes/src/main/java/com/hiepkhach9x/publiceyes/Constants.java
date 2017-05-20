@@ -17,10 +17,11 @@ public class Constants {
             ".RESULT_DATA_ADDRESS";
     public static final String LOCATION_DATA_EXTRA = PACKAGE_NAME +
             ".LOCATION_DATA_EXTRA";
-    public static final String COMMA =",";
+    public static final String COMMA = ",";
 
     public static final int REQUEST_PERMISSION_LOCATION = 100;
     public static final int REQUEST_PERMISSION_STORE = 101;
     public static final int REQUEST_PERMISSION_CAMERA = 102;
     public static final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
+    public static String APP_FORMAT_DATE = "yyyy/MM/dd HH:mm:ss";
 }

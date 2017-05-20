@@ -117,5 +117,10 @@ public class UserPref extends BasePrefers {
     public boolean hasActive() {
         return (!TextUtils.isEmpty(getEmail()) && !TextUtils.isEmpty(getPassword()));
     }
+
+    @Override
+    public void clear() {
+        mEditor.clear().commit();
+    }
 }
 

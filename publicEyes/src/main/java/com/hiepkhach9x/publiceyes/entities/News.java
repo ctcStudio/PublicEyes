@@ -130,8 +130,15 @@ public class News implements Parcelable {
     }
 
     public String getDeadline() {
-        return DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE,"yyyy/MM/dd HH:mm:ss")
-                + " ~ " + DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE,"yyyy/MM/dd HH:mm:ss");
+        String result = "";
+        if(!TextUtils.isEmpty(fromDate)) {
+            result += DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE, Constants.APP_FORMAT_DATE) + " ~ ";
+        }
+
+        if(!TextUtils.isEmpty(toDate)) {
+            result += DateUtils.convertFormatDateTime(fromDate, Constants.FORMAT_DATE,Constants.APP_FORMAT_DATE);
+        }
+        return result;
     }
 
     public String getTitle() {

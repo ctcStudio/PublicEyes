@@ -2,8 +2,12 @@ package com.hiepkhach9x.publiceyes.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
+import com.hiepkhach9x.publiceyes.Constants;
+
+import co.utilities.DateUtils;
 
 /**
  * Created by hungh on 3/5/2017.
@@ -168,6 +172,13 @@ public class Complaint implements Parcelable {
 
     public String getTime() {
         return time;
+    }
+
+    public String getFormatTime() {
+        if(TextUtils.isEmpty(time)) {
+            return "";
+        }
+        return DateUtils.convertFormatDateTime(time, Constants.FORMAT_DATE,Constants.APP_FORMAT_DATE);
     }
 
     public void setTime(String time) {

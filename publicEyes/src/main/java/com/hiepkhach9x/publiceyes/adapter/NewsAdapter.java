@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.entities.News;
@@ -32,24 +33,6 @@ public class NewsAdapter extends BaseAdapter {
         this.mNewsList = newsList;
         mLayoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         mDetailList = new HashSet<>();
-    }
-
-    public void addAll(List<News> newsList) {
-        mNewsList.addAll(newsList);
-        notifyDataSetChanged();
-    }
-
-    public void refresh(List<News> newsList) {
-        mNewsList.clear();
-        mDetailList.clear();
-        mNewsList.addAll(newsList);
-        notifyDataSetChanged();
-    }
-
-    public void clearAll() {
-        mNewsList.clear();
-        mDetailList.clear();
-        notifyDataSetChanged();
     }
 
     @Override
@@ -102,6 +85,7 @@ public class NewsAdapter extends BaseAdapter {
             holder.setCollapseContent();
         }
         ImageUtil.loadBannerImage(mContext,news.getBanner(),holder.banner);
+        AppLog.d("NewAdapter","image banner: " + news.getBanner());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

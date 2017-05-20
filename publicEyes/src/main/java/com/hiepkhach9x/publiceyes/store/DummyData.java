@@ -23,24 +23,41 @@ public class DummyData {
             "\"decentralization_id\": 2,\"name\": \"Hung Hoang\",\"age\": 24,\"address\": \"102 trường chinhw\",\"id_card\": \"013230848\",\"mobile_phone\": " +
             "\"0984921226\",\"bonus_point\": 30,\"payment_type\": \"as\",\"bank_account\": \"as\",\"bank_name\": \"a\",\"bank_branch\": \"a\"," +
             "\"create_by\": null,\"create_date\": null,\"update_by\": \"minhpt\",\"update_date\": \"2017-05-04T14:37:58.037\",\"delete_by\": null,\"delete_date\": null}}";
-    public static final String UPLOAD_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"https://drive.google.com/open?id=0B9930oH9q2HrNHhqelVLTnc0djA\"}}";
+    public static final String UPLOAD_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\"}}";
     public static final String MESSAGE_RESPONSE = "{\"Code\": 0,\"Data\": {\"Message\": \"Xử lý thành công!\",\"Path\": \"\"}}";
-    public static final String GET_LIST_VIOLATION = "{\"Code\": 0,\"Data\": [{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
-            "\"path\": \"/Uploads/Files/636295083555836511_tumblr_mm82d6DNhY1rwuy3uo1_400.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
+    public static final String GET_LIST_VIOLATION = "{\"Code\": 0,\"Data\": [" +
+            "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
+            "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
             "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
             "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
-            "\"status_admin\": false}]}";
+            "\"status_admin\": false}," +
+            "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
+            "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
+            "\"status_admin\": false}," +
+            "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
+            "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
+            "\"status_admin\": false}," +
+            "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
+            "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            " \"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
+            "\"status_admin\": false}" +
+            "]}";
     public static final String GET_OPERATON_LIST = "{\"Code\": 0,\"Data\": [{\"operation_id\": 1,\"name\": \"Tháng giao thông\",\"descripton\": " +
-            "\"Mỗi báo cáo vi phạm được x2 point\",\"image\": \"https://drive.google.com/open?id=0B9930oH9q2HrZVJBcjBNM2g3bms\",\"detail\": " +
+            "\"Mỗi báo cáo vi phạm được x2 point\",\"image\": \"http://sv1.upsieutoc.com/2017/05/20/banner-giao-thong.jpg\",\"detail\": " +
             "\"Mỗi báo cáo vi phạm được x2 point\",\"bonus_point\": 10,\"date_from\": \"2017-04-15T00:00:00\",\"date_to\": \"2017-05-20T00:00:00\"," +
             "\"create_by\": null,\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status\": true}," +
             "{\"operation_id\": 2,\"name\": \"Tháng giao thông\",\"descripton\": \"Mỗi báo cáo vi phạm được x2 point\",\"image\": " +
-            "\"https://drive.google.com/open?id=0B9930oH9q2HrZVJBcjBNM2g3bms\",\"detail\": \"Mỗi báo cáo vi phạm được x2 point\",\"bonus_point\": 10," +
+            "\"http://sv1.upsieutoc.com/2017/05/20/banner-giao-thong.jpg\",\"detail\": \"Mỗi báo cáo vi phạm được x2 point\",\"bonus_point\": 10," +
             "\"date_from\": \"2017-04-15T00:00:00\",\"date_to\": \"2017-05-20T00:00:00\",\"create_by\": null,\"create_date\": null,\"update_by\": null," +
             "\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status\": true}]}";
-    public static final String GET_CATEGORY_LIST = "{\"Code\": 0,\"Data\": [{\"category_id\": 1,\"name\": \"Ngược chiều\",\"path\": \"https://drive.google.com/open?id=0B9930oH9q2HrZHBFZU8zVDZidEk\"," +
+    public static final String GET_CATEGORY_LIST = "{\"Code\": 0,\"Data\": [{\"category_id\": 1,\"name\": \"Ngược chiều\",\"path\": \"http://sv1.upsieutoc.com/2017/05/20/no_parking.png\"," +
             "\"create_by\": null,\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null}," +
-            "{\"category_id\": 2,\"name\": \"Vượt đèn đỏ\",\"path\": \"https://drive.google.com/open?id=0B9930oH9q2HrZHBFZU8zVDZidEk\",\"create_by\": null," +
+            "{\"category_id\": 2,\"name\": \"Vượt đèn đỏ\",\"path\": \"http://sv1.upsieutoc.com/2017/05/20/no_parking.png\",\"create_by\": null," +
             "\"create_date\": null,\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null}]}";
 
     public static ArrayList<Category> createCategories(Context context) {
