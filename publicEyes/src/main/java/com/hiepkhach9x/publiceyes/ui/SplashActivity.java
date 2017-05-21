@@ -2,11 +2,14 @@ package com.hiepkhach9x.publiceyes.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 
 import com.hiepkhach9x.base.BaseAppActivity;
 import com.hiepkhach9x.base.api.BaseResponse;
@@ -17,6 +20,9 @@ import com.hiepkhach9x.publiceyes.api.response.LoginResponse;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class SplashActivity extends BaseAppActivity implements ResponseListener {
 
@@ -45,6 +51,22 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
             }, 1000);
             AppPref.get().saveFirstLogin(true);
         }
+
+        /*
+        try {
+            String packageName = getPackageName();
+            PackageInfo info = getPackageManager().getPackageInfo(packageName,
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("package:", packageName);
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
+                e.printStackTrace();
+        }
+        */
     }
 
     @Override

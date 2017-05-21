@@ -20,6 +20,7 @@ import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
+import com.sromku.simple.fb.entities.Profile;
 
 import co.utilities.KeyboardUtils;
 
@@ -27,8 +28,59 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         ResponseListener {
 
     private static final int REQUEST_SIGN_UP = 100;
+    private static final String ARG_EMAIL = "args.email";
+    private static final String ARG_ID = "args.id";
+    private static final String ARG_NAME = "args.name";
+    private static final String ARG_PHONE = "args.phone";
+    private static final String ARG_ADDRESS = "args.address";
+    private static final String ARG_IS_FACEBOOK = "args.is.facebook";
 
     public SignUpFragment() {
+    }
+
+    public static SignUpFragment newInstance(String email,String id, String name, String phone,
+                                             String address, boolean isFacebook) {
+
+        Bundle args = new Bundle();
+        args.putString(ARG_EMAIL,email);
+        args.putString(ARG_ID,id);
+        args.putString(ARG_NAME,name);
+        args.putString(ARG_PHONE,phone);
+        args.putString(ARG_ADDRESS,address);
+        args.putBoolean(ARG_IS_FACEBOOK,isFacebook);
+        SignUpFragment fragment = new SignUpFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    private void parseBundle(Bundle bundle) {
+        email = bundle.getString(ARG_EMAIL);
+        password = bundle.getString(ARG_ID);
+        fullName = bundle.getString(ARG_NAME);
+        phone = bundle.getString(ARG_PHONE);
+        address = bundle.getString(ARG_ADDRESS);
+        isFacebook = bundle.getBoolean(ARG_IS_FACEBOOK);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(savedInstanceState !=null) {
+            parseBundle(savedInstanceState);
+        } else if(getArguments() !=null) {
+            parseBundle(getArguments());
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(ARG_EMAIL,email);
+        outState.putString(ARG_ID,password);
+        outState.putString(ARG_NAME,fullName);
+        outState.putString(ARG_PHONE,phone);
+        outState.putString(ARG_ADDRESS,address);
+        outState.putBoolean(ARG_IS_FACEBOOK,isFacebook);
     }
 
     @Override
@@ -39,6 +91,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
 
     private UnderLineEditText edEmail, etPassword, edFullName, edPhone, edCmt, edAddress;
     private String email, password, fullName, phone, cmt, address;
+    private boolean isFacebook;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -49,11 +102,30 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         view.findViewById(R.id.show_pass).setOnClickListener(this);
 
         edEmail = (UnderLineEditText) view.findViewById(R.id.ed_email);
+        if(!TextUtils.isEmpty(email)) {
+            edEmail.setText(email);
+        }
         etPassword = (UnderLineEditText) view.findViewById(R.id.input_pass);
+        if(!TextUtils.isEmpty(password)) {
+            etPassword.setText(password);
+        }
+        if(isFacebook) {
+            view.findViewById(R.id.layout_password).setVisibility(View.GONE);
+        }
         edFullName = (UnderLineEditText) view.findViewById(R.id.ed_full_name);
+        if(!TextUtils.isEmpty(fullName)) {
+            edFullName.setText(fullName);
+        }
         edPhone = (UnderLineEditText) view.findViewById(R.id.ed_phone);
+        if(!TextUtils.isEmpty(phone)) {
+            edPhone.setText(phone);
+        }
         edCmt = (UnderLineEditText) view.findViewById(R.id.ed_cmt);
+
         edAddress = (UnderLineEditText) view.findViewById(R.id.ed_address);
+        if(!TextUtils.isEmpty(address)) {
+            edAddress.setText(address);
+        }
     }
 
     @Override

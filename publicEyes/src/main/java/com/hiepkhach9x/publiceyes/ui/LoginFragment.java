@@ -77,9 +77,11 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_facebook:
-                gotoMain();
+                facebookLogin();
                 break;
             case R.id.btn_continue:
+                email = etEmail.getText().toString().trim();
+                password = etPassword.getText().toString().trim();
                 loginByEmail();
                 break;
             case R.id.layout:
@@ -101,9 +103,6 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     }
 
     private void loginByEmail() {
-        email = etEmail.getText().toString().trim();
-        password = etPassword.getText().toString().trim();
-
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
             AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error),true,null);
             alertDialog.show();
@@ -193,6 +192,9 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
                     String gender = profile.getGender();
                     String name = profile.getName();
                     String avatar = profile.getPicture();
+                    email = profile.getEmail();
+                    password = profile.getId();
+                    loginByEmail();
                 }
             }
 

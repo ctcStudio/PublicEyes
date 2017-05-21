@@ -76,6 +76,5 @@
     <string name="new_close_up">close</string>
     <string name="change_money">Change money</string>
     <string name="validate_email">email validation error</string>
-
-    <string name="app_facebook_id">abc</string>
+    <string name="loading">loading…</string>
 </resources>

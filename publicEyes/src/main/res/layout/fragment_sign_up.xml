@@ -70,18 +70,25 @@
                 android:hint="@string/enter_email"
                 android:textSize="@dimen/large_text" />
 
-            <TextView
-                style="@style/TextViewYellow"
+            <LinearLayout
+                android:id="@+id/layout_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/space_smaller"
-                android:text="@string/password"
-                android:textSize="@dimen/large_text" />
+                android:orientation="vertical">
 
-            <include
-                layout="@layout/layout_input_pass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                <TextView
+                    style="@style/TextViewYellow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password"
+                    android:textSize="@dimen/large_text" />
+
+                <include
+                    layout="@layout/layout_input_pass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <TextView
                 style="@style/TextViewYellow"

@@ -24,6 +24,7 @@ import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetListCategoryResponse;
 import com.hiepkhach9x.publiceyes.entities.Category;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
+import com.hiepkhach9x.publiceyes.store.DummyData;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 
@@ -145,7 +146,8 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
         dismissApiLoading();
         if (requestId == REQUEST_GET_CATEGORIES) {
             GetListCategoryResponse getListCategoryResponse = (GetListCategoryResponse) response;
-            ArrayList<Category> List = getListCategoryResponse.getCategories();
+//            ArrayList<Category> List = getListCategoryResponse.getCategories();
+            ArrayList<Category> List = DummyData.createCategories(getContext());
             if (List != null) {
                 categories.clear();
                 categories.addAll(List);
