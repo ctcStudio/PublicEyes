@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
 import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.BaseAppFragment;
@@ -22,17 +22,11 @@ import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
-import com.sromku.simple.fb.SimpleFacebookConfiguration;
 import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
 import com.sromku.simple.fb.listeners.OnProfileListener;
-import com.sromku.simple.fb.utils.Attributes;
-import com.sromku.simple.fb.utils.PictureAttributes;
 
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Response;
 
 /**
  * Created by hungh on 3/3/2017.
@@ -42,6 +36,7 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
 
     private  final static String TAG = "RegisterFragment";
     private static final int REQUEST_LOGIN = 100;
+    private SimpleFacebook mSimpleFacebook;
 
     public RegisterFragment() {
     }
@@ -83,78 +78,73 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
         }
     }
 
-    private void facebookLogin() {
-        Permission[] permissions = new Permission[] {
-                Permission.USER_ABOUT_ME,
-                Permission.PUBLIC_PROFILE,
-                Permission.USER_PHOTOS,
-                Permission.EMAIL,
-                Permission.PUBLISH_ACTION,
-                Permission.USER_BIRTHDAY
-        };
-        SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
-                .setAppId(getString(R.string.app_facebook_id))
-                .setPermissions(permissions)
-                .build();
-        SimpleFacebook simpleFacebook = SimpleFacebook.getInstance(getActivity());
-        simpleFacebook.setConfiguration(configuration);
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
-        simpleFacebook.login(new OnLoginListener() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSimpleFacebook = SimpleFacebook.getInstance(getActivity());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mSimpleFacebook.onActivityResult(requestCode,resultCode,data);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void facebookLogin() {
+        mSimpleFacebook.login(new OnLoginListener() {
             @Override
             public void onLogin(String accessToken, List<Permission> acceptedPermissions, List<Permission> declinedPermissions) {
+                Log.d("Facebook","onLogin");
                 getFacebookUserInfo();
             }
 
             @Override
             public void onCancel() {
-
+                Log.d("Facebook","onCancel");
             }
 
             @Override
             public void onException(Throwable throwable) {
-
+                Log.d("Facebook","onException");
             }
 
             @Override
             public void onFail(String reason) {
-
+                Log.d("Facebook","onFail");
             }
         });
     }
     private ProgressDialog progressDialog;
     private void getFacebookUserInfo() {
-
-        PictureAttributes pictureAttributes = Attributes.createPictureAttributes();
-        pictureAttributes.setHeight(360);
-        pictureAttributes.setWidth(360);
-        pictureAttributes.setType(PictureAttributes.PictureType.SQUARE);
-
         Profile.Properties properties = new Profile.Properties.Builder()
                 .add(Profile.Properties.ID)
                 .add(Profile.Properties.NAME)
                 .add(Profile.Properties.EMAIL)
-                .add(Profile.Properties.LOCATION)
                 .add(Profile.Properties.BIRTHDAY)
                 .add(Profile.Properties.GENDER)
-                .add(Profile.Properties.PICTURE, pictureAttributes)
                 .build();
-
-        SimpleFacebook simpleFacebook = SimpleFacebook.getInstance(getActivity());
 
         if (progressDialog == null) {
             progressDialog = new ProgressDialog(getContext());
             progressDialog.setMessage(getString(R.string.loading));
             progressDialog.setCancelable(false);
         }
-        simpleFacebook.getProfile(properties, new OnProfileListener() {
+        mSimpleFacebook.getProfile(properties, new OnProfileListener() {
             @Override
             public void onComplete(Profile profile) {
                 super.onComplete(profile);
                 AppLog.d(TAG, "onComplete");
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 if (profile != null) {
 
                     name = profile.getName();
-                    address = profile.getLocation().getName();
                     email = profile.getEmail();
                     password = profile.getId();
                     loginByEmail();

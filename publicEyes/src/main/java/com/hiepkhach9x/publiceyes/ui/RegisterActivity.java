@@ -1,6 +1,7 @@
 package com.hiepkhach9x.publiceyes.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.hiepkhach9x.base.BaseAppActivity;
@@ -25,5 +26,13 @@ public class RegisterActivity extends BaseAppActivity {
     @Override
     public int getContentFrame() {
         return R.id.content_layout;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mNavigationManager != null && mNavigationManager.getActivePage() != null) {
+            mNavigationManager.getActivePage().onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

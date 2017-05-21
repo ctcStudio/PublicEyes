@@ -187,8 +187,10 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
             public void onComplete(Profile profile) {
                 super.onComplete(profile);
                 AppLog.d(TAG, "onComplete");
+                if (progressDialog.isShowing()) {
+                    progressDialog.dismiss();
+                }
                 if (profile != null) {
-
                     String gender = profile.getGender();
                     String name = profile.getName();
                     String avatar = profile.getPicture();

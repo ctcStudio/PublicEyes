@@ -20,7 +20,6 @@ import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
-import com.sromku.simple.fb.entities.Profile;
 
 import co.utilities.KeyboardUtils;
 
