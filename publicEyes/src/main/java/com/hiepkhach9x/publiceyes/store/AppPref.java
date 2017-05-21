@@ -17,6 +17,7 @@ public class AppPref extends BasePrefers {
 
     private final String KEY_FIRST_LOGIN = "key.first.login";
     public static final String KEY_IS_SHOW_NEWS = "is.show.news";
+    public static final String KEY_DATE_SHOW_NEW = "date.show.new";
 
     public static AppPref get() {
         return new AppPref(App.get());
@@ -46,6 +47,14 @@ public class AppPref extends BasePrefers {
 
     public boolean isShowNews() {
         return getSharedPreference().getBoolean(KEY_IS_SHOW_NEWS, true);
+    }
+
+    public void saveDateShowNews(long time) {
+        mEditor.putLong(KEY_IS_SHOW_NEWS, time).commit();
+    }
+
+    public long getDateShowNews() {
+        return getSharedPreference().getLong(KEY_IS_SHOW_NEWS, 0);
     }
 
     @Override

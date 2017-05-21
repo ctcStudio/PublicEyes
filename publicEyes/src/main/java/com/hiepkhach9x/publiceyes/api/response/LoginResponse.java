@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.publiceyes.api.ResponseCode;
+import com.hiepkhach9x.publiceyes.entities.Msg;
 import com.hiepkhach9x.publiceyes.entities.User;
 
 import org.json.JSONException;
@@ -18,7 +19,7 @@ import okhttp3.Response;
 
 public class LoginResponse extends BaseResponse {
     @SerializedName("Data")
-    private User user;
+    private Msg msg;
     public LoginResponse(String response) throws IOException, JSONException {
         super(response);
     }
@@ -28,11 +29,11 @@ public class LoginResponse extends BaseResponse {
         Gson gson = new Gson();
         LoginResponse response = gson.fromJson(data,LoginResponse.class);
         code = response.getCode();
-        user = response.getUser();
+        msg = response.getMsg();
     }
 
-    public User getUser() {
-        return user;
+    public Msg getMsg() {
+        return msg;
     }
 
     @Override

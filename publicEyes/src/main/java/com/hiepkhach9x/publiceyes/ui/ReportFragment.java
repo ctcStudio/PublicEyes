@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.EditText;
 
@@ -94,6 +95,7 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
         File file = new File(mPhotoPath);
         UploadFileRequest uploadFileRequest = new UploadFileRequest();
         uploadFileRequest.setFile(file);
+        showApiLoading();
         mApi.restartRequest(REQUEST_UPLOAD_PHOTO, uploadFileRequest, this);
     }
 
@@ -151,6 +153,8 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

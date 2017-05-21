@@ -109,11 +109,11 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
             alertDialog.show();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
-            alertDialog.show();
-            return;
-        }
+//        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+//            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
+//            alertDialog.show();
+//            return;
+//        }
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(email);
         loginRequest.setPassword(password);
@@ -243,8 +243,6 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
         dismissApiLoading();
         if(requestId == REQUEST_LOGIN) {
             AppPref.get().saveFirstLogin(true);
-            LoginResponse loginResponse = (LoginResponse) response;
-            UserPref.get().saveUserInfo(loginResponse.getUser());
             UserPref.get().saveEmail(email);
             UserPref.get().savePassword(password);
             gotoMain();
@@ -254,6 +252,8 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

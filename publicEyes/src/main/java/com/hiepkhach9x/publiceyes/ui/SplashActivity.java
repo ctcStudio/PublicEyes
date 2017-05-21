@@ -89,8 +89,6 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
     public void onResponse(int requestId, BaseResponse response) {
         if (requestId == REQUEST_LOGIN) {
             AppPref.get().saveFirstLogin(false);
-            LoginResponse loginResponse = (LoginResponse) response;
-            UserPref.get().saveUserInfo(loginResponse.getUser());
             startMainActivity();
         }
     }
@@ -98,11 +96,19 @@ public class SplashActivity extends BaseAppActivity implements ResponseListener 
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(this, e, new DialogInterface.OnClickListener() {
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(this, e, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 startRegisterActivity();
             }
         });
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                SplashActivity.this.finish();
+            }
+        });
+        dialog.show();
     }
 }

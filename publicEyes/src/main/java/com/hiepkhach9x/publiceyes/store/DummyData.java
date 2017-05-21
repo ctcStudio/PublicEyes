@@ -28,22 +28,22 @@ public class DummyData {
     public static final String GET_LIST_VIOLATION = "{\"Code\": 0,\"Data\": [" +
             "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
             "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
-            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"email\": \"minhpt\",\"create_by\": \"minhpt\"," +
             "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
             "\"status_admin\": false}," +
             "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
             "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
-            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"email\": \"minhpt\",\"create_by\": \"minhpt\"," +
             "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
             "\"status_admin\": false}," +
             "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
             "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
-            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"email\": \"minhpt\",\"create_by\": \"minhpt\"," +
             "\"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
             "\"status_admin\": false}," +
             "{\"violation_id\": 1,\"category_id\": 1,\"category_name\":\"Cấm đỗ\"," +
             "\"path\": \"http://sv1.upsieutoc.com/2017/05/20/ps2.jpg\",\"location\": \"123,123\",\"address\": \"102 Trường Chinh Đống Đa\"," +
-            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"username\": \"minhpt\",\"create_by\": \"minhpt\"," +
+            "\"license_plate\": \"30F-123.45\",\"district\": \"Đống Đa\",\"province\": \"hà nội\",\"operation_id\": 1,\"email\": \"minhpt\",\"create_by\": \"minhpt\"," +
             " \"create_date\": \"2017-05-04T15:38:43.557\",\"update_by\": null,\"update_date\": null,\"delete_by\": null,\"delete_date\": null,\"status_user\": false," +
             "\"status_admin\": false}" +
             "]}";

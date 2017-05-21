@@ -1,5 +1,6 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +12,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
+import android.text.format.DateUtils;
 import android.view.View;
 
 import com.hiepkhach9x.base.BaseAppFragment;
@@ -21,6 +25,8 @@ import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
+import com.hiepkhach9x.base.toolbox.PermissionGrant;
+import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.GetCampaignsRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetCampaignsResponse;
@@ -98,7 +104,9 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        if (!DateUtils.isToday(AppPref.get().getDateShowNews())) {
+            AppPref.get().saveIsShowNews(true);
+        }
         if (AppPref.get().isShowNews()) {
             getListCampaign();
         }
@@ -109,6 +117,7 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         mNewsDialog = new NewsDialog(getContext(), newsList);
         mNewsDialog.show();
         AppPref.get().saveIsShowNews(false);
+        AppPref.get().saveDateShowNews(System.currentTimeMillis());
     }
 
     @Override
@@ -169,21 +178,53 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         return getString(R.string.app_name);
     }
 
+    private boolean isChoosePhoto;
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.choose_photo:
-                photoPickerFile();
+                isChoosePhoto = true;
+                if(PermissionGrant.checkSelfPermission(getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
+                    photoPickerFile();
+                } else {
+                    PermissionGrant.verify(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PERMISSION_STORE);
+                }
                 break;
             case R.id.choose_video:
-                videoPickerFile();
+                isChoosePhoto = false;
+                if(PermissionGrant.checkSelfPermission(getContext(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})) {
+                    videoPickerFile();
+                } else {
+                    PermissionGrant.verify(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Constants.REQUEST_PERMISSION_STORE);
+                }
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == Constants.REQUEST_PERMISSION_STORE) {
+            boolean grant = true;
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                    grant = false;
+                }
+            }
+
+            if (grant) {
+                if(isChoosePhoto) {
+                    photoPickerFile();
+                } else {
+                    videoPickerFile();
+                }
+            }
         }
     }
 
     private void videoPickerFile() {
         Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 3 * 60);
+        takeVideoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 60);
         startActivityForResult(takeVideoIntent, REQUEST_VIDEO);
     }
 
@@ -285,6 +326,8 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

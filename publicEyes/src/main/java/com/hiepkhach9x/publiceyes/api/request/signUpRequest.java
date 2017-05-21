@@ -17,7 +17,7 @@ import okhttp3.RequestBody;
  */
 
 public class SignUpRequest implements BaseRequest {
-    @SerializedName("username")
+    @SerializedName("email")
     private String email;
     @SerializedName("password")
     private String password;

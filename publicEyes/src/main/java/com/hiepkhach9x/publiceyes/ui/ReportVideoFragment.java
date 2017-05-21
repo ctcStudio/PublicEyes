@@ -1,8 +1,11 @@
 package com.hiepkhach9x.publiceyes.ui;
 
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
@@ -18,6 +21,9 @@ import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import java.io.File;
 
 import co.utilities.KeyboardUtils;
+import co.utilities.PhotoUtils;
+import co.utilities.StorageUtils;
+import co.utilities.Utils;
 
 /**
  * Created by hungh on 3/5/2017.
@@ -90,9 +96,13 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
     }
 
     private void uploadFile() {
-        File file = new File(mVideoFile.getPath());
+        String videoPath = PhotoUtils.getRealPathFromURI(getContext().getContentResolver(),mVideoFile);
         UploadFileRequest uploadFileRequest = new UploadFileRequest();
-        uploadFileRequest.setFile(file);
+        if(!TextUtils.isEmpty(videoPath)) {
+            File file = new File(videoPath);
+            uploadFileRequest.setFile(file);
+        }
+        showApiLoading();
         mApi.restartRequest(REQUEST_UPLOAD_VIDEO, uploadFileRequest, this);
     }
 
@@ -121,6 +131,8 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

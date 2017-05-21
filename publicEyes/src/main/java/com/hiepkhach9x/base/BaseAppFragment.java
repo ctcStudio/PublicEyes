@@ -103,6 +103,7 @@ public abstract class BaseAppFragment extends NFragment {
     protected void showApiLoading() {
         if (apiDialog == null) {
             apiDialog = new ProgressDialog(getActivity());
+            apiDialog.setCanceledOnTouchOutside(false);
             apiDialog.setMessage("Loading..");
         }
 

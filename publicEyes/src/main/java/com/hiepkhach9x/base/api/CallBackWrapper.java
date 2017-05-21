@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 
+import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.api.errors.AuthFailureError;
 import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.base.api.errors.ServerError;
@@ -57,16 +58,16 @@ public class CallBackWrapper implements Callback {
                  */
             if (!isError) {
                 try {
-                    BaseResponse temp = listener.parse(requestId, response.body().string());
-                    response.close();
+                    String responseBody = response.body().string();
+                    AppLog.d("Api",responseBody);
+                    BaseResponse temp = listener.parse(requestId, responseBody);
                     if (temp.isSuccess()) {
                         deliverUIResponse(temp);
                     } else {
                         if (temp.getCode() == ResponseCode.UNAUTHORIZED) {
                             pushBroadcastError(temp.getCode());
-                        } else {
-                            deliverUIError(new ServerError(call, response));
                         }
+                        deliverUIError(new ServerError(responseBody));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -83,8 +84,9 @@ public class CallBackWrapper implements Callback {
 
                 deliverUIError(new AuthFailureError(call, response));
             } else {
-                deliverUIError(new ServerError(call, response));
+                deliverUIError(new ServerError(response.body().string()));
             }
+            response.close();
         }
     }
 

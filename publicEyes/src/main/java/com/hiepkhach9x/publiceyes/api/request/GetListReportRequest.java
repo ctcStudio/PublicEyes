@@ -8,6 +8,7 @@ import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 
+import okhttp3.Credentials;
 import okhttp3.Headers;
 import okhttp3.RequestBody;
 
@@ -41,12 +42,11 @@ public class GetListReportRequest implements BaseRequest {
 
     @Override
     public String getMethod() {
-        return ApiConfig.METHOD_POST;
+        return ApiConfig.METHOD_GET;
     }
 
     @Override
     public RequestBody getBody() {
-        RequestBody body = RequestBody.create(JSON, toJson());
-        return body;
+        return null;
     }
 }

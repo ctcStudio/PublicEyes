@@ -51,8 +51,8 @@ public class UploadFileRequest implements BaseRequest {
     @Override
     public RequestBody getBody() {
         MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if(file !=null) {
-            requestBody.addFormDataPart("file", file.getPath(), RequestBody.create(IMAGE, file));
+        if(file != null) {
+            requestBody.addFormDataPart("", file.getPath(), RequestBody.create(IMAGE, file));
         }
 
         return requestBody.build();

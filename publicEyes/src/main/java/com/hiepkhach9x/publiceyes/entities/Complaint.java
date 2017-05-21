@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.publiceyes.Constants;
+import com.hiepkhach9x.publiceyes.api.ApiConfig;
 
 import co.utilities.DateUtils;
 
@@ -32,7 +33,7 @@ public class Complaint implements Parcelable {
     private String province;
     @SerializedName("operation_id")
     private int operationId;
-    @SerializedName("username")
+    @SerializedName("email")
     private String userName;
     @SerializedName("create_date")
     private String time; // 2017-05-04T15:38:43.557
@@ -115,7 +116,10 @@ public class Complaint implements Parcelable {
     }
 
     public String getImageThumb() {
-        return imageThumb;
+        if (imageThumb.startsWith("http:") || imageThumb.startsWith("https:")) {
+            return imageThumb;
+        }
+        return ApiConfig.makeUrlImage(imageThumb);
     }
 
     public void setImageThumb(String imageThumb) {
@@ -175,10 +179,10 @@ public class Complaint implements Parcelable {
     }
 
     public String getFormatTime() {
-        if(TextUtils.isEmpty(time)) {
+        if (TextUtils.isEmpty(time)) {
             return "";
         }
-        return DateUtils.convertFormatDateTime(time, Constants.FORMAT_DATE,Constants.APP_FORMAT_DATE);
+        return DateUtils.convertFormatDateTime(time, Constants.FORMAT_DATE, Constants.APP_FORMAT_DATE);
     }
 
     public void setTime(String time) {

@@ -28,11 +28,13 @@ import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.request.UpdateReportRequest;
 import com.hiepkhach9x.publiceyes.api.response.UpdateReportResponse;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.task.FetchAddressIntentService;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.ui.dialog.PostSuccessDialog;
 import com.hiepkhach9x.publiceyes.view.UnderLineEditText;
 
+import co.utilities.DateUtils;
 import co.utilities.KeyboardUtils;
 
 /**
@@ -210,6 +212,7 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
         complaint.setLocation(location);
         complaint.setDistrict(district);
         complaint.setProvince(province);
+        complaint.setTime(DateUtils.getTimeInGMT(Constants.FORMAT_DATE));
         updateReportRequest.setComplaint(complaint);
         showApiLoading();
         mApi.restartRequest(REQUEST_UPDATE_REPORT, updateReportRequest, this);
@@ -236,7 +239,9 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     private class AddressResultReceiver extends ResultReceiver {

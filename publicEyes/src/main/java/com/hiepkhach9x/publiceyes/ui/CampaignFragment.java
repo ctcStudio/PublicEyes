@@ -2,6 +2,7 @@ package com.hiepkhach9x.publiceyes.ui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ListView;
 
@@ -107,6 +108,8 @@ public class CampaignFragment extends BaseAppFragment implements ActionbarInfo, 
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

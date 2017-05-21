@@ -43,12 +43,11 @@ public class GetCampaignsRequest implements BaseRequest {
 
     @Override
     public String getMethod() {
-        return ApiConfig.METHOD_POST;
+        return ApiConfig.METHOD_GET;
     }
 
     @Override
     public RequestBody getBody() {
-        RequestBody body = RequestBody.create(JSON, toJson());
-        return body;
+        return null;
     }
 }

@@ -3,6 +3,7 @@ package com.hiepkhach9x.publiceyes.api.request;
 import android.net.Uri;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
@@ -29,7 +30,7 @@ public class UpdateReportRequest implements BaseRequest {
     @Override
     public String toJson() {
         Gson gson = new Gson();
-        return gson.toJson(this);
+        return gson.toJson(complaint);
     }
 
     @Override

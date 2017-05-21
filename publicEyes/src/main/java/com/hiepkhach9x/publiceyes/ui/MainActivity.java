@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,6 +47,11 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     };
 
     @Override
+    protected void showApiLoading() {
+        super.showApiLoading();
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -70,7 +76,9 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     @Override
     protected void onStart() {
         super.onStart();
-        getUserInfo();
+        if(mNavigationManager.getActivePage() instanceof HomeFragment) {
+            getUserInfo();
+        }
 
     }
 
@@ -223,6 +231,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
 
     @Override
     public void onError(int requestId, Exception e) {
-        AppAlertDialog.errorApiAlertDialogOk(this, e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(this, e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

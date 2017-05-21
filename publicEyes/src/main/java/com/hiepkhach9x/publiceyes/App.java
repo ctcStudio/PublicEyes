@@ -3,8 +3,10 @@ package com.hiepkhach9x.publiceyes;
 import android.app.Application;
 
 import com.hiepkhach9x.base.api.Api;
+import com.hiepkhach9x.base.api.OkHttpImpl;
 import com.hiepkhach9x.publiceyes.api.FakeImpl;
 
+import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
@@ -22,13 +24,13 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
 
-        //OkHttpClient okHttpClient = new OkHttpClient.Builder()
-        //        .addInterceptor(loggingInterceptor)
-        //        .build();
-        //mApi = new OkHttpImpl(okHttpClient);
-        mApi = new FakeImpl();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
+                .build();
+        mApi = new OkHttpImpl(okHttpClient);
+        //mApi = new FakeImpl();
     }
 
     public static App get() {

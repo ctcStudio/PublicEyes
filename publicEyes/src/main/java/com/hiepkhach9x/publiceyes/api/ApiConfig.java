@@ -8,6 +8,7 @@ public class ApiConfig {
 
     public final static String METHOD_POST = "POST";
     public final static String METHOD_GET = "GET";
+    public final static String IMAGE_URL = "http://acquyxenangdien.net";
     public final static String API = "api";
     public final static String API_LOGIN = "login";
     public final static String API_USER = "user";
@@ -20,5 +21,9 @@ public class ApiConfig {
     public final static String API_VALUE = "getvalue";
     public final static String API_CATEGORY = "category";
     public final static String API_GET_ALL_CATEGORY = "getallcategory";
+
+    public static String makeUrlImage(String path) {
+        return IMAGE_URL + path;
+    }
 
 }

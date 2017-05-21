@@ -63,6 +63,7 @@
     <string name="lane_discipline">Violation lane discipline</string>
     <string name="wrong_parking">Wrong parking</string>
     <string name="cmt_or_the_can_cuoc">Identity card</string>
+    <string name="enter_cmt_or_the_can_cuoc">Enter identity card</string>
     <string name="address">Address</string>
     <string name="common_ok">OK</string>
     <string name="common_cancel">Cancel</string>

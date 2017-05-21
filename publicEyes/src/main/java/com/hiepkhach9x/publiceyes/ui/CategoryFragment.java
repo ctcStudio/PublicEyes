@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetListCategoryResponse;
 import com.hiepkhach9x.publiceyes.entities.Category;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
+import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 
 import java.util.ArrayList;
@@ -104,6 +106,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
                     complaint.setCategoryId(category.getId());
                     complaint.setImageThumb(imageUrl);
                     complaint.setDescription(description);
+                    complaint.setUserName(UserPref.get().getEmail());
                     mNavigationManager.showPage(LocationFragment.newInstance(complaint));
                 }
             }
@@ -154,7 +157,9 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     private class CategoryAdapter extends ArrayAdapter<Category> {

@@ -64,6 +64,7 @@
     <string name="wrong_parking">Đỗ xe không đúng nơi quy định</string>
 
     <string name="cmt_or_the_can_cuoc">Chứng minh thư/ Thẻ căn cước</string>
+    <string name="enter_cmt_or_the_can_cuoc">Điền Chứng minh thư/ Thẻ căn cước</string>
     <string name="address">Địa chỉ</string>
     <string name="common_ok">OK</string>
     <string name="common_cancel">Cancel</string>

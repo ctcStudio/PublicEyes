@@ -10,7 +10,7 @@ import com.hiepkhach9x.publiceyes.entities.Msg;
 public class Error {
     @SerializedName("error")
     private int code;
-    @SerializedName("data")
+    @SerializedName("Data")
     private Msg message;
 
     public int getCode() {

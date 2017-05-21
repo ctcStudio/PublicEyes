@@ -113,7 +113,7 @@
                 style="@style/UnderLineEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/enter_mobile_number"
+                android:hint="@string/enter_cmt_or_the_can_cuoc"
                 android:inputType="numberDecimal"
                 android:textSize="@dimen/large_text" />
 

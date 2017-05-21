@@ -83,11 +83,11 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
 
     private void signUpAccount() {
         email = edEmail.getText().toString().trim();
-        password = edEmail.getText().toString().trim();
-        fullName = edEmail.getText().toString().trim();
-        phone = edEmail.getText().toString().trim();
-        cmt = edEmail.getText().toString().trim();
-        address = edEmail.getText().toString().trim();
+        password = etPassword.getText().toString().trim();
+        fullName = edFullName.getText().toString().trim();
+        phone = edPhone.getText().toString().trim();
+        cmt = edCmt.getText().toString().trim();
+        address = edAddress.getText().toString().trim();
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
                 || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)
@@ -147,6 +147,8 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
     @Override
     public void onError(int requestId, Exception e) {
         dismissApiLoading();
-        AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(getContext(), e, null);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

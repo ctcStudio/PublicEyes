@@ -69,6 +69,7 @@ public class NewsAdapter extends BaseAdapter {
         if (news.hasBanner()) {
             holder.banner.setVisibility(View.VISIBLE);
             holder.newsLayoutTitle.setVisibility(View.VISIBLE);
+            ImageUtil.loadBannerImage(mContext,news.getBanner(),holder.banner);
         } else {
             holder.banner.setVisibility(View.GONE);
             holder.newsLayoutTitle.setVisibility(View.VISIBLE);
@@ -84,8 +85,6 @@ public class NewsAdapter extends BaseAdapter {
         } else {
             holder.setCollapseContent();
         }
-        ImageUtil.loadBannerImage(mContext,news.getBanner(),holder.banner);
-        AppLog.d("NewAdapter","image banner: " + news.getBanner());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override

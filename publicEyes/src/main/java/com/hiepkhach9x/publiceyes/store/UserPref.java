@@ -9,6 +9,7 @@ import com.hiepkhach9x.publiceyes.App;
 import com.hiepkhach9x.publiceyes.entities.User;
 
 import co.utilities.BasePrefers;
+import okhttp3.Credentials;
 
 /**
  * Created by hungh on 3/3/2017.
@@ -120,8 +121,8 @@ public class UserPref extends BasePrefers {
     }
 
     public String getAuthorization() {
-        String data = getEmail()+":"+getPassword();
-        return Base64.encodeToString(data.getBytes(),Base64.DEFAULT);
+        String data = Credentials.basic(getEmail(),getPassword());
+        return data;
     }
 
     @Override
