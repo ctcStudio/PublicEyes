@@ -50,11 +50,11 @@ public class AppPref extends BasePrefers {
     }
 
     public void saveDateShowNews(long time) {
-        mEditor.putLong(KEY_IS_SHOW_NEWS, time).commit();
+        mEditor.putLong(KEY_DATE_SHOW_NEW, time).commit();
     }
 
     public long getDateShowNews() {
-        return getSharedPreference().getLong(KEY_IS_SHOW_NEWS, 0);
+        return getSharedPreference().getLong(KEY_DATE_SHOW_NEW, 0);
     }
 
     @Override

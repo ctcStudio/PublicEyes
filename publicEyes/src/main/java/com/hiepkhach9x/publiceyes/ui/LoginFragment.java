@@ -109,11 +109,11 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
             alertDialog.show();
             return;
         }
-//        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-//            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
-//            alertDialog.show();
-//            return;
-//        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
+            alertDialog.show();
+            return;
+        }
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(email);
         loginRequest.setPassword(password);
