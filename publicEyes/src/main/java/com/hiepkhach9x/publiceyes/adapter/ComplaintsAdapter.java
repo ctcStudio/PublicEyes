@@ -96,12 +96,13 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Ho
         }
 
         private void initVideo(String url){
-            MediaController mc = new MediaController(context);
-            mc.setAnchorView(videoView);
-            mc.setMediaPlayer(videoView);
+//            MediaController mc = new MediaController(context);
+//            mc.setAnchorView(videoView);
+//            mc.setMediaPlayer(videoView);
+//            videoView.setMediaController(mc);
             Uri video = Uri.parse(url);
-            videoView.setMediaController(mc);
             videoView.setVideoURI(video);
+
             videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
                 public void onPrepared(MediaPlayer mediaPlayer) {
