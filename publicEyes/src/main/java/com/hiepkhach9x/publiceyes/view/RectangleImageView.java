@@ -24,8 +24,8 @@ public class RectangleImageView extends ImageView {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         int height = widthMeasureSpec * 3 / 4;
+        super.onMeasure(widthMeasureSpec, height);
         setMeasuredDimension(widthMeasureSpec, height);
     }
 }

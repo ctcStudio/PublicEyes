@@ -39,9 +39,14 @@ public class Complaint implements Parcelable {
     private String time; // 2017-05-04T15:38:43.557
     @SerializedName("description")
     private String description;
+    @SerializedName("isVideo")
+    private boolean isVideo;
+    @SerializedName("isImage")
+    private boolean isPhoto;
 
     public Complaint() {
     }
+
 
     protected Complaint(Parcel in) {
         violationId = in.readInt();
@@ -56,6 +61,8 @@ public class Complaint implements Parcelable {
         userName = in.readString();
         time = in.readString();
         description = in.readString();
+        isVideo = in.readByte() != 0;
+        isPhoto = in.readByte() != 0;
     }
 
     @Override
@@ -72,6 +79,8 @@ public class Complaint implements Parcelable {
         dest.writeString(userName);
         dest.writeString(time);
         dest.writeString(description);
+        dest.writeByte((byte) (isVideo ? 1 : 0));
+        dest.writeByte((byte) (isPhoto ? 1 : 0));
     }
 
     @Override
@@ -115,11 +124,27 @@ public class Complaint implements Parcelable {
         this.categoryName = categoryName;
     }
 
-    public String getImageThumb() {
+    public String getUrl() {
         if (imageThumb.startsWith("http:") || imageThumb.startsWith("https:")) {
             return imageThumb;
         }
         return ApiConfig.makeUrlImage(imageThumb);
+    }
+
+    public boolean isVideo() {
+        return isVideo;
+    }
+
+    public void setVideo(boolean video) {
+        isVideo = video;
+    }
+
+    public boolean isPhoto() {
+        return isPhoto;
+    }
+
+    public void setPhoto(boolean photo) {
+        isPhoto = photo;
     }
 
     public void setImageThumb(String imageThumb) {

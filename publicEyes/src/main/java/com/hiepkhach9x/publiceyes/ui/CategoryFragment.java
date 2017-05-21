@@ -146,8 +146,8 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
         dismissApiLoading();
         if (requestId == REQUEST_GET_CATEGORIES) {
             GetListCategoryResponse getListCategoryResponse = (GetListCategoryResponse) response;
-//            ArrayList<Category> List = getListCategoryResponse.getCategories();
-            ArrayList<Category> List = DummyData.createCategories(getContext());
+            ArrayList<Category> List = getListCategoryResponse.getCategories();
+//            ArrayList<Category> List = DummyData.createCategories(getContext());
             if (List != null) {
                 categories.clear();
                 categories.addAll(List);
