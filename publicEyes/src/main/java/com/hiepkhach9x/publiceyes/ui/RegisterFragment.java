@@ -181,14 +181,11 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
     }
     private String email,password, name, phone, address;
     private void loginByEmail() {
-        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error),true,null);
-            alertDialog.show();
-            return;
-        }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.validate_email),true,null);
-            alertDialog.show();
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
+                || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            if (mNavigationManager != null) {
+                mNavigationManager.showPage(SignUpFragment.newInstance(email,password,name, phone,address,false));
+            }
             return;
         }
         LoginRequest loginRequest = new LoginRequest();

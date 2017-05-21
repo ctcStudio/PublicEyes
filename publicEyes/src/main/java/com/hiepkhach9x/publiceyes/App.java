@@ -40,7 +40,6 @@ public class App extends Application {
                 Permission.PUBLIC_PROFILE,
                 Permission.USER_PHOTOS,
                 Permission.EMAIL,
-                Permission.PUBLISH_ACTION,
                 Permission.USER_BIRTHDAY
         };
         SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()

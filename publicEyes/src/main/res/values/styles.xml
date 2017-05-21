@@ -24,6 +24,7 @@
         <item name="android:textColorHint">@color/grayColor</item>
         <item name="android:paddingTop">@dimen/space_normal</item>
         <item name="android:paddingBottom">@dimen/space_normal</item>
+        <item name="android:lines">1</item>
     </style>
 
     <style name="ButtonDefault">

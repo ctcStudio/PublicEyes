@@ -23,6 +23,7 @@
         android:layout_alignParentTop="true">
 
         <LinearLayout
+            android:id="@+id/layout_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -138,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/address"
+                android:imeOptions="actionDone"
                 android:textSize="@dimen/large_text" />
         </LinearLayout>
     </ScrollView>

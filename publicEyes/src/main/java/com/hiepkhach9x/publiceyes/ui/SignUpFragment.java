@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 
 import com.hiepkhach9x.base.BaseAppFragment;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
@@ -96,7 +97,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
-        view.findViewById(R.id.layout).setOnClickListener(this);
+        view.findViewById(R.id.layout_input).setOnClickListener(this);
         view.findViewById(R.id.btn_continue).setOnClickListener(this);
         view.findViewById(R.id.show_pass).setOnClickListener(this);
 
@@ -122,6 +123,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         edCmt = (UnderLineEditText) view.findViewById(R.id.ed_cmt);
 
         edAddress = (UnderLineEditText) view.findViewById(R.id.ed_address);
+        edAddress.setImeOptions(EditorInfo.IME_ACTION_DONE);
         if(!TextUtils.isEmpty(address)) {
             edAddress.setText(address);
         }
@@ -140,7 +142,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.layout:
+            case R.id.layout_input:
                 KeyboardUtils.hideSoftKeyboard(getActivity());
                 break;
             case R.id.btn_continue:
