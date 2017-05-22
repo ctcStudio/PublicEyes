@@ -163,8 +163,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
         address = edAddress.getText().toString().trim();
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
-                || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)
-                || TextUtils.isEmpty(cmt) || TextUtils.isEmpty(address)) {
+                || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)) {
             AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error)
                     , true,null);
             alertDialog.show();

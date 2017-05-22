@@ -104,12 +104,14 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        /*
         if (!DateUtils.isToday(AppPref.get().getDateShowNews())) {
             AppPref.get().saveIsShowNews(true);
         }
         if (AppPref.get().isShowNews()) {
             getListCampaign();
         }
+        */
     }
 
     private void showPopupNews(ArrayList<News> newsList) {

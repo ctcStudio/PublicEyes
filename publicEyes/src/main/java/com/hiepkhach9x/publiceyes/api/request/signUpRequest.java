@@ -4,7 +4,6 @@ import android.net.Uri;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import com.hiepkhach9x.base.api.Api;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;

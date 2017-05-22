@@ -65,31 +65,30 @@
         android:scaleType="center"
         android:src="@drawable/img_register_step" />
 
-    <TextView
+    <com.facebook.login.widget.LoginButton
+        xmlns:facebook="http://schemas.android.com/apk/res-auto"
         android:id="@+id/sign_up_fb"
         style="@style/ButtonDefault"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_width_button_sign_up"
         android:layout_height="wrap_content"
         android:layout_above="@+id/sign_up_email"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="15dp"
         android:background="@drawable/button_blue_fb"
-        android:minWidth="@dimen/min_width_button_sign_up"
-        android:text="@string/sign_up_with_facebook"
+        facebook:com_facebook_login_text="@string/sign_up_with_facebook"
         android:textSize="@dimen/large_text" />
 
     <TextView
         android:id="@+id/sign_up_email"
         style="@style/ButtonDefault"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/min_width_button_sign_up"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/login"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_blue"
-        android:minWidth="@dimen/min_width_button_sign_up"
         android:text="@string/sign_up_with_e_mail"
-        android:textSize="@dimen/large_text" />
+        android:textSize="@dimen/large_text"
+        android:layout_above="@+id/login"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/login"

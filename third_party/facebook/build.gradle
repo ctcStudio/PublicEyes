@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion 25
         versionName '4.1.1'
         versionCode 411
@@ -64,7 +64,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.facebook.android:facebook-android-sdk:4.5.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.+'
     compile 'com.google.code.gson:gson:2.8.0'
 }
 

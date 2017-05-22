@@ -72,6 +72,7 @@
     <string name="common_cancel">Cancel</string>
     <string name="error">Error</string>
     <string name="input_data_error">Bạn phải nhập đủ thông tin!</string>
+    <string name="input_fb_error">Không thể lấy được dữ từ facebook của bạn, hãy đăng nhập bằng email!</string>
 
     <!-- popup news -->
     <string name="news_popup_title">Chiến dịch</string>

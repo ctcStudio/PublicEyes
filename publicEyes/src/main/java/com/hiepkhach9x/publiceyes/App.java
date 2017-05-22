@@ -4,10 +4,6 @@ import android.app.Application;
 
 import com.hiepkhach9x.base.api.Api;
 import com.hiepkhach9x.base.api.OkHttpImpl;
-import com.hiepkhach9x.publiceyes.api.FakeImpl;
-import com.sromku.simple.fb.Permission;
-import com.sromku.simple.fb.SimpleFacebook;
-import com.sromku.simple.fb.SimpleFacebookConfiguration;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -34,19 +30,6 @@ public class App extends Application {
                 .build();
         mApi = new OkHttpImpl(okHttpClient);
         //mApi = new FakeImpl();
-
-        Permission[] permissions = new Permission[] {
-                Permission.USER_ABOUT_ME,
-                Permission.PUBLIC_PROFILE,
-                Permission.USER_PHOTOS,
-                Permission.EMAIL,
-                Permission.USER_BIRTHDAY
-        };
-        SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
-                .setAppId(getString(R.string.app_facebook_id))
-                .setPermissions(permissions)
-                .build();
-        SimpleFacebook.setConfiguration(configuration);
     }
 
     public static App get() {

@@ -69,6 +69,7 @@
     <string name="common_cancel">Cancel</string>
     <string name="error">Error</string>
     <string name="input_data_error">You have not entered enough information!</string>
+    <string name="input_fb_error">Unable to retrieve data from your facebook, please login by email!</string>
 
     <!-- popup news -->
     <string name="news_popup_title">Compaign</string>
