@@ -128,6 +128,10 @@ public class HomeFragment extends BaseAppFragment implements ActionbarInfo, Acti
         if (slidingMenu != null) {
             slidingMenu.setEnableSliding(true);
         }
+        Activity activity = getActivity();
+        if(activity instanceof MainActivity) {
+            ((MainActivity) activity).getUserInfo();
+        }
     }
 
     @Override

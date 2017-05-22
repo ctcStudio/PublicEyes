@@ -134,8 +134,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
                 Log.d("facebook", "error");
             }
         });
-        String[] readPermsArr = {"basic_info", "email", "user_about_me", "user_activities",
-                "user_mobile_phone", "user_hometown", "user_location"};
+        String[] readPermsArr = {"basic_info", "email", "user_about_me", "user_hometown", "user_location"};
         fbLoginButton.clearPermissions();
         fbLoginButton.setReadPermissions(readPermsArr);
     }
