@@ -164,7 +164,7 @@ public class SignUpFragment extends BaseAppFragment implements ActionbarInfo, Vi
 
         if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
                 || TextUtils.isEmpty(fullName) || TextUtils.isEmpty(phone)) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_error)
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(),"",getString(R.string.input_data_signup_error)
                     , true,null);
             alertDialog.show();
             return;

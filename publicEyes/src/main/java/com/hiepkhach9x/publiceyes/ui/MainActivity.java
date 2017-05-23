@@ -76,10 +76,6 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     @Override
     protected void onStart() {
         super.onStart();
-        if(mNavigationManager.getActivePage() instanceof HomeFragment) {
-            getUserInfo();
-        }
-
     }
 
     @Override
@@ -88,7 +84,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         unregisterReceiver(broadcastReceiver);
     }
 
-    private void getUserInfo() {
+    public void getUserInfo() {
         GetUserRequest getUserRequest = new GetUserRequest();
         mApi.restartRequest(REQUEST_GET_USER,getUserRequest,this);
     }
@@ -203,9 +199,10 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             case R.id.change_money:
                 break;
             case R.id.layout_logout:
+                UserPref.get().clear();
+                AppPref.get().clear();
                 startActivity(new Intent(this, RegisterActivity.class));
                 finish();
-                AppPref.get().clear();
                 break;
         }
     }
