@@ -143,7 +143,7 @@ public class ReportFragment extends BaseAppFragment implements ActionbarInfo, Ac
             UploadFileResponse uploadFileResponse = (UploadFileResponse) response;
             if (uploadFileResponse.isSuccess()) {
                 if (mNavigationManager != null) {
-                    mNavigationManager.showPage(CategoryFragment.newInstance(uploadFileResponse.getMsg().getPath(),
+                    mNavigationManager.showPage(SelectCategoryFragment.newInstance(uploadFileResponse.getMsg().getPath(),
                             mDescription.getText().toString().trim()));
                 }
             }

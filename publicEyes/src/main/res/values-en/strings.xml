@@ -79,4 +79,7 @@
     <string name="change_money">Change money</string>
     <string name="validate_email">email validation error</string>
     <string name="loading">loading…</string>
+    <string name="list_category_motorbike">Motorbike Categories</string>
+    <string name="list_category_oto">Car Categories</string>
+    <string name="penance">Phạt %s</string>
 </resources>

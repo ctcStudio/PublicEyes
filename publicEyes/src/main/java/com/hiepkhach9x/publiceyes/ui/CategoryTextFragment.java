@@ -1,74 +1,74 @@
 package com.hiepkhach9x.publiceyes.ui;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.hiepkhach9x.base.BaseAppFragment;
-import com.hiepkhach9x.base.ImageUtil;
 import com.hiepkhach9x.base.actionbar.ActionbarInfo;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.publiceyes.R;
-import com.hiepkhach9x.publiceyes.adapter.CategoryAdapter;
+import com.hiepkhach9x.publiceyes.adapter.CategoryTextAdapter;
 import com.hiepkhach9x.publiceyes.api.request.GetListCategoryRequest;
 import com.hiepkhach9x.publiceyes.api.response.GetListCategoryResponse;
 import com.hiepkhach9x.publiceyes.entities.Category;
+import com.hiepkhach9x.publiceyes.entities.CategoryText;
 import com.hiepkhach9x.publiceyes.entities.Complaint;
-import com.hiepkhach9x.publiceyes.store.DummyData;
+import com.hiepkhach9x.publiceyes.store.CategoryCar;
+import com.hiepkhach9x.publiceyes.store.CategoryMoto;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 
 import java.util.ArrayList;
 
-import co.core.imageloader.NDisplayOptions;
-
 /**
  * Created by hungh on 3/4/2017.
  */
 
-public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, ResponseListener {
-
+public class CategoryTextFragment extends BaseAppFragment implements ActionbarInfo, ResponseListener {
+    public static final int TYPE_CAR = 0;
+    public static final int TYPE_MOTO = 1;
+    private static final String ARGS_TYPE = "args.type";
     private static final String ARGS_IMAGE_URL = "args.image.url";
     private static final String ARGS_DESCRIPTION = "args.description";
     private static final String ARGS_CATEGORIES = "args.categories";
+    private static final String ARGS_CATEGORIES_SERVER = "args.categories.server";
 
     private static final int REQUEST_GET_CATEGORIES = 104;
-    private ArrayList<Category> categories;
-    private CategoryAdapter categoryAdapter;
+    private ArrayList<CategoryText> categories;
+    private ArrayList<Category> categoriesSever;
+    private CategoryTextAdapter categoryAdapter;
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_category;
     }
 
-    public static CategoryFragment newInstance(String filePath, String description) {
+    public static CategoryTextFragment newInstance(int type, String filePath, String description) {
 
         Bundle args = new Bundle();
+        args.putInt(ARGS_TYPE, type);
         args.putString(ARGS_IMAGE_URL, filePath);
         args.putString(ARGS_DESCRIPTION, description);
-        CategoryFragment fragment = new CategoryFragment();
+        CategoryTextFragment fragment = new CategoryTextFragment();
         fragment.setArguments(args);
         return fragment;
     }
 
+    private int type;
     private String imageUrl;
     private String description;
 
     private void parseBundle(Bundle bundle) {
+        type = bundle.getInt(ARGS_TYPE);
         imageUrl = bundle.getString(ARGS_IMAGE_URL);
         description = bundle.getString(ARGS_DESCRIPTION);
         categories = bundle.getParcelableArrayList(ARGS_CATEGORIES);
+        categoriesSever = bundle.getParcelableArrayList(ARGS_CATEGORIES_SERVER);
     }
 
     @Override
@@ -79,30 +79,46 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
         } else if (getArguments() != null) {
             parseBundle(getArguments());
         }
-        if (categories == null) {
-            categories = new ArrayList<>();
+        switch (type) {
+            case TYPE_MOTO:
+                categories = CategoryMoto.getCategoriesMoto();
+                break;
+            case TYPE_CAR:
+                categories = CategoryCar.getCategoriesCar();
+                break;
+            default:
+                categories = new ArrayList<>();
+        }
+
+        if(categoriesSever == null) {
+            categoriesSever = new ArrayList<>();
         }
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putInt(ARGS_TYPE,type);
         outState.putString(ARGS_IMAGE_URL, imageUrl);
         outState.putString(ARGS_DESCRIPTION, description);
         outState.putParcelableArrayList(ARGS_CATEGORIES, categories);
+        outState.putParcelableArrayList(ARGS_CATEGORIES_SERVER, categoriesSever);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ListView categoryList = (ListView) view.findViewById(R.id.list_category);
-        categoryAdapter = new CategoryAdapter(getContext(), categories);
+        categoryAdapter = new CategoryTextAdapter(getContext(), categories);
         categoryList.setAdapter(categoryAdapter);
 
         categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Category category = categories.get(i);
+                if(i > categoriesSever.size()) {
+                    i = categoriesSever.size() - 1;
+                }
+                Category category = categoriesSever.get(i);
                 if (mNavigationManager != null) {
                     Complaint complaint = new Complaint();
                     complaint.setCategoryId(category.getId());
@@ -118,7 +134,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (categories.isEmpty()) {
+        if (categoriesSever.isEmpty()) {
             getListCategory();
         }
     }
@@ -150,9 +166,8 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
             ArrayList<Category> List = getListCategoryResponse.getCategories();
 //            ArrayList<Category> List = DummyData.createCategories(getContext());
             if (List != null) {
-                categories.clear();
-                categories.addAll(List);
-                categoryAdapter.notifyDataSetChanged();
+                categoriesSever.clear();
+                categoriesSever.addAll(List);
             }
         }
     }

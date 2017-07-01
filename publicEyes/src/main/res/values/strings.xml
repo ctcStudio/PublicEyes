@@ -82,4 +82,7 @@
     <string name="change_money">Đổi tiền</string>
     <string name="validate_email">email không đúng định dạng</string>
     <string name="loading">loading…</string>
+    <string name="list_category_motorbike">Danh sách Vi phạm xe máy</string>
+    <string name="list_category_oto">Danh sách Vi phạm oto</string>
+    <string name="penance">Phạt %s</string>
 </resources>
