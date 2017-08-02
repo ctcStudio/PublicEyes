@@ -1,5 +1,15 @@
 package com.hiepkhach9x.publiceyes.api;
 
+import android.util.Base64;
+
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
 /**
  * Created by hungh on 5/17/2017.
  */
@@ -22,8 +32,59 @@ public class ApiConfig {
     public final static String API_CATEGORY = "category";
     public final static String API_GET_ALL_CATEGORY = "getallcategory";
 
+
+    public static final String API_COIN_SEND_ORDER = "send_order";
+
     public static String makeUrlImage(String path) {
         return IMAGE_URL + path;
     }
 
+    public static final String NO_PHONE = "+84984921226";
+    public static final String API_NUMBER = "1f52d883-20ba-4bfe-b584-9213ab7040a0";
+    public static final String SECRET = "a13a927b-c9ea-46d5-98d9-1ffdcaa14b60";
+
+    public static String getCoinAuth() {
+        try {
+
+            String auth = NO_PHONE + ":" + API_NUMBER;
+            byte[] data = auth.getBytes("UTF-8");
+            return Base64.encodeToString(data, Base64.DEFAULT);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    public static String getUnixTime() {
+        Long tsLong = System.currentTimeMillis()/1000;
+        return tsLong.toString();
+    }
+
+    public static String hashSha256(String nonce) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+        byte[] hash = digest.digest(nonce.getBytes("UTF-8"));
+        return Base64.encodeToString(hash,Base64.DEFAULT);
+    }
+
+    public static byte[] hashHmacSHA512(String message, String secret) {
+        try {
+            Mac sha_HMAC = Mac.getInstance("HmacSHA512");
+
+            SecretKeySpec secret_key = new SecretKeySpec(secret.getBytes(), "HmacSHA512");
+            sha_HMAC.init(secret_key);
+            return sha_HMAC.doFinal(message.getBytes());
+        }
+        catch (Exception e){
+            System.out.println("Error");
+            return new byte[0];
+        }
+    }
+
+    public static String bytesToHex(byte[] in) {
+        final StringBuilder builder = new StringBuilder();
+        for(byte b : in) {
+            builder.append(String.format("%02x", b));
+        }
+        return builder.toString().toLowerCase();
+    }
 }
