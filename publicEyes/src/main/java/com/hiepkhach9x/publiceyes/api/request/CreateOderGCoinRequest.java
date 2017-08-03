@@ -35,6 +35,7 @@ public class CreateOderGCoinRequest implements BaseRequest {
         builder.appendQueryParameter("transRef",transRef);
         builder.appendQueryParameter("amount",String.valueOf(amount));
         builder.appendQueryParameter("callback_data",callbackData);
+        builder.appendQueryParameter("userNoPhone",userNoPhone);
         if (!TextUtils.isEmpty(userId)) {
             builder.appendQueryParameter("userId", userId);
         }
@@ -78,5 +79,53 @@ public class CreateOderGCoinRequest implements BaseRequest {
     @Override
     public RequestBody getBody() {
         return null;
+    }
+
+    public String getTransRef() {
+        return transRef;
+    }
+
+    public void setTransRef(String transRef) {
+        this.transRef = transRef;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public String getUserNoPhone() {
+        return userNoPhone;
+    }
+
+    public void setUserNoPhone(String userNoPhone) {
+        this.userNoPhone = userNoPhone;
+    }
+
+    public String getCallbackData() {
+        return callbackData;
+    }
+
+    public void setCallbackData(String callbackData) {
+        this.callbackData = callbackData;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public void setServiceId(String serviceId) {
+        this.serviceId = serviceId;
     }
 }

@@ -12,6 +12,8 @@ import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.base.api.errors.ServerError;
 import com.hiepkhach9x.publiceyes.R;
 
+import java.io.IOException;
+
 /**
  * Created by hungh on 5/1/2017.
  */
@@ -28,7 +30,12 @@ public class AppAlertDialog {
         } else if (error instanceof ParserError) {
             msg = "parser data error";
         } else if (error instanceof AuthFailureError) {
-            msg = "AuthFailure error";
+            msg = "AuthFailure error: ";
+            try {
+                msg+= ((AuthFailureError) error).getResponse().body().string();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         return alertDialogOkAndCancel(context, context.getString(R.string.error), msg, true, okClick, false, null);

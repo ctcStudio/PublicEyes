@@ -25,6 +25,8 @@ public class OrderGCoin {
     private int status;
     @SerializedName("callback_data")
     private String callbackData;
+    @SerializedName("error")
+    private int error = 200;
 
     public String getTransRef() {
         return transRef;
@@ -96,5 +98,13 @@ public class OrderGCoin {
 
     public void setCallbackData(String callbackData) {
         this.callbackData = callbackData;
+    }
+
+    public int getError() {
+        return error;
+    }
+
+    public void setError(int error) {
+        this.error = error;
     }
 }

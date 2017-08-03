@@ -7,29 +7,43 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.BaseSlidingActivity;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
 import com.hiepkhach9x.base.menu.CustomSlidingMenu;
 import com.hiepkhach9x.base.toolbox.PermissionGrant;
+import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
+import com.hiepkhach9x.publiceyes.api.ApiConfig;
 import com.hiepkhach9x.publiceyes.api.ResponseCode;
+import com.hiepkhach9x.publiceyes.api.request.CreateOderGCoinRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
+import com.hiepkhach9x.publiceyes.api.response.CreateOderGCoinResponse;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
+import com.hiepkhach9x.publiceyes.entities.OrderGCoin;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
+import com.hiepkhach9x.publiceyes.ui.dialog.ConvertPointDialog;
+import com.hiepkhach9x.publiceyes.ui.dialog.PostSuccessDialog;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener, ResponseListener {
+import co.core.dialog.OnActionInDialogListener;
+
+public class MainActivity extends BaseSlidingActivity implements CustomSlidingMenu, View.OnClickListener,
+        ResponseListener, OnActionInDialogListener {
 
     private static final int REQUEST_GET_USER = 101;
+    private static final int REQUEST_POINT_DIALOG = 102;
+    private static final int REQUEST_CONVERT_POINT = 1001;
     private SlidingMenu mSlidingMenu;
     TextView name, point;
 
@@ -113,6 +127,39 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
 
         name.setText(UserPref.get().getFullName());
         point.setText(String.valueOf(UserPref.get().getPoint()));
+
+        findViewById(R.id.change_money).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UserPref.get().getPoint() > Config.NUMBER_POINT_THRESHOLD) {
+                    ConvertPointDialog convertPointDialog = ConvertPointDialog.newInstance(REQUEST_POINT_DIALOG);
+                    convertPointDialog.show(getSupportFragmentManager(), "SuccessDialog");
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDialogResult(int requestCode, int action, Intent extraData) {
+        if (requestCode == REQUEST_POINT_DIALOG) {
+            switch (action) {
+                case ConvertPointDialog.ACTION_CLICK_CONVERT_POINT:
+                    String phone = extraData.getStringExtra(ConvertPointDialog.EXTRA_PHONE);
+                    requestConvertPoint(phone);
+                    break;
+            }
+        }
+    }
+
+    private void requestConvertPoint(String phone) {
+        CreateOderGCoinRequest createOderGCoinRequest = new CreateOderGCoinRequest();
+        createOderGCoinRequest.setTransRef(ApiConfig.getUnixTime());
+        createOderGCoinRequest.setAmount(UserPref.get().getPoint());
+        createOderGCoinRequest.setUserNoPhone(phone);
+        createOderGCoinRequest.setCallbackData("convert_point");
+
+        showApiLoading();
+        mApi.restartRequest(REQUEST_CONVERT_POINT,createOderGCoinRequest, this);
     }
 
     @Override
@@ -211,6 +258,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     public BaseResponse parse(int requestId, String response) throws Exception {
         if (requestId == REQUEST_GET_USER) {
             return new GetUserResponse(response);
+        } else if (requestId == REQUEST_CONVERT_POINT) {
+            return new CreateOderGCoinResponse(response);
         }
         return null;
     }
@@ -223,6 +272,9 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
 
             name.setText(UserPref.get().getFullName());
             point.setText(String.valueOf(UserPref.get().getPoint()));
+        } else if (requestId == REQUEST_CONVERT_POINT) {
+            CreateOderGCoinResponse gCoinResponse = (CreateOderGCoinResponse) response;
+            OrderGCoin orderGCoin = gCoinResponse.getOrderGCoins();
         }
     }
 

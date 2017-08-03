@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/space_large"
+    android:background="@drawable/bg_dialog_confirm_coin"
+    android:minHeight="300dp"
+    android:orientation="vertical"
+    android:padding="@dimen/space_normal">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/space_small"
+        android:scaleType="center"
+        android:src="@drawable/logo_testnet_ngang" />
+
+    <TextView
+        android:id="@+id/text_content"
+        style="@style/TextViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top"
+        android:textColor="@color/whiteColor"
+        android:textSize="@dimen/normal_text" />
+
+    <LinearLayout
+        android:id="@+id/mobile_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/space_largest"
+        android:paddingRight="@dimen/space_largest">
+
+        <TextView
+            style="@style/TextViewDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/vietnam_code" />
+
+        <EditText
+            android:id="@+id/user_phone"
+            style="@style/TextViewDefault"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:inputType="phone" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_convert"
+        style="@style/TextViewDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:layout_marginTop="@dimen/space_normal"
+        android:background="@drawable/post"
+        android:gravity="center"
+        android:minHeight="52dp"
+        android:text="@string/convert_point"
+        android:textSize="@dimen/larger_text" />
+</LinearLayout>
