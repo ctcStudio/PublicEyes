@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -129,6 +130,10 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 }
             }
         });
+        if(!TextUtils.isEmpty(UserPref.get().getOrderId())){
+            //Todo call api update point.
+
+        }
     }
 
     @Override
@@ -271,6 +276,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             if (orderGCoin.getStatus() == ApiConfig.COIN_SUCCESS) {
                 AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, orderGCoin.getAmount()),null);
                 alertDialog.show();
+                UserPref.get().saveOrderId(orderGCoin.getSendOrderId());
             }
         }
     }

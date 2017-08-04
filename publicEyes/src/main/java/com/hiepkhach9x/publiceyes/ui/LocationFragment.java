@@ -202,8 +202,7 @@ public class LocationFragment extends BaseAppFragment implements ActionbarInfo, 
     private void updateReport() {
         String address = etYourLocation.getText().toString().trim();
         if (TextUtils.isEmpty(address)) {
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", getString(R.string.input_data_error)
-                    , true, null);
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", getString(R.string.input_data_error), null);
             alertDialog.show();
             return;
         }
