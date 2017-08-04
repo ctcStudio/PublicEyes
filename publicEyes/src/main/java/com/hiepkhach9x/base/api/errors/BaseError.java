@@ -8,9 +8,9 @@ import okhttp3.Response;
  */
 public abstract class BaseError extends Exception {
     protected Call call;
-    protected Response response;
+    protected String response;
 
-    public BaseError(Call call, Response response) {
+    public BaseError(Call call, String response) {
         this.call = call;
         this.response = response;
     }
@@ -19,7 +19,7 @@ public abstract class BaseError extends Exception {
         return call;
     }
 
-    public Response getResponse() {
+    public String getResponse() {
         return response;
     }
 }

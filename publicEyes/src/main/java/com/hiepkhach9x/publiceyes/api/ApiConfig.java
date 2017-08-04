@@ -35,6 +35,8 @@ public class ApiConfig {
 
     public static final String API_COIN_SEND_ORDER = "send_order";
 
+    public static final int COIN_SUCCESS = 1;
+
     public static String makeUrlImage(String path) {
         return IMAGE_URL + path;
     }
@@ -63,7 +65,7 @@ public class ApiConfig {
     public static String hashSha256(String nonce) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         byte[] hash = digest.digest(nonce.getBytes("UTF-8"));
-        return Base64.encodeToString(hash,Base64.DEFAULT);
+        return Base64.encodeToString(hash,Base64.NO_WRAP);
     }
 
     public static byte[] hashHmacSHA512(String message, String secret) {

@@ -7,6 +7,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 
 import com.hiepkhach9x.base.api.errors.AuthFailureError;
+import com.hiepkhach9x.base.api.errors.BaseError;
 import com.hiepkhach9x.base.api.errors.Error;
 import com.hiepkhach9x.base.api.errors.ParserError;
 import com.hiepkhach9x.base.api.errors.ServerError;
@@ -30,12 +31,16 @@ public class AppAlertDialog {
         } else if (error instanceof ParserError) {
             msg = "parser data error";
         } else if (error instanceof AuthFailureError) {
-            msg = "AuthFailure error: ";
-            try {
-                msg+= ((AuthFailureError) error).getResponse().body().string();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            msg = "AuthFailure error ";
+        }
+
+        return alertDialogOkAndCancel(context, context.getString(R.string.error), msg, true, okClick, false, null);
+    }
+
+    public static android.support.v7.app.AlertDialog errorApiCoinAlertDialogOk(Context context, Exception error, Dialog.OnClickListener okClick) {
+        String msg = "app unknown error";
+        if (error instanceof BaseError) {
+            msg = ((BaseError) error).getResponse();
         }
 
         return alertDialogOkAndCancel(context, context.getString(R.string.error), msg, true, okClick, false, null);
@@ -56,9 +61,8 @@ public class AppAlertDialog {
         return alertDialogOkAndCancel(context, title, message, false, null, hasCancelButton, cancelClick);
     }
 
-    public static android.support.v7.app.AlertDialog alertDialogOk(Context context, String title, String message,
-                                                                   boolean hasOKButton, Dialog.OnClickListener okClick) {
-        return alertDialogOkAndCancel(context, title, message, hasOKButton, okClick, false, null);
+    public static android.support.v7.app.AlertDialog alertDialogOk(Context context, String title, String message, Dialog.OnClickListener okClick) {
+        return alertDialogOkAndCancel(context, title, message, true, okClick, false, null);
     }
 
     public static android.support.v7.app.AlertDialog alertDialogOkAndCancel(Context context, String title, String message,

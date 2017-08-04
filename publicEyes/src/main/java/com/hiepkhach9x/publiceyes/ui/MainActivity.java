@@ -7,13 +7,11 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.hiepkhach9x.base.AppLog;
 import com.hiepkhach9x.base.BaseSlidingActivity;
 import com.hiepkhach9x.base.api.BaseResponse;
 import com.hiepkhach9x.base.api.ResponseListener;
@@ -33,7 +31,6 @@ import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
 import com.hiepkhach9x.publiceyes.ui.dialog.ConvertPointDialog;
-import com.hiepkhach9x.publiceyes.ui.dialog.PostSuccessDialog;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import co.core.dialog.OnActionInDialogListener;
@@ -59,11 +56,6 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             }
         }
     };
-
-    @Override
-    protected void showApiLoading() {
-        super.showApiLoading();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -155,7 +147,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         CreateOderGCoinRequest createOderGCoinRequest = new CreateOderGCoinRequest();
         createOderGCoinRequest.setTransRef(ApiConfig.getUnixTime());
         createOderGCoinRequest.setAmount(UserPref.get().getPoint());
-        createOderGCoinRequest.setUserNoPhone(phone);
+        createOderGCoinRequest.setUserNophone(phone);
         createOderGCoinRequest.setCallbackData("convert_point");
 
         showApiLoading();
@@ -273,15 +265,27 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             name.setText(UserPref.get().getFullName());
             point.setText(String.valueOf(UserPref.get().getPoint()));
         } else if (requestId == REQUEST_CONVERT_POINT) {
+            dismissApiLoading();
             CreateOderGCoinResponse gCoinResponse = (CreateOderGCoinResponse) response;
             OrderGCoin orderGCoin = gCoinResponse.getOrderGCoins();
+            if (orderGCoin.getStatus() == ApiConfig.COIN_SUCCESS) {
+                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, orderGCoin.getAmount()),null);
+                alertDialog.show();
+            }
         }
     }
 
     @Override
     public void onError(int requestId, Exception e) {
-        AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(this, e, null);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.show();
+        dismissApiLoading();
+        if(requestId == REQUEST_CONVERT_POINT) {
+            AlertDialog dialog = AppAlertDialog.errorApiCoinAlertDialogOk(this, e, null);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        } else {
+            AlertDialog dialog = AppAlertDialog.errorApiAlertDialogOk(this, e, null);
+            dialog.setCanceledOnTouchOutside(false);
+            dialog.show();
+        }
     }
 }

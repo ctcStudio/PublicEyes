@@ -180,7 +180,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
             } else {
                 message = getString(R.string.input_data_error);
             }
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", message, true, null);
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", message, null);
             alertDialog.show();
             return;
         }
@@ -191,7 +191,7 @@ public class LoginFragment extends BaseAppFragment implements ActionbarInfo, Vie
             } else {
                 message = getString(R.string.validate_email);
             }
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", message, true, null);
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", message, null);
             alertDialog.show();
             return;
         }

@@ -56,10 +56,12 @@ public class CallBackWrapper implements Callback {
                 /*
                 If call API successfully
                  */
+
+
+            String responseBody = response.body().string();
+            AppLog.d("Api",responseBody);
             if (!isError) {
                 try {
-                    String responseBody = response.body().string();
-                    AppLog.d("Api",responseBody);
                     BaseResponse temp = listener.parse(requestId, responseBody);
                     if (temp.isSuccess()) {
                         deliverUIResponse(temp);
@@ -67,11 +69,11 @@ public class CallBackWrapper implements Callback {
                         if (temp.getCode() == ResponseCode.UNAUTHORIZED) {
                             pushBroadcastError(temp.getCode());
                         }
-                        deliverUIError(new ServerError(responseBody));
+                        deliverUIError(new ServerError(call,responseBody));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    deliverUIError(new ParserError(call, response));
+                    deliverUIError(new ParserError(call, responseBody));
                 }
 
                 return;
@@ -82,9 +84,9 @@ public class CallBackWrapper implements Callback {
             if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED
                     || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
 
-                deliverUIError(new AuthFailureError(call, response));
+                deliverUIError(new AuthFailureError(call, responseBody));
             } else {
-                deliverUIError(new ServerError(response.body().string()));
+                deliverUIError(new ServerError(call,responseBody));
             }
             response.close();
         }

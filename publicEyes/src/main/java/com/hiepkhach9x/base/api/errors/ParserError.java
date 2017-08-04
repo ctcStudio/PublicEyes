@@ -12,7 +12,7 @@ import okhttp3.Response;
  */
 
 public class ParserError extends BaseError {
-    public ParserError(Call call, Response response) {
+    public ParserError(Call call, String response) {
         super(call, response);
     }
 }

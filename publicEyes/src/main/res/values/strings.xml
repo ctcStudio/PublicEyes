@@ -92,4 +92,5 @@
     <string name="convert_point_to_coin">\nNếu bạn có tài khoản thì hãy nhập số điện thoại để chuyển point thành gCoin </string>
     <string name="vietnam_code">+84</string>
     <string name="convert_point">Đổi point</string>
+    <string name="order_coin_success">Bạn đã chuyển thành công %s point đến tài khoản của bạn</string>
 </resources>

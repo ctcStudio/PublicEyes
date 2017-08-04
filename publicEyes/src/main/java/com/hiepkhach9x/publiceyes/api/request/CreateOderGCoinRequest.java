@@ -3,7 +3,6 @@ package com.hiepkhach9x.publiceyes.api.request;
 import android.net.Uri;
 import android.text.TextUtils;
 
-import com.google.android.gms.common.api.Api;
 import com.google.gson.Gson;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
@@ -22,7 +21,7 @@ import okhttp3.RequestBody;
 public class CreateOderGCoinRequest implements BaseRequest {
     private String transRef;
     private int amount;
-    private String userNoPhone; // Định danh ví của User, dưới dạng số điện thoại. Chú ý là phải bắt đầu bằng '+84'
+    private String userNophone; // Định danh ví của User, dưới dạng số điện thoại. Chú ý là phải bắt đầu bằng '+84'
                                 // nhưng do query trên url nên kí tự '+' được thể hiện là '%2B'
     private String callbackData;
     private String userId;
@@ -33,9 +32,9 @@ public class CreateOderGCoinRequest implements BaseRequest {
         Uri.Builder builder = Uri.parse(Config.API_COIN_URL).buildUpon();
         builder.appendPath(ApiConfig.API_COIN_SEND_ORDER);
         builder.appendQueryParameter("transRef",transRef);
+        builder.appendQueryParameter("userNophone", userNophone);
         builder.appendQueryParameter("amount",String.valueOf(amount));
         builder.appendQueryParameter("callback_data",callbackData);
-        builder.appendQueryParameter("userNoPhone",userNoPhone);
         if (!TextUtils.isEmpty(userId)) {
             builder.appendQueryParameter("userId", userId);
         }
@@ -61,7 +60,7 @@ public class CreateOderGCoinRequest implements BaseRequest {
         builder.add("X-Nonce", nonce);
         try {
             String hashNonce = ApiConfig.hashSha256(nonce);
-            String urlHash = getUrl().replace(Config.API_COIN_URL,"");
+            String urlHash = getUrl().replace(Config.COIN_URL,"");
             byte[] hashData = ApiConfig.hashHmacSHA512(urlHash + hashNonce, ApiConfig.SECRET);
             String signature = ApiConfig.bytesToHex(hashData);
             builder.add("X-Signature", signature);
@@ -97,12 +96,12 @@ public class CreateOderGCoinRequest implements BaseRequest {
         this.amount = amount;
     }
 
-    public String getUserNoPhone() {
-        return userNoPhone;
+    public String getUserNophone() {
+        return userNophone;
     }
 
-    public void setUserNoPhone(String userNoPhone) {
-        this.userNoPhone = userNoPhone;
+    public void setUserNophone(String userNophone) {
+        this.userNophone = userNophone;
     }
 
     public String getCallbackData() {

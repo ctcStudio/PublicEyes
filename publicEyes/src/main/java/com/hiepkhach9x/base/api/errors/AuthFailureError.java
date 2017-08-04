@@ -8,7 +8,7 @@ import okhttp3.Response;
  */
 public class AuthFailureError extends BaseError {
 
-    public AuthFailureError(Call call, Response response) {
-        super(call, response);
+    public AuthFailureError(Call call, String responseBody) {
+        super(call, responseBody);
     }
 }

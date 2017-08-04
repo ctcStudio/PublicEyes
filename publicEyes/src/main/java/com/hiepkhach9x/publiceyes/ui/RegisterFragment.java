@@ -168,7 +168,7 @@ public class RegisterFragment extends BaseAppFragment implements View.OnClickLis
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)
                 || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", getString(R.string.input_fb_error), true, new DialogInterface.OnClickListener() {
+            AlertDialog alertDialog = AppAlertDialog.alertDialogOk(getContext(), "", getString(R.string.input_fb_error), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     if (mNavigationManager != null) {

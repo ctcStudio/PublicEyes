@@ -9,15 +9,15 @@ import com.hiepkhach9x.publiceyes.entities.Msg;
 
 public class Error {
     @SerializedName("error")
-    private int code;
+    private String code;
     @SerializedName("Data")
     private Msg message;
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 

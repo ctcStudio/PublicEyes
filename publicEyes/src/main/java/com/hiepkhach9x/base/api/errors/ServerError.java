@@ -10,11 +10,12 @@ import okhttp3.Response;
 /**
  * Created by HungHN on 7/18/16.
  */
-public class ServerError extends Exception {
+public class ServerError extends BaseError {
 
     private Error error;
 
-    public ServerError(String response) {
+    public ServerError(Call call,String response) {
+        super(call,response);
         parseError(response);
     }
 
