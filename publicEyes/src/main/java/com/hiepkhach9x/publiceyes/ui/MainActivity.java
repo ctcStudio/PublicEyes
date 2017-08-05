@@ -282,8 +282,6 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             CreateOderGCoinResponse gCoinResponse = (CreateOderGCoinResponse) response;
             OrderGCoin orderGCoin = gCoinResponse.getOrderGCoins();
             if (orderGCoin.getStatus() == ApiConfig.COIN_SUCCESS) {
-                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, orderGCoin.getAmount()),null);
-                alertDialog.show();
                 UserPref.get().saveOrderId(orderGCoin.getSendOrderId());
                 UserPref.get().savePointOrder(orderGCoin.getAmount());
                 requestUpdatePoint();
@@ -291,6 +289,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         } else if (requestId == REQUEST_UPDATE_POINT) {
             dismissApiLoading();
            if(response.isSuccess()) {
+               AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, UserPref.get().getOrderPoint()),null);
+               alertDialog.show();
                UserPref.get().saveOrderId("");
                UserPref.get().savePointOrder(0);
                UserPref.get().savePoint(0);

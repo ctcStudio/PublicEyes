@@ -23,7 +23,7 @@ public class UpdatePointRequest implements BaseRequest {
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
         builder.appendPath(ApiConfig.API);
-        builder.appendPath(ApiConfig.API_VIOLATION);
+        builder.appendPath(ApiConfig.API_UPDATE_POINT);
         return builder.toString();
     }
 
