@@ -73,6 +73,7 @@ public class ConvertPointDialog extends NDialogFragment implements View.OnClickL
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.btn_convert).setOnClickListener(this);
+        view.findViewById(R.id.btn_cancel).setOnClickListener(this);
         TextView content = (TextView) view.findViewById(R.id.text_content);
         phone = (EditText) view.findViewById(R.id.user_phone);
         String confirmStart = getString(R.string.convert_point_to_coin_start);
@@ -117,7 +118,7 @@ public class ConvertPointDialog extends NDialogFragment implements View.OnClickL
         ViewGroup.LayoutParams params = window.getAttributes();
 
         int marginRL = getResources().getDimensionPixelSize(R.dimen.activity_horizontal_margin);
-        params.width = displayMetrics.widthPixels - 2 * marginRL;
+        params.width = displayMetrics.widthPixels - 4 * marginRL;
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         window.setLayout(params.width, params.height);
     }
@@ -130,6 +131,9 @@ public class ConvertPointDialog extends NDialogFragment implements View.OnClickL
                 String format = "+84%s";
                 intent.putExtra(EXTRA_PHONE, String.format(format,phone.getText().toString().trim()));
                 NotifyUtil.notifyAction(true, this, intent, mRequestCode, ACTION_CLICK_CONVERT_POINT);
+                break;
+            case R.id.btn_cancel:
+                this.dismiss();
                 break;
         }
     }

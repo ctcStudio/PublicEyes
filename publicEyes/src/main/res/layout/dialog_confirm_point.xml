@@ -55,11 +55,18 @@
         style="@style/TextViewDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/space_largest"
         android:layout_marginTop="@dimen/space_normal"
         android:background="@drawable/post"
         android:gravity="center"
         android:minHeight="52dp"
         android:text="@string/convert_point"
         android:textSize="@dimen/larger_text" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/space_largest"
+        android:text="@string/cancel_coin"/>
 </LinearLayout>

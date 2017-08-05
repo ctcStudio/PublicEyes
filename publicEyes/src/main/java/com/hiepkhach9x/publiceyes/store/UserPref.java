@@ -28,6 +28,7 @@ public class UserPref extends BasePrefers {
     private final String KEY_AGE = "key.age";
     private final String KEY_ADDRESS = "key.address";
     private final String KEY_CONVERT_COIN_ORDER = "key.convert.coin.order";
+    private final String KEY_CONVERT_COIN_ORDER_POINT = "key.convert.coin.order.point";
 
 
 
@@ -120,6 +121,14 @@ public class UserPref extends BasePrefers {
 
     public String getOrderId() {
         return getSharedPreference().getString(KEY_CONVERT_COIN_ORDER,"");
+    }
+
+    public boolean savePointOrder(int point) {
+        return mEditor.putInt(KEY_CONVERT_COIN_ORDER_POINT, point).commit();
+    }
+
+    public int getOrderPoint() {
+        return getSharedPreference().getInt(KEY_CONVERT_COIN_ORDER_POINT,0);
     }
 
     public String getAddress() {

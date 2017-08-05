@@ -25,9 +25,12 @@ import com.hiepkhach9x.publiceyes.api.ApiConfig;
 import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.api.request.CreateOderGCoinRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
+import com.hiepkhach9x.publiceyes.api.request.UpdatePointRequest;
 import com.hiepkhach9x.publiceyes.api.response.CreateOderGCoinResponse;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
+import com.hiepkhach9x.publiceyes.api.response.UpdatePointResponse;
 import com.hiepkhach9x.publiceyes.entities.OrderGCoin;
+import com.hiepkhach9x.publiceyes.entities.TransactionPoint;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 import com.hiepkhach9x.publiceyes.ui.dialog.AppAlertDialog;
@@ -42,6 +45,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     private static final int REQUEST_GET_USER = 101;
     private static final int REQUEST_POINT_DIALOG = 102;
     private static final int REQUEST_CONVERT_POINT = 1001;
+    private static final int REQUEST_UPDATE_POINT = 1002;
     private SlidingMenu mSlidingMenu;
     TextView name, point;
 
@@ -78,6 +82,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         PermissionGrant.verify(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.REQUEST_PERMISSION_LOCATION);
 
         registerReceiver(broadcastReceiver,new IntentFilter(Constants.EXTRA_FILTER_ERROR_REQUEST));
+
+        requestUpdatePoint();
     }
 
     @Override
@@ -131,7 +137,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             }
         });
         if(!TextUtils.isEmpty(UserPref.get().getOrderId())){
-            //Todo call api update point.
+
 
         }
     }
@@ -257,6 +263,8 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             return new GetUserResponse(response);
         } else if (requestId == REQUEST_CONVERT_POINT) {
             return new CreateOderGCoinResponse(response);
+        } else if (requestId == REQUEST_UPDATE_POINT) {
+            return new UpdatePointResponse(response);
         }
         return null;
     }
@@ -277,8 +285,35 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, orderGCoin.getAmount()),null);
                 alertDialog.show();
                 UserPref.get().saveOrderId(orderGCoin.getSendOrderId());
+                UserPref.get().savePointOrder(orderGCoin.getAmount());
+                requestUpdatePoint();
             }
+        } else if (requestId == REQUEST_UPDATE_POINT) {
+            dismissApiLoading();
+           if(response.isSuccess()) {
+               UserPref.get().saveOrderId("");
+               UserPref.get().savePointOrder(0);
+               UserPref.get().savePoint(0);
+               point.setText("0");
+           }
         }
+    }
+
+    private void requestUpdatePoint() {
+        String transactionId = UserPref.get().getOrderId();
+        if(TextUtils.isEmpty(transactionId)) {
+            return;
+        }
+
+        int amount = UserPref.get().getOrderPoint();
+        TransactionPoint transactionPoint = new TransactionPoint();
+        transactionPoint.setTransactionId(transactionId);
+        transactionPoint.setPoint(amount);
+
+        UpdatePointRequest request = new UpdatePointRequest();
+        request.setTransactionPoint(transactionPoint);
+        showApiLoading();
+        mApi.restartRequest(REQUEST_UPDATE_POINT,request,this);
     }
 
     @Override

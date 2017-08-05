@@ -14,7 +14,7 @@ public class OrderGCoin {
     @SerializedName("userNophone")
     private String userNoPhone;
     @SerializedName("amount")
-    private String amount;
+    private int amount;
     @SerializedName("address")
     private String address;
     @SerializedName("createOn")
@@ -52,11 +52,11 @@ public class OrderGCoin {
         this.userNoPhone = userNoPhone;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

@@ -8,4 +8,5 @@ public class ResponseCode {
     public static final int SUCCESS = 0;
     public static final int UNAUTHORIZED = 401;
     public static final int UNKNOWN_ERROR = 1;
+    public static final int POINT_SUCCESS = 7;
 }
