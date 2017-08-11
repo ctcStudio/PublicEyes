@@ -82,4 +82,14 @@
     <string name="list_category_motorbike">Motorbike Categories</string>
     <string name="list_category_oto">Car Categories</string>
     <string name="penance">Phạt %s</string>
+
+    <string name="convert_point_to_coin_start">Nếu bạn chưa có tài khoản hay bấm\u0020</string>
+    <string name="convert_point_to_coin_link"><u>đây</u></string>
+    <string name="convert_point_to_coin_end">\u0020để đăng ký tài khoản </string>
+    <string name="convert_point_to_coin">\nNếu bạn có tài khoản thì hãy nhập số điện thoại để chuyển point thành gCoin </string>
+    <string name="vietnam_code">+84</string>
+    <string name="convert_point">Đổi point</string>
+    <string name="order_coin_success">Bạn đã chuyển thành công %d point đến tài khoản của bạn</string>
+    <string name="cancel_coin">Huỷ giao dịch</string>
+    <string name="order_coin_alert">Bạn đã chuyển thành công %d point đến tài khoản của bạn</string>
 </resources>

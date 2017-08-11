@@ -133,6 +133,9 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                 if (UserPref.get().getPoint() > Config.NUMBER_POINT_THRESHOLD) {
                     ConvertPointDialog convertPointDialog = ConvertPointDialog.newInstance(REQUEST_POINT_DIALOG);
                     convertPointDialog.show(getSupportFragmentManager(), "SuccessDialog");
+                } else {
+                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert, Config.NUMBER_POINT_THRESHOLD),null);
+                    alertDialog.show();
                 }
             }
         });

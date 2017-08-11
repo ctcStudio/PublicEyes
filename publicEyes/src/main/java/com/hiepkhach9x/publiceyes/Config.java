@@ -15,5 +15,5 @@ public class Config {
     public static final String GCOIN_APP_MARKET = "https://play.google.com/store/apps/details?id=com.vngcoin.wallet";
     public static final String GCOIN_LINK = "https://wallet.vngcoin.com";
 
-    public static final int NUMBER_POINT_THRESHOLD = 10;
+    public static final int NUMBER_POINT_THRESHOLD = 50;
 }
