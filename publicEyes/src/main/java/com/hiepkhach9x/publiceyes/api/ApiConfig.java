@@ -32,6 +32,7 @@ public class ApiConfig {
     public final static String API_CATEGORY = "category";
     public final static String API_GET_ALL_CATEGORY = "getallcategory";
     public final static String API_UPDATE_POINT = "payorder";
+    public final static String API_CONVERT_POINT = "convert_point";
 
 
     public static final String API_COIN_SEND_ORDER = "send_order";

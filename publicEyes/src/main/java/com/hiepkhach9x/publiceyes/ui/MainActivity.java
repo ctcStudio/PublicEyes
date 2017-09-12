@@ -23,9 +23,11 @@ import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
 import com.hiepkhach9x.publiceyes.api.ResponseCode;
+import com.hiepkhach9x.publiceyes.api.request.ConvertPointRequest;
 import com.hiepkhach9x.publiceyes.api.request.CreateOderGCoinRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
 import com.hiepkhach9x.publiceyes.api.request.UpdatePointRequest;
+import com.hiepkhach9x.publiceyes.api.response.ConvertPointResponse;
 import com.hiepkhach9x.publiceyes.api.response.CreateOderGCoinResponse;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
 import com.hiepkhach9x.publiceyes.api.response.UpdatePointResponse;
@@ -134,15 +136,11 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                     ConvertPointDialog convertPointDialog = ConvertPointDialog.newInstance(REQUEST_POINT_DIALOG);
                     convertPointDialog.show(getSupportFragmentManager(), "SuccessDialog");
                 } else {
-                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert, Config.NUMBER_POINT_THRESHOLD),null);
+                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert),null);
                     alertDialog.show();
                 }
             }
         });
-        if(!TextUtils.isEmpty(UserPref.get().getOrderId())){
-
-
-        }
     }
 
     @Override
@@ -158,14 +156,19 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
     }
 
     private void requestConvertPoint(String phone) {
-        CreateOderGCoinRequest createOderGCoinRequest = new CreateOderGCoinRequest();
-        createOderGCoinRequest.setTransRef(ApiConfig.getUnixTime());
-        createOderGCoinRequest.setAmount(UserPref.get().getPoint());
-        createOderGCoinRequest.setUserNophone(phone);
-        createOderGCoinRequest.setCallbackData("convert_point");
+        /*
+        CreateOderGCoinRequest request = new CreateOderGCoinRequest();
+        request.setTransRef(ApiConfig.getUnixTime());
+        request.setAmount(UserPref.get().getPoint());
+        request.setUserNophone(phone);
+        request.setCallbackData("convert_point");
+        */
 
+        ConvertPointRequest request = new ConvertPointRequest();
+        request.setPhone(phone);
+        request.setAmount("10");
         showApiLoading();
-        mApi.restartRequest(REQUEST_CONVERT_POINT,createOderGCoinRequest, this);
+        mApi.restartRequest(REQUEST_CONVERT_POINT,request, this);
     }
 
     @Override
@@ -265,7 +268,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         if (requestId == REQUEST_GET_USER) {
             return new GetUserResponse(response);
         } else if (requestId == REQUEST_CONVERT_POINT) {
-            return new CreateOderGCoinResponse(response);
+            return new ConvertPointResponse(response);
         } else if (requestId == REQUEST_UPDATE_POINT) {
             return new UpdatePointResponse(response);
         }
@@ -282,12 +285,26 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             point.setText(String.valueOf(UserPref.get().getPoint()));
         } else if (requestId == REQUEST_CONVERT_POINT) {
             dismissApiLoading();
+            /*
             CreateOderGCoinResponse gCoinResponse = (CreateOderGCoinResponse) response;
             OrderGCoin orderGCoin = gCoinResponse.getOrderGCoins();
             if (orderGCoin.getStatus() == ApiConfig.COIN_SUCCESS) {
                 UserPref.get().saveOrderId(orderGCoin.getSendOrderId());
                 UserPref.get().savePointOrder(orderGCoin.getAmount());
                 requestUpdatePoint();
+            }
+            */
+            ConvertPointResponse convertPointResponse = (ConvertPointResponse) response;
+            if(response.isSuccess()) {
+                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, UserPref.get().getOrderPoint()),null);
+                alertDialog.show();
+                UserPref.get().saveOrderId("");
+                UserPref.get().savePointOrder(0);
+                UserPref.get().savePoint(convertPointResponse.getPoint());
+                point.setText(String.valueOf(convertPointResponse.getPoint()));
+            } else {
+                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert),null);
+                alertDialog.show();
             }
         } else if (requestId == REQUEST_UPDATE_POINT) {
             dismissApiLoading();
