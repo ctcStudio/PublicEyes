@@ -166,7 +166,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
 
         ConvertPointRequest request = new ConvertPointRequest();
         request.setPhone(phone);
-        request.setAmount("10");
+        request.setAmount(String.valueOf(UserPref.get().getPoint()));
         showApiLoading();
         mApi.restartRequest(REQUEST_CONVERT_POINT,request, this);
     }
