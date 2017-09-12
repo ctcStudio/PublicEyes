@@ -94,5 +94,6 @@
     <string name="convert_point">Đổi point</string>
     <string name="order_coin_success">Bạn đã chuyển thành công %d point đến tài khoản của bạn</string>
     <string name="cancel_coin">Huỷ giao dịch</string>
-    <string name="order_coin_alert">Chuyển coint không thành công</string>
+    <string name="order_coin_alert">Phải đủ 50 point mới có thể chuyển được, bạn đang có %d point</string>
+    <string name="order_coin_fail">Chuyển point thất bại</string>
 </resources>

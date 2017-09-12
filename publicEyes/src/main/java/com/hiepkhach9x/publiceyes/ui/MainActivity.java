@@ -136,7 +136,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                     ConvertPointDialog convertPointDialog = ConvertPointDialog.newInstance(REQUEST_POINT_DIALOG);
                     convertPointDialog.show(getSupportFragmentManager(), "SuccessDialog");
                 } else {
-                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert),null);
+                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert, Config.NUMBER_POINT_THRESHOLD),null);
                     alertDialog.show();
                 }
             }
@@ -298,12 +298,10 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             if(response.isSuccess()) {
                 AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, UserPref.get().getOrderPoint()),null);
                 alertDialog.show();
-                UserPref.get().saveOrderId("");
-                UserPref.get().savePointOrder(0);
                 UserPref.get().savePoint(convertPointResponse.getPoint());
                 point.setText(String.valueOf(convertPointResponse.getPoint()));
             } else {
-                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert),null);
+                AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_fail),null);
                 alertDialog.show();
             }
         } else if (requestId == REQUEST_UPDATE_POINT) {
