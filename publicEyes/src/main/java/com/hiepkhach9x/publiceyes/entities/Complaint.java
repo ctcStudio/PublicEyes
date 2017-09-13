@@ -17,8 +17,8 @@ import co.utilities.DateUtils;
 public class Complaint implements Parcelable {
     @SerializedName("violation_id")
     private int violationId;
-    @SerializedName("category_id")
-    private int categoryId;
+//    @SerializedName("category_id")
+//    private int categoryId;
     @SerializedName("category_name")
     private String categoryName;
     @SerializedName("path")
@@ -50,7 +50,7 @@ public class Complaint implements Parcelable {
 
     protected Complaint(Parcel in) {
         violationId = in.readInt();
-        categoryId = in.readInt();
+//        categoryId = in.readInt();
         categoryName = in.readString();
         imageThumb = in.readString();
         location = in.readString();
@@ -68,7 +68,7 @@ public class Complaint implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(violationId);
-        dest.writeInt(categoryId);
+//        dest.writeInt(categoryId);
         dest.writeString(categoryName);
         dest.writeString(imageThumb);
         dest.writeString(location);
@@ -108,13 +108,13 @@ public class Complaint implements Parcelable {
         this.violationId = violationId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
+//    public int getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(int categoryId) {
+//        this.categoryId = categoryId;
+//    }
 
     public String getCategoryName() {
         return categoryName;

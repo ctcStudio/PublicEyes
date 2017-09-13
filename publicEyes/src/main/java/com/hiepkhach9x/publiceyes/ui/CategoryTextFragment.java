@@ -36,24 +36,27 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
     private static final String ARGS_IMAGE_URL = "args.image.url";
     private static final String ARGS_DESCRIPTION = "args.description";
     private static final String ARGS_CATEGORIES = "args.categories";
-    private static final String ARGS_CATEGORIES_SERVER = "args.categories.server";
+    private static final String ARGS_IS_VIDEO = "args.is.video";
+//    private static final String ARGS_CATEGORIES_SERVER = "args.categories.server";
 
     private static final int REQUEST_GET_CATEGORIES = 104;
     private ArrayList<CategoryText> categories;
-    private ArrayList<Category> categoriesSever;
+    //private ArrayList<Category> categoriesSever;
     private CategoryTextAdapter categoryAdapter;
+    private boolean isVideo;
 
     @Override
     protected int getLayoutRes() {
         return R.layout.fragment_category;
     }
 
-    public static CategoryTextFragment newInstance(int type, String filePath, String description) {
+    public static CategoryTextFragment newInstance(int type, String filePath, String description, boolean isVideo) {
 
         Bundle args = new Bundle();
         args.putInt(ARGS_TYPE, type);
         args.putString(ARGS_IMAGE_URL, filePath);
         args.putString(ARGS_DESCRIPTION, description);
+        args.putBoolean(ARGS_IS_VIDEO, isVideo);
         CategoryTextFragment fragment = new CategoryTextFragment();
         fragment.setArguments(args);
         return fragment;
@@ -68,7 +71,8 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
         imageUrl = bundle.getString(ARGS_IMAGE_URL);
         description = bundle.getString(ARGS_DESCRIPTION);
         categories = bundle.getParcelableArrayList(ARGS_CATEGORIES);
-        categoriesSever = bundle.getParcelableArrayList(ARGS_CATEGORIES_SERVER);
+        isVideo = bundle.getBoolean(ARGS_IS_VIDEO);
+        //categoriesSever = bundle.getParcelableArrayList(ARGS_CATEGORIES_SERVER);
     }
 
     @Override
@@ -90,9 +94,9 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
                 categories = new ArrayList<>();
         }
 
-        if(categoriesSever == null) {
-            categoriesSever = new ArrayList<>();
-        }
+//        if(categoriesSever == null) {
+//            categoriesSever = new ArrayList<>();
+//        }
     }
 
     @Override
@@ -102,7 +106,8 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
         outState.putString(ARGS_IMAGE_URL, imageUrl);
         outState.putString(ARGS_DESCRIPTION, description);
         outState.putParcelableArrayList(ARGS_CATEGORIES, categories);
-        outState.putParcelableArrayList(ARGS_CATEGORIES_SERVER, categoriesSever);
+        outState.putBoolean(ARGS_IS_VIDEO, isVideo);
+        //outState.putParcelableArrayList(ARGS_CATEGORIES_SERVER, categoriesSever);
     }
 
     @Override
@@ -115,16 +120,18 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
         categoryList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i > categoriesSever.size()) {
-                    i = categoriesSever.size() - 1;
-                }
-                Category category = categoriesSever.get(i);
+//                if(i > categoriesSever.size()) {
+//                    i = categoriesSever.size() - 1;
+//                }
+                CategoryText category = categories.get(i);
                 if (mNavigationManager != null) {
                     Complaint complaint = new Complaint();
-                    complaint.setCategoryId(category.getId());
+//                    complaint.setCategoryId(category.getId());
                     complaint.setCategoryName(category.getCategoryName());
                     complaint.setImageThumb(imageUrl);
                     complaint.setDescription(description);
+                    if(isVideo) complaint.setVideo(true);
+                    else complaint.setPhoto(true);
                     complaint.setUserName(UserPref.get().getEmail());
                     mNavigationManager.showPage(LocationFragment.newInstance(complaint));
                 }
@@ -135,9 +142,9 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (categoriesSever.isEmpty()) {
-            getListCategory();
-        }
+//        if (categoriesSever.isEmpty()) {
+//            getListCategory();
+//        }
     }
 
     private void getListCategory() {
@@ -166,10 +173,10 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
             GetListCategoryResponse getListCategoryResponse = (GetListCategoryResponse) response;
             ArrayList<Category> List = getListCategoryResponse.getCategories();
 //            ArrayList<Category> List = DummyData.createCategories(getContext());
-            if (List != null) {
-                categoriesSever.clear();
-                categoriesSever.addAll(List);
-            }
+//            if (List != null) {
+//                categoriesSever.clear();
+//                categoriesSever.addAll(List);
+//            }
         }
     }
 

@@ -16,6 +16,7 @@ public class SelectCategoryFragment extends BaseAppFragment implements Actionbar
 
     private static final String ARGS_IMAGE_URL = "args.image.url";
     private static final String ARGS_DESCRIPTION = "args.description";
+    private static final String ARGS_IS_VIDEO = "args.is.video";
 
 
     @Override
@@ -23,11 +24,12 @@ public class SelectCategoryFragment extends BaseAppFragment implements Actionbar
         return R.layout.fragment_select_category;
     }
 
-    public static SelectCategoryFragment newInstance(String filePath, String description) {
+    public static SelectCategoryFragment newInstance(String filePath, String description,boolean isVideo) {
 
         Bundle args = new Bundle();
         args.putString(ARGS_IMAGE_URL, filePath);
         args.putString(ARGS_DESCRIPTION, description);
+        args.putBoolean(ARGS_IS_VIDEO, isVideo);
         SelectCategoryFragment fragment = new SelectCategoryFragment();
         fragment.setArguments(args);
         return fragment;
@@ -35,10 +37,12 @@ public class SelectCategoryFragment extends BaseAppFragment implements Actionbar
 
     private String imageUrl;
     private String description;
+    private boolean isVideo;
 
     private void parseBundle(Bundle bundle) {
         imageUrl = bundle.getString(ARGS_IMAGE_URL);
         description = bundle.getString(ARGS_DESCRIPTION);
+        isVideo = bundle.getBoolean(ARGS_IS_VIDEO);
     }
 
     @Override
@@ -56,6 +60,7 @@ public class SelectCategoryFragment extends BaseAppFragment implements Actionbar
         super.onSaveInstanceState(outState);
         outState.putString(ARGS_IMAGE_URL, imageUrl);
         outState.putString(ARGS_DESCRIPTION, description);
+        outState.putBoolean(ARGS_IS_VIDEO, isVideo);
     }
 
     @Override
@@ -81,10 +86,10 @@ public class SelectCategoryFragment extends BaseAppFragment implements Actionbar
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.category_moto:
-                mNavigationManager.showPage(CategoryTextFragment.newInstance(CategoryTextFragment.TYPE_MOTO, imageUrl, description));
+                mNavigationManager.showPage(CategoryTextFragment.newInstance(CategoryTextFragment.TYPE_MOTO, imageUrl, description, isVideo));
                 break;
             case R.id.category_oto:
-                mNavigationManager.showPage(CategoryTextFragment.newInstance(CategoryTextFragment.TYPE_CAR, imageUrl, description));
+                mNavigationManager.showPage(CategoryTextFragment.newInstance(CategoryTextFragment.TYPE_CAR, imageUrl, description, isVideo));
                 break;
         }
     }

@@ -89,7 +89,7 @@ public class DummyData {
 
     public static Complaint dummyComplaints(Category category) {
         Complaint complaint = new Complaint();
-        complaint.setCategoryId(category.getId());
+        //complaint.setCategoryId(category.getId());
         complaint.setCategoryName(category.getCategoryName());
         complaint.setTime("2 days");
         complaint.setAddress("Kim No, Dong Anh, Ha Noi");

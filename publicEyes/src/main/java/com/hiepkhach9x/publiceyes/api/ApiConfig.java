@@ -18,7 +18,8 @@ public class ApiConfig {
 
     public final static String METHOD_POST = "POST";
     public final static String METHOD_GET = "GET";
-    public final static String IMAGE_URL = "http://acquyxenangdien.net";
+    //public final static String IMAGE_URL = "http://acquyxenangdien.net";
+    public final static String IMAGE_URL = "http://27.118.16.206";
     public final static String API = "api";
     public final static String API_LOGIN = "login";
     public final static String API_USER = "user";

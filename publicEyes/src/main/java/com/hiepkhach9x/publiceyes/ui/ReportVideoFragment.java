@@ -122,7 +122,7 @@ public class ReportVideoFragment extends BaseAppFragment implements ActionbarInf
             if (uploadFileResponse.isSuccess()) {
                 if (mNavigationManager != null) {
                     mNavigationManager.showPage(SelectCategoryFragment.newInstance(uploadFileResponse.getMsg().getPath(),
-                            mDescription.getText().toString().trim()));
+                            mDescription.getText().toString().trim(), false));
                 }
             }
         }

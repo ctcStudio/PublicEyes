@@ -105,7 +105,7 @@ public class CategoryFragment extends BaseAppFragment implements ActionbarInfo, 
                 Category category = categories.get(i);
                 if (mNavigationManager != null) {
                     Complaint complaint = new Complaint();
-                    complaint.setCategoryId(category.getId());
+//                    complaint.setCategoryId(category.getId());
                     complaint.setCategoryName(category.getCategoryName());
                     complaint.setImageThumb(imageUrl);
                     complaint.setDescription(description);
