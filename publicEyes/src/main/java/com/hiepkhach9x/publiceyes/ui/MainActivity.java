@@ -21,17 +21,13 @@ import com.hiepkhach9x.base.toolbox.PermissionGrant;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.Constants;
 import com.hiepkhach9x.publiceyes.R;
-import com.hiepkhach9x.publiceyes.api.ApiConfig;
 import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import com.hiepkhach9x.publiceyes.api.request.ConvertPointRequest;
-import com.hiepkhach9x.publiceyes.api.request.CreateOderGCoinRequest;
 import com.hiepkhach9x.publiceyes.api.request.GetUserRequest;
 import com.hiepkhach9x.publiceyes.api.request.UpdatePointRequest;
 import com.hiepkhach9x.publiceyes.api.response.ConvertPointResponse;
-import com.hiepkhach9x.publiceyes.api.response.CreateOderGCoinResponse;
 import com.hiepkhach9x.publiceyes.api.response.GetUserResponse;
 import com.hiepkhach9x.publiceyes.api.response.UpdatePointResponse;
-import com.hiepkhach9x.publiceyes.entities.OrderGCoin;
 import com.hiepkhach9x.publiceyes.entities.TransactionPoint;
 import com.hiepkhach9x.publiceyes.store.AppPref;
 import com.hiepkhach9x.publiceyes.store.UserPref;
@@ -136,7 +132,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
                     ConvertPointDialog convertPointDialog = ConvertPointDialog.newInstance(REQUEST_POINT_DIALOG);
                     convertPointDialog.show(getSupportFragmentManager(), "SuccessDialog");
                 } else {
-                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert, Config.NUMBER_POINT_THRESHOLD),null);
+                    AlertDialog alertDialog = AppAlertDialog.alertDialogOk(MainActivity.this,"",getString(R.string.order_coin_alert_number),null);
                     alertDialog.show();
                 }
             }
@@ -159,14 +155,15 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
         /*
         CreateOderGCoinRequest request = new CreateOderGCoinRequest();
         request.setTransRef(ApiConfig.getUnixTime());
-        request.setAmount(UserPref.get().getPoint());
+        request.setPoint(UserPref.get().getPoint());
         request.setUserNophone(phone);
         request.setCallbackData("convert_point");
         */
 
         ConvertPointRequest request = new ConvertPointRequest();
         request.setPhone(phone);
-        request.setAmount(String.valueOf(UserPref.get().getPoint()));
+        request.setPoint(String.valueOf(UserPref.get().getPoint()));
+        UserPref.get().savePointOrder(UserPref.get().getPoint());
         showApiLoading();
         mApi.restartRequest(REQUEST_CONVERT_POINT,request, this);
     }
@@ -298,6 +295,7 @@ public class MainActivity extends BaseSlidingActivity implements CustomSlidingMe
             if(response.isSuccess()) {
                 AlertDialog alertDialog = AppAlertDialog.alertDialogOk(this,"",getString(R.string.order_coin_success, UserPref.get().getOrderPoint()),null);
                 alertDialog.show();
+                UserPref.get().savePointOrder(0);
                 UserPref.get().savePoint(convertPointResponse.getPoint());
                 point.setText(String.valueOf(convertPointResponse.getPoint()));
             } else {

@@ -9,6 +9,7 @@ public class Config {
     public static final int TIME_LIMIT_VIDEO = 3;
 
     public static final String API_URL = "http://acquyxenangdien.net";
+    //public static final String API_URL = "http://27.118.16.206";
     public static final String COIN_URL = "https://tmapi.vngcoin.com";
     public static final String API_COIN_URL = COIN_URL + "/gateway";
 

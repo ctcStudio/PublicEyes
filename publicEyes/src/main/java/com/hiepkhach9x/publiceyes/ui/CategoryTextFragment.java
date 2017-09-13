@@ -122,6 +122,7 @@ public class CategoryTextFragment extends BaseAppFragment implements ActionbarIn
                 if (mNavigationManager != null) {
                     Complaint complaint = new Complaint();
                     complaint.setCategoryId(category.getId());
+                    complaint.setCategoryName(category.getCategoryName());
                     complaint.setImageThumb(imageUrl);
                     complaint.setDescription(description);
                     complaint.setUserName(UserPref.get().getEmail());

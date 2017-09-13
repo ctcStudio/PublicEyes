@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName;
 import com.hiepkhach9x.base.api.BaseRequest;
 import com.hiepkhach9x.publiceyes.Config;
 import com.hiepkhach9x.publiceyes.api.ApiConfig;
-import com.hiepkhach9x.publiceyes.entities.TransactionPoint;
 import com.hiepkhach9x.publiceyes.store.UserPref;
 
 import okhttp3.Headers;
@@ -20,13 +19,13 @@ import okhttp3.RequestBody;
 public class ConvertPointRequest implements BaseRequest {
     @SerializedName("phone")
     private  String phone;
-    @SerializedName("amount")
-    private  String amount;
+    @SerializedName("point")
+    private  String point;
     @Override
     public String getUrl() {
         Uri.Builder builder = Uri.parse(Config.API_URL).buildUpon();
         builder.appendPath(ApiConfig.API);
-        builder.appendPath(ApiConfig.API_USER);
+        builder.appendPath(ApiConfig.API_ORDER);
         builder.appendPath(ApiConfig.API_CONVERT_POINT);
         return builder.toString();
     }
@@ -60,7 +59,7 @@ public class ConvertPointRequest implements BaseRequest {
         this.phone = phone;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setPoint(String point) {
+        this.point = point;
     }
 }

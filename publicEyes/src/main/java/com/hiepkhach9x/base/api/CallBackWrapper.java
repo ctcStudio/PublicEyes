@@ -20,6 +20,7 @@ import com.hiepkhach9x.publiceyes.api.ResponseCode;
 import java.io.IOException;
 import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
+import java.net.SocketTimeoutException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -37,8 +38,9 @@ public class CallBackWrapper implements Callback {
     @Override
     public void onFailure(Call call, IOException e) {
         e.printStackTrace();
-
-        deliverUIError(e);
+        if(!call.isCanceled()) {
+            deliverUIError(e);
+        }
     }
 
     @Override

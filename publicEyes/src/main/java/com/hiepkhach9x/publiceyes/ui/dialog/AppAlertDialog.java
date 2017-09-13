@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class AppAlertDialog {
     public static android.support.v7.app.AlertDialog errorApiAlertDialogOk(Context context, Exception error,Dialog.OnClickListener okClick) {
-        String msg = "app unknown error";
+        String msg = "error connect to server";
         if (error instanceof ServerError) {
             ServerError serverError = (ServerError) error;
             Error err = serverError.getError();
